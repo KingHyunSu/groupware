@@ -1,0 +1,71 @@
+@charset "UTF-8";
+ul {
+	list-style : none;
+}
+.zTree-h1 {
+	font-weight : 350;
+	font-size :25px;
+}
+.group {
+	width : 580px;
+	box-shadow : 0 5px 15px rgba(0,0,0,.5);
+	margin : 0 auto;
+	margin-top : 50px;
+	border : 1px solid #ddd;
+}
+
+.group-head {
+	height : 50px;
+	border-bottom : 1px solid #e5e5e5;
+	text-align : center;
+}
+.group-body {
+	height :500px;
+	position : relative;
+}
+
+.dept {
+	width : 250px;
+	border: 1px solid #ddd;
+	margin-left : 20px;
+	margin-top : 20px;
+}
+.dept-head {
+	height : 30px;
+	background-color : #f5f5f5;
+	border-bottom : 1px solid #ddd;
+}
+.dept-body {
+	height : 300px;
+}
+.position {
+	width : 250px;
+	border: 1px solid #ddd;
+	position : absolute;
+	top : 0px;
+	right : 20px;
+}
+.position-head {
+	height : 30px;
+	background-color : #f5f5f5;
+	border-bottom : 1px solid #ddd;
+}
+.position-body {
+	height : 300px;
+}
+
+.position-button {
+	width : 250px;
+	border: none;
+   background: white;
+   border-bottom: 1px solid #ddd;
+   height: 60px;
+   padding : 0px;
+}
+.tree-button {
+	list-style: none;
+	border: none;
+	background: white;
+	line-height: 11px;
+	padding: 0;
+}
