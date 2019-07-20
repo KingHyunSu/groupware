@@ -31,7 +31,15 @@ public class MemberDAOImp implements MemberDAO {
 		System.out.println("dao : " + id);
 		return sqlSession.selectOne(namespace + ".login", id);
 	}
-	
-	
-	
+
+	@Override
+	public String selectDeptName(int deptno) throws Exception {
+		return sqlSession.selectOne(namespace + ".deptname", deptno);
+	}
+
+	@Override
+	public String selectRankName(int rankno) throws Exception {
+		return sqlSession.selectOne(namespace + ".rankname", rankno);
+	}
+
 }

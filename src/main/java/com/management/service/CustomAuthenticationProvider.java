@@ -8,6 +8,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.management.dto.CustomUserDetails;
 
@@ -15,11 +16,16 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 	@Inject
 	private UserDetailsService service;
+	@Inject
+	private BCryptPasswordEncoder passEncoder;
 	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String id = (String)authentication.getPrincipal();
-		String pw = (String)authentication.getCredentials();
+		String pass = (String)authentication.getCredentials();
+		String pw = passEncoder.encode(pass);
+		//String pw = (String)authentication.getCredentials();
+		System.out.println(pw);
 		
 		CustomUserDetails user = (CustomUserDetails)service.loadUserByUsername(id);
 		

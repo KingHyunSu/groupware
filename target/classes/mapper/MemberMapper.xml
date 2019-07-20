@@ -6,9 +6,9 @@
     <mapper namespace = "com.management.dao.MemberDAO">
     	<insert id="join">
     		INSERT INTO
-    			member(id,pw,name)
+    			member(id,pw,name,dept,rank)
     		VALUES
-    			(#{id},#{pw},#{name})
+    			(#{id},#{pw},#{name},#{dept},#{rank})
     	</insert>
     	
     	<select id="idCheck" resultType = "int" parameterType = "String">
@@ -26,5 +26,23 @@
     			member
     		WHERE
     			id = #{id}
+    	</select>
+    	
+    	<select id="deptname" parameterType="int" resultType = "String">
+    		SELECT
+    			deptname
+    		FROM
+    			dept
+    		WHERE
+    			deptno = #{deptno}
+    	</select>
+    	
+    	<select id="rankname" parameterType="int" resultType = "String">
+    		SELECT
+    			rankname
+    		FROM
+    			rank
+    		WHERE
+    			rankno = #{rankno}
     	</select>
     </mapper>

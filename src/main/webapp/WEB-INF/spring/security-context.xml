@@ -17,6 +17,7 @@
 			<security:intercept-url pattern="/joinAction" access="permitAll"/>
 			<security:intercept-url pattern="/idCheck" access="permitAll"/>
 			<security:intercept-url pattern="/resources/**" access="permitAll"/>
+			<security:intercept-url pattern="/join/*" access="permitAll"/>
 			<security:intercept-url pattern="/**" access="hasAnyRole('USER, ADMIN')" />
 			
 			<!-- csrf 토큰 임시 비활성화 -->

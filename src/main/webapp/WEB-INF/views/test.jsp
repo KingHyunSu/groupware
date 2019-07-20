@@ -36,74 +36,130 @@ $(function() {
 
 function click_dept(name) {
 	
-	var detpNum = name;
-	console.log(detpNum);
-	
+	var deptNum = name;
+		
 	$.ajax({
-		data : detpNum,
-		url : "idCheck",
+		data : deptNum,
+		url : "selectDeptName",
 		type : "POST",
 		dataType : "JSON",
 		contentType : "application/json; charset=UTF-8",
 		success : function(data) {
-			console.log(data.check);
-			
-			if(data.check > 0) {
-				$("#check").prop("disabled", true);
-				$("#idzon").css("background-color", "#FFCECE");
-				$(".add-text").css("margin-bottom", "16px");
-				$(".add-text").css("color", "rgb(255, 168, 203)");
-				$(".add-text").css("text-align", "center");
-				$(".add-text").html("이미 사용중인 아이디 입니다.");						
-			}else if(data.check == 0){
-				$("#idzon").css("background-color", "#B0F6AC");
-				$("#check").prop("disabled", false);
-				$(".add-text").css("margin-bottom", "16px");
-				$(".add-text").css("color", "#34aadc");
-				$(".add-text").css("text-align", "center");
-				$(".add-text").html("사용 가능한 아이디 입니다.");
-				}
+			var result = JSON.parse(data);
+			$(".result-dept").html("<" + result.deptname);
+			$("input#dept").val(deptNum);
 			}
 		});
 	};
+	
+	
+	function click_rank(name) {
+		
+		var rankNum = name;
+			
+		$.ajax({
+			data : rankNum,
+			url : "selectRankName",
+			type : "POST",
+			dataType : "JSON",
+			contentType : "application/json; charset=UTF-8",
+			success : function(data) {
+				var result = JSON.parse(data);
+				$(".result-rank").html(result.rankname + ">");
+				$("input#rank").val(rankNum);
+				}
+			});
+		};
+		
+		function click_Ok() {
+		//	var realDept = $("input#dept").val(rankNum);
+		//	var realRank = $("input#rank").val(rankNum);
+			
+		//	$("input#realDept").val(realDept);
+		//	$("input#realRank").val(realRank);
+		$('body').css("background", "rgba(0,0,0,0)");
+		$('#popupGroup').hide();
+			};
+		
+		function click_group(){
+		    if($("#popupGroup").css("display") == "none"){   
+		    	 $('body').css("background", "rgba(0,0,0,0.2)");
+		        $('#popupGroup').show();  
+		    } else {  
+		    	 $('body').css("background", "rgba(0,0,0,0)");
+		        $('#popupGroup').hide();  
+		    }
+		};
+		
+		function close_group(){
+			$('#popupGroup').hide();
+		};
 </script>
 </head>
 <body>
-<div class = "group">	
+
+<div>
+	<button type = "button" id = "choiseGroup" onclick="click_group();">선택</button>
+</div>
+
+<div class = "group" id = "popupGroup">	
 	<div class = "group-head">
 		<h1 class = "zTree-h1"> 부서/직급 선택 </h1>
+		<button class = "close-button" type = "button" onclick="close_group();">닫기</button>
 	</div>
 	<div class = "group-body">
 		<div class = "dept">
 			<div class = "dept-head">
-				부서
+				부서 목록
 			</div>
 			<div class = "dept-body">
 				<div id="sidetree">
 					<div class="treeheader">&nbsp;</div>
-				
-					<div id="sidetreecontrol"></div>
-					<ul id="tree">
+	
+					<ul id="tree"> 
+						<h3 class= "zTree-h3"> 목록 </h3>
 						<li>
-							<strong>test1</strong>
-							<ul>
-								<li>
-									<input class = "tree-button" type = "button" name = "1" value = "test1.1" onclick="click_dept(name);">
-								</li>
-							</ul>
+							<input class = "tree-button" type = "button" name = "1" value = "총무" onclick="click_dept(name);">
 						</li>
 						<li>
-							<strong>test2</strong>
-							<ul>
-								<li>
-									<input class = "tree-button" type = "button" name = "2" value = "test2.1" onclick="click_dept(name);">
-								</li>
-							</ul>
-							<ul>
-								<li>
-									<input class = "tree-button" type = "button" name = "3" value = "test2.2" onclick="click_dept(name);">
-								</li>
-							</ul>
+							<input class = "tree-button" type = "button" name = "2" value = "회계" onclick="click_dept(name);">
+						</li>
+						<li>
+							<input class = "tree-button" type = "button" name = "3" value = "인사" onclick="click_dept(name);">
+						</li>
+						<li>
+							<input class = "tree-button" type = "button" name = "4" value = "영업본부" onclick="click_dept(name);">
+								<ul>
+									<li>
+										<input class = "tree-button" type = "button" name = "5" value = "영업1팀" onclick="click_dept(name);">
+									</li>
+								</ul>
+								<ul>
+									<li>
+										<input class = "tree-button" type = "button" name = "6" value = "영업2팀" onclick="click_dept(name);">
+									</li>
+								</ul>
+						</li>
+						<li>
+							<input class = "tree-button" type = "button" name = "7" value = "디자인" onclick="click_dept(name);">
+						</li>
+						<li>
+							<input class = "tree-button" type = "button" name = "8" value = "IT" onclick="click_dept(name);">
+								<ul>
+									<li>
+										<input class = "tree-button" type = "button" name = "9" value = "개발1팀" onclick="click_dept(name);">
+									</li>
+								</ul>
+								<ul>
+									<li>
+										<input class = "tree-button" type = "button" name = "10" value = "개발2팀" onclick="click_dept(name);">
+									</li>
+								</ul>
+								<ul>
+									<li>
+										<input class = "tree-button" type = "button" name = "11" value = "개발3팀" onclick="click_dept(name);">
+									</li>
+								</ul>
 						</li>
 					</ul>
 				</div>
@@ -111,14 +167,15 @@ function click_dept(name) {
 		</div>
 		<div class = "position">
 			<div class = "position-head">
-				직급
+				직급 목록
 			</div>
 			<div class = "position-body">
-				<input class= "position-button" type = "button" name = "부장" value = "부장">
-				<input class= "position-button" type = "button" name = "과장" value = "과장">
-				<input class= "position-button" type = "button" name = "대리" value = "대리">
-				<input class= "position-button" type = "button" name = "주임" value = "주임">
-				<input class= "position-button" type = "button" name = "사원" value = "사원">
+				<input class= "position-button" type = "button" name = "1" value = "이사" onclick="click_rank(name);">
+				<input class= "position-button" type = "button" name = "2" value = "부장" onclick="click_rank(name);">
+				<input class= "position-button" type = "button" name = "3" value = "과장" onclick="click_rank(name);">
+				<input class= "position-button" type = "button" name = "4" value = "대리" onclick="click_rank(name);">
+				<input class= "position-button" type = "button" name = "5" value = "주임" onclick="click_rank(name);">
+				<input class= "position-button" type = "button" name = "6" value = "사원" onclick="click_rank(name);">
 				
 				<!-- <ul>
 					<li>부장</li>
@@ -129,8 +186,21 @@ function click_dept(name) {
 				</ul> -->
 			</div>
 		</div>
+		<div class = "group-foot">
+			<div class = "result-view-zone">
+				<div class = "result-dept">
+				</div>
+				<div class = "result-rank">
+				</div>
+			</div>
+		</div>
+		<button class = "check-button" type= "button" onclick="click_Ok();">확인</button>
 		
-	</div>
+		<input type = "hidden" name = "dept" id = "dept" value = "">
+		<input type = "hidden" name = "rank" id = "rank" value = "">
+	</div>	
 </div>
+
+
 </body>
 </html>

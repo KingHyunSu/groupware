@@ -5,7 +5,22 @@ public class MemberDTO {
 	private String id;
 	private String pw;
 	private String name;
+	private int dept;
+	private int rank;
 	
+
+	public int getDept() {
+		return dept;
+	}
+	public void setDept(int dept) {
+		this.dept = dept;
+	}
+	public int getRank() {
+		return rank;
+	}
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
 	public String getId() {
 		return id;
 	}

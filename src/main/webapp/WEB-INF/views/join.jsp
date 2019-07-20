@@ -28,36 +28,16 @@
   <!-- ajax -->
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script src="resources/modify/js/Ajax.js"></script>
-   <!-- zTree -->
-  <link href="resources/zTree/zTreeStyle.css" rel="stylesheet">
-  <script src="resources/zTree/jquery.ztree.core.js"></script>
-
-
-<!-- test -->
-<script>
-	var zNodes = [
-		{ id : "1", name : "TEST1", open : true },
-		{ id : "11", pId : "1", name : "TEST1.1"},
-		{ id : "12", pId : "1", name : "TEST1.2"},
-		{ id : "2", name : "TEST2", open : true },
-		{ id : "21", pId : "2", name : "TEST2.1"},
-		{ id : "22", pId : "2", name : "TEST2.2"},
-	];
-	var setting = {
-			data : {
-				simpleData : {
-					enable :true
-				}
-			}
-	};
-	
-	$(document).ready(function(){
-		$.fn.zTree.init($("#treeDemo"), setting, zNodes);
-	});
-	
-	
-</script>
+   <!-- Tree -->
+  <link rel="stylesheet" href="resources/Tree/css/jquery.treeview.css" />
+  <link rel="stylesheet" href="resources/Tree/css/screen.css" />
+  <script src="resources/Tree/lib/jquery.js" type="text/javascript"></script>
+  <script src="resources/Tree/lib/jquery.cookie.js" type="text/javascript"></script>
+  <script src="resources/Tree/lib/jquery.treeview.js" type="text/javascript"></script>
+  <!-- Custom -->
+  <link href="resources/custom/css/popupGroup.css" rel="stylesheet" />
+  <script src="resources/custom/js/Ajax.js"></script>
+  
 </head>
 
 <body class="login-img3-body">
@@ -79,8 +59,9 @@
           <input type="text" class="form-control" name = "name" placeholder="이름을 입력해주세요.." autofocus>
         </div>
         <div class="input-group">
-          <span class="input-group-addon"><i class="icon_profile"></i></span>
-          <ul id = "treeDemo" class = "ztree"></ul>
+          <input type="button" class="form-control" name = "group" autofocus onclick="click_group();"
+          		style="border:0; margin-left:50px; background:#D6E3F4; border-radius:10px; color:white;" 
+          		value = "부서/직급 선택하기">
         </div>
         <div class="input-group">
           <span class="input-group-addon"><i class="icon_key_alt"></i></span>
@@ -89,9 +70,108 @@
         </div>
         <button class="btn btn-info btn-lg btn-block" type="submit">가입</button>
       </div>
+      <input type = "hidden" id = "dept" name = "formDept" value = "">
+      <input type = "hidden" id = "rank" name = "formRank" value = "">
     </form>
   </div>
 
-	
+
+	<!-- popupGroup -->
+<div class = "group" id = "popupGroup">	
+	<div class = "group-head">
+		<h1 class = "zTree-h1"> 부서/직급 선택 </h1>
+		<button class = "close-button" type = "button" onclick="close_group();">닫기</button>
+	</div>
+	<div class = "group-body">
+		<div class = "dept">
+			<div class = "dept-head">
+				부서 목록
+			</div>
+			<div class = "dept-body">
+				<div id="sidetree">
+					<ul id="tree"> 
+						
+						<li>
+							<input class = "tree-button" type = "button" name = "1" value = "총무" onclick="click_dept(name);">
+						</li>
+						<li>
+							<input class = "tree-button" type = "button" name = "2" value = "회계" onclick="click_dept(name);">
+						</li>
+						<li>
+							<input class = "tree-button" type = "button" name = "3" value = "인사" onclick="click_dept(name);">
+						</li>
+						<li>
+							<input class = "tree-button" type = "button" name = "4" value = "영업본부" onclick="click_dept(name);">
+								<ul>
+									<li>
+										<input class = "tree-button-sub" type = "button" name = "5" value = "영업1팀" onclick="click_dept(name);">
+									</li>
+								</ul>
+								<ul>
+									<li>
+										<input class = "tree-button-sub" type = "button" name = "6" value = "영업2팀" onclick="click_dept(name);">
+									</li>
+								</ul>
+						</li>
+						<li>
+							<input class = "tree-button" type = "button" name = "7" value = "디자인" onclick="click_dept(name);">
+						</li>
+						<li>
+							<input class = "tree-button" type = "button" name = "8" value = "IT" onclick="click_dept(name);">
+								<ul>
+									<li>
+										<input class = "tree-button-sub" type = "button" name = "9" value = "개발1팀" onclick="click_dept(name);">
+									</li>
+								</ul>
+								<ul>
+									<li>
+										<input class = "tree-button-sub" type = "button" name = "10" value = "개발2팀" onclick="click_dept(name);">
+									</li>
+								</ul>
+								<ul>
+									<li>
+										<input class = "tree-button-sub" type = "button" name = "11" value = "개발3팀" onclick="click_dept(name);">
+									</li>
+								</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class = "position">
+			<div class = "position-head">
+				직급 목록
+			</div>
+			<div class = "position-body">
+				<input class= "position-button" type = "button" name = "1" value = "이사" onclick="click_rank(name);">
+				<input class= "position-button" type = "button" name = "2" value = "부장" onclick="click_rank(name);">
+				<input class= "position-button" type = "button" name = "3" value = "과장" onclick="click_rank(name);">
+				<input class= "position-button" type = "button" name = "4" value = "대리" onclick="click_rank(name);">
+				<input class= "position-button" type = "button" name = "5" value = "주임" onclick="click_rank(name);">
+				<input class= "position-button" type = "button" name = "6" value = "사원" onclick="click_rank(name);">
+				
+				<!-- <ul>
+					<li>부장</li>
+					<li>과장</li>
+					<li>대리</li>
+					<li>주임</li>
+					<li>사원</li>
+				</ul> -->
+			</div>
+		</div>
+		<div class = "group-foot">
+			<div class = "result-view-zone">
+				<div class = "result-dept">
+				</div>
+				<div class = "result-rank">
+				</div>
+			</div>
+		</div>
+		<button class = "check-button" type= "button" onclick="click_Ok();">확인</button>
+		
+		<input type = "hidden" name = "dept" id = "dept" value = "">
+		<input type = "hidden" name = "rank" id = "rank" value = "">
+	</div>	
+</div>
 </body>
 </html>
