@@ -16,20 +16,16 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 	@Inject
 	private UserDetailsService service;
-	@Inject
-	private BCryptPasswordEncoder passEncoder;
 	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String id = (String)authentication.getPrincipal();
-		String pass = (String)authentication.getCredentials();
-		String pw = passEncoder.encode(pass);
-		//String pw = (String)authentication.getCredentials();
-		System.out.println(pw);
+		String pw = (String)authentication.getCredentials();
+
 		
 		CustomUserDetails user = (CustomUserDetails)service.loadUserByUsername(id);
 		
-		if(!matchPassword(pw, user.getPassword())) {
+		if(!matchPassword(id, user.getUsername())) {
             throw new BadCredentialsException(id);
         }
 
@@ -43,7 +39,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		return true;
 	}
 	
-	private boolean matchPassword(String pw, String password) {
-		return pw.equals(password);
+	private boolean matchPassword(String userId, String dbId) {
+		return userId.equals(dbId);
 	}
 }

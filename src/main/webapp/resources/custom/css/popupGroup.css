@@ -33,12 +33,14 @@ ul {
 .close-button {
 	position : absolute;
 	top: 12px;
-	right : 0;
+	right : 10px;
 	border: 0;
-    background: white;
+    background: #34aadc;
     width: 70px;
     height: 27px;
     cursor: pointer;
+    color: white;
+	border-radius: 6px;
 }
 .group-body {
 	height :483px;
@@ -54,40 +56,42 @@ ul {
 }
 .dept-head {
 	height : 30px;
-	background-color : #f5f5f5;
-	border: 1px solid #ddd;
+	background-color : #D6E3F4;
+	border: 1px solid #34aadc;
+	border-bottom : 0;
 	font-size : 14px;
 	text-align : center;
-	font-weight : 300;
+	color: white;
+	font-weight : 600;
 }
 .dept-body {
-	border: 1px solid #ddd;
+	border: 1px solid #34aadc;
 }
 .position {
 	width : 252px;
-	border: 1px solid #ddd;
+	border: 1px solid #34aadc;
 	position : absolute;
 	top : 20px;
 	right : 20px;
 }
 .position-head {
 	height : 30px;
-	background-color : #f5f5f5;
-	border-bottom : 1px solid #ddd;
+	background-color : #D6E3F4;
 	font-size : 14px;
 	text-align : center;
-	font-weight : 300;
+	color : white;
+	font-weight : 600;
 }
 .position-body {
 	height : 300px;
-	border-top: 1px solid #ddd;
+	border-top: 1px solid #34aadc;
 }
 
 .position-button {
 	width : 250px;
 	border: none;
    background: white;
-   border-bottom: 1px solid #ddd;
+   border-bottom: 1px solid #34aadc;
    height: 50px;
    padding : 0px;
    cursor: pointer;
@@ -137,12 +141,16 @@ ul {
 	top : 0px;
 	right : 138px;
 }
-.check-button {
+.ok-button {
+	width: 70px;
+	height: 27px;
 	float: right;
     margin-right: 20px;
     border: 0;
-    background: white;
+    background: #34aadc;
     margin-top: 30px;
     font-size: 15px;
-    cursor : pointer;
+    cursor: pointer;
+    color: white;
+    border-radius: 6px;
 }

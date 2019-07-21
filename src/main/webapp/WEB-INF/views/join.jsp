@@ -44,15 +44,15 @@
 
   <div class="container">
 
-    <form class="login-form" action="joinAction" method = "post">
+    <form class="login-form" name = "joinForm" action="joinAction" method = "post" onsubmit="return formCheck();">
       <div class="login-wrap">
         <p class="login-img"><i class="icon_lock_alt"></i></p>
         <div class="input-group">
           <span class="input-group-addon"><i class="icon_profile"></i></span>
           <input type="text" class="form-control" name = "id" placeholder="아이디를 입력해주세요.." autofocus
-          		id = "idzon" oninput="checkId()">
+          		id = "idzon" oninput="check_id();">
         </div>
-        <div class = "add-text">
+        <div class = "id-text">
         </div>
         <div class="input-group">
           <span class="input-group-addon"><i class="icon_profile"></i></span>
@@ -63,12 +63,23 @@
           		style="border:0; margin-left:50px; background:#D6E3F4; border-radius:10px; color:white;" 
           		value = "부서/직급 선택하기">
         </div>
+        <div class = "group-text">
+        </div>
         <div class="input-group">
           <span class="input-group-addon"><i class="icon_key_alt"></i></span>
-          <input type="password" class="form-control" name = "pw" placeholder="비밀번호를 입력해주세요..">
-          <input id = "csrf" name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+          <input type="password" class="form-control" name = "pw" placeholder="비밀번호를 입력해주세요.."
+          		id = "pw" oninput="check_pw();">
         </div>
-        <button class="btn btn-info btn-lg btn-block" type="submit">가입</button>
+        <div class = "pw-text">
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+          <input type="password" class="form-control" name = "pw" placeholder="비밀번호를 한번 더 입력해주세요.."
+          		id = "checkPw" oninput="check_pw();">
+        </div>
+        <div class = "ok-text">
+        </div>
+        <button class="btn btn-primary btn-lg btn-block" type="submit" id = "joinSubmit" disabled>가입</button>
       </div>
       <input type = "hidden" id = "dept" name = "formDept" value = "">
       <input type = "hidden" id = "rank" name = "formRank" value = "">
@@ -92,45 +103,45 @@
 					<ul id="tree"> 
 						
 						<li>
-							<input class = "tree-button" type = "button" name = "1" value = "총무" onclick="click_dept(name);">
+							<input class = "tree-button" type = "button" name = "1" value = "총무" onclick="click_dept(name,value);">
 						</li>
 						<li>
-							<input class = "tree-button" type = "button" name = "2" value = "회계" onclick="click_dept(name);">
+							<input class = "tree-button" type = "button" name = "2" value = "회계" onclick="click_dept(name,value);">
 						</li>
 						<li>
-							<input class = "tree-button" type = "button" name = "3" value = "인사" onclick="click_dept(name);">
+							<input class = "tree-button" type = "button" name = "3" value = "인사" onclick="click_dept(name,value);">
 						</li>
 						<li>
-							<input class = "tree-button" type = "button" name = "4" value = "영업본부" onclick="click_dept(name);">
+							<input class = "tree-button" type = "button" name = "4" value = "영업본부" onclick="click_dept(name,value);">
 								<ul>
 									<li>
-										<input class = "tree-button-sub" type = "button" name = "5" value = "영업1팀" onclick="click_dept(name);">
+										<input class = "tree-button-sub" type = "button" name = "5" value = "영업1팀" onclick="click_dept(name,value);">
 									</li>
 								</ul>
 								<ul>
 									<li>
-										<input class = "tree-button-sub" type = "button" name = "6" value = "영업2팀" onclick="click_dept(name);">
+										<input class = "tree-button-sub" type = "button" name = "6" value = "영업2팀" onclick="click_dept(name,value);">
 									</li>
 								</ul>
 						</li>
 						<li>
-							<input class = "tree-button" type = "button" name = "7" value = "디자인" onclick="click_dept(name);">
+							<input class = "tree-button" type = "button" name = "7" value = "디자인" onclick="click_dept(name,value);">
 						</li>
 						<li>
-							<input class = "tree-button" type = "button" name = "8" value = "IT" onclick="click_dept(name);">
+							<input class = "tree-button" type = "button" name = "8" value = "IT" onclick="click_dept(name,value);">
 								<ul>
 									<li>
-										<input class = "tree-button-sub" type = "button" name = "9" value = "개발1팀" onclick="click_dept(name);">
+										<input class = "tree-button-sub" type = "button" name = "9" value = "개발1팀" onclick="click_dept(name,value);">
 									</li>
 								</ul>
 								<ul>
 									<li>
-										<input class = "tree-button-sub" type = "button" name = "10" value = "개발2팀" onclick="click_dept(name);">
+										<input class = "tree-button-sub" type = "button" name = "10" value = "개발2팀" onclick="click_dept(name,value);">
 									</li>
 								</ul>
 								<ul>
 									<li>
-										<input class = "tree-button-sub" type = "button" name = "11" value = "개발3팀" onclick="click_dept(name);">
+										<input class = "tree-button-sub" type = "button" name = "11" value = "개발3팀" onclick="click_dept(name,value);">
 									</li>
 								</ul>
 						</li>
@@ -143,12 +154,12 @@
 				직급 목록
 			</div>
 			<div class = "position-body">
-				<input class= "position-button" type = "button" name = "1" value = "이사" onclick="click_rank(name);">
-				<input class= "position-button" type = "button" name = "2" value = "부장" onclick="click_rank(name);">
-				<input class= "position-button" type = "button" name = "3" value = "과장" onclick="click_rank(name);">
-				<input class= "position-button" type = "button" name = "4" value = "대리" onclick="click_rank(name);">
-				<input class= "position-button" type = "button" name = "5" value = "주임" onclick="click_rank(name);">
-				<input class= "position-button" type = "button" name = "6" value = "사원" onclick="click_rank(name);">
+				<input class= "position-button" type = "button" name = "1" value = "이사" onclick="click_rank(name,value);">
+				<input class= "position-button" type = "button" name = "2" value = "부장" onclick="click_rank(name,value);">
+				<input class= "position-button" type = "button" name = "3" value = "과장" onclick="click_rank(name,value);">
+				<input class= "position-button" type = "button" name = "4" value = "대리" onclick="click_rank(name,value);">
+				<input class= "position-button" type = "button" name = "5" value = "주임" onclick="click_rank(name,value);">
+				<input class= "position-button" type = "button" name = "6" value = "사원" onclick="click_rank(name,value);">
 				
 				<!-- <ul>
 					<li>부장</li>
@@ -167,11 +178,14 @@
 				</div>
 			</div>
 		</div>
-		<button class = "check-button" type= "button" onclick="click_Ok();">확인</button>
+		<button class = "ok-button" type= "button" onclick="click_Ok();">확인</button>
 		
 		<input type = "hidden" name = "dept" id = "dept" value = "">
 		<input type = "hidden" name = "rank" id = "rank" value = "">
+		<input type = "hidden" name = "deptName" id = "deptName" value = "">
+		<input type = "hidden" name = "rankName" id = "rankName" value = "">
 	</div>	
 </div>
+
 </body>
 </html>

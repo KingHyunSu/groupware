@@ -9,8 +9,6 @@
 
 		<context:component-scan base-package="com.management.dao"></context:component-scan>
 		
-		<bean id = "bcryptPasswordEncoder" class = "org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
-		
 		<security:http auto-config="true" use-expressions="true">
 			<security:intercept-url pattern="/loginPage" access="permitAll"/>
 			<security:intercept-url pattern="/join" access="permitAll"/>
@@ -37,6 +35,7 @@
             </security:authentication-provider>
         </security:authentication-manager>
 
+		<bean id = "bcryptPasswordEncoder" class = "org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
 		<bean id = "userService" class = "com.management.service.CustomUserDetailsService"></bean>
 		<bean id = "userAuthProvider" class = "com.management.service.CustomAuthenticationProvider"></bean>
 		
