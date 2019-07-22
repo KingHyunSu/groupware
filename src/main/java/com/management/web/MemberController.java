@@ -28,7 +28,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/joinAction", method = RequestMethod.POST)
-	public String joinActionn(MemberDTO dto, @RequestParam String formDept, @RequestParam String formRank) throws Exception {
+	public String joinAction(MemberDTO dto, @RequestParam String formDept, @RequestParam String formRank) throws Exception {
 		service.joinAction(dto,formDept,formRank);
 		
 		return "redirect:/loginPage";
@@ -56,12 +56,6 @@ public class MemberController {
 	public String main() throws Exception {
 		
 		return "/form_validation";
-	}
-	
-	@RequestMapping(value = "/test")
-	public String test() throws Exception {
-		
-		return "/test";
 	}
 	
 	@ResponseBody

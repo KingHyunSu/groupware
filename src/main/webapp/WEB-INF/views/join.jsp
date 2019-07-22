@@ -36,7 +36,7 @@
   <script src="resources/Tree/lib/jquery.treeview.js" type="text/javascript"></script>
   <!-- Custom -->
   <link href="resources/custom/css/popupGroup.css" rel="stylesheet" />
-  <script src="resources/custom/js/Ajax.js"></script>
+  <script src="resources/custom/js/join.js"></script>
   
 </head>
 

@@ -25,7 +25,7 @@
 				username-parameter ="id"
 				password-parameter="pw"
 				login-page="/loginPage"
-				default-target-url="/main"
+				default-target-url="/schedule"
 			/>
        </security:http>
         
