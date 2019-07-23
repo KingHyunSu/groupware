@@ -22,15 +22,16 @@ public class ScheduleController {
 	@Inject
 	private ScheduleService service;
 	
-	@RequestMapping(value = "/test2")
+	@RequestMapping(value = "/schedulePopup")
 	public String test2() throws Exception {
-		return "/test2";
+		return "/schedulePopup";
 	}
 	
 	@RequestMapping(value = "/schedule")
-	public String tables(Model model)throws Exception {
+	public String schedule(Model model)throws Exception {
 
 		model.addAttribute("showSchedule" , service.showSchedule());
+		
 		return "/schedule";
 	}
 	
@@ -38,14 +39,12 @@ public class ScheduleController {
 	@RequestMapping(value = "/addSchedule", method = RequestMethod.POST)
 	public Map<Object,Object> addSchedule(@RequestBody ScheduleDTO dto) throws Exception{
 		Map<Object,Object>map = new HashMap<Object,Object>();
-		System.out.println(dto.getMemo());
-		System.out.println(dto.getSubject());
-		
+
 		service.addSchedule(dto);
-		
-		
+	
 		return map;
 	}
+
 	
 	@ResponseBody
 	@RequestMapping(value = "/showSchedule")

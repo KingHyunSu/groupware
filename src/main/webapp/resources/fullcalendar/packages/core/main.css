@@ -96,7 +96,7 @@ hr.fc-divider {
   table-layout: fixed;
   border-collapse: collapse;
   border-spacing: 0;
-  font-size: 15px;
+  font-size: 1em;
   /* normalize cross-browser */ }
 
 .fc th {
@@ -714,7 +714,6 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
 
 .fc-toolbar h2 {
   font-size: 1.75em;
-  color : #32325d;
   margin: 0; }
 
 /* View Structure

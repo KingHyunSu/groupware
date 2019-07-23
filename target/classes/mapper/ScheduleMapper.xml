@@ -13,7 +13,7 @@
     			num
     		DESC
     	</select>
-    	<insert id="addSchedule">
+    	<insert id="addSchedule" parameterType = "ScheduleDTO">
 	    	INSERT INTO
 	    		schedule(subject,startDate,endDate,memo)
 	    	VALUES

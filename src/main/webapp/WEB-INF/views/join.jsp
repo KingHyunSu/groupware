@@ -74,7 +74,7 @@
         </div>
         <div class="input-group">
           <span class="input-group-addon"><i class="icon_key_alt"></i></span>
-          <input type="password" class="form-control" name = "pw" placeholder="비밀번호를 한번 더 입력해주세요.."
+          <input type="password" class="form-control" placeholder="비밀번호를 한번 더 입력해주세요.."
           		id = "checkPw" oninput="check_pw();">
         </div>
         <div class = "ok-text">

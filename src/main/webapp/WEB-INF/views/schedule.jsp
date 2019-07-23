@@ -32,15 +32,16 @@
   <link href="resources/origin/css/style.css" rel="stylesheet">
   <link href="resources/origin/css/style-responsive.css" rel="stylesheet" />
 
-	<link href='resources/calendar/packages/core/main.css' rel='stylesheet' />
-	<link href='resources/calendar/packages/daygrid/main.css' rel='stylesheet' />
-	<link href='resources/calendar/packages/timegrid/main.css' rel='stylesheet' />
-	<link href='resources/calendar/packages/list/main.css' rel='stylesheet' />
-	<script src='resources/calendar/packages/core/main.js'></script>
-	<script src='resources/calendar/packages/interaction/main.js'></script>
-	<script src='resources/calendar/packages/daygrid/main.js'></script>
-	<script src='resources/calendar/packages/timegrid/main.js'></script>
-	<script src='resources/calendar/packages/list/main.js'></script>
+	<!-- fullcalendar -->
+	<link href='resources/fullcalendar/packages/core/main.css' rel='stylesheet' />
+	<link href='resources/fullcalendar/packages/daygrid/main.css' rel='stylesheet' />
+	<link href='resources/fullcalendar/packages/timegrid/main.css' rel='stylesheet' />
+	<link href='resources/fullcalendar/packages/list/main.css' rel='stylesheet' />
+	<script src='resources/fullcalendar/packages/core/main.js'></script>
+	<script src='resources/fullcalendar/packages/interaction/main.js'></script>
+	<script src='resources/fullcalendar/packages/daygrid/main.js'></script>
+	<script src='resources/fullcalendar/packages/timegrid/main.js'></script>
+	<script src='resources/fullcalendar/packages/list/main.js'></script>
 	
   <!-- container section end -->
 

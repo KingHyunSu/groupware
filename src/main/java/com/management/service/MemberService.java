@@ -18,6 +18,8 @@ public class MemberService{
 	
 	
 	public void joinAction(MemberDTO dto, String formDept, String formRank) throws Exception {
+		
+		System.out.println(dto.getPw());
 		String pass = passEncoder.encode(dto.getPw());
 		
 		dto.setPw(pass);
