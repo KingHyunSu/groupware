@@ -21,4 +21,10 @@ public class SignService {
 		
 		return dao.selectDeptShowMember(dto);
 	}
+	
+	public SignDTO selectSignUser(SignDTO dto){
+		
+		System.out.println( dao.selectSignUser(dto));
+		return dao.selectSignUser(dto);
+	}
 }

@@ -24,5 +24,4 @@ public class ScheduleDAO {
 	public void addSchedule(ScheduleDTO dto) throws Exception  {
 		sqlSession.insert(namespace + ".addSchedule", dto);
 	}
-
 }

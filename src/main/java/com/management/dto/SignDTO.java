@@ -7,8 +7,15 @@ public class SignDTO {
 	private String rank;
 	private String name;
 	private String rankname;
+	private String deptname;
 	
 	
+	public String getDeptname() {
+		return deptname;
+	}
+	public void setDeptname(String deptname) {
+		this.deptname = deptname;
+	}
 	public String getNum() {
 		return num;
 	}

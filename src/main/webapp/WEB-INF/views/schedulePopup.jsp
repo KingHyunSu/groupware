@@ -48,6 +48,8 @@
 	</form>
 		<button class = "ok-button" type= "button" onclick="click_ok();">확인</button>
 	</div>	
+	
+	
 </div>
 </body>
 </html>

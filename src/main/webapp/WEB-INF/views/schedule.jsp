@@ -105,8 +105,7 @@
     });
 
     calendar.render();
-  });
-
+});
 </script>
 </head>
 

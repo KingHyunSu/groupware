@@ -27,7 +27,7 @@
 	<!-- popupGroup -->
 <div class = "group" id = "popupGroup">	
 	<div class = "group-head">
-		<h1 class = "zTree-h1"> 부서/직급 선택 </h1>
+		<h1 class = "zTree-h1"> 결재경로 지정 </h1>
 	</div>
 	<div class = "group-body">
 		<div class = "dept">
@@ -89,16 +89,26 @@
 				직급 목록
 			</div>
 			<div class = "rank-list">
-			
+				
 			</div>
 		</div>
-			<input type = "hidden" name = "dept" id = "dept" value = "">
-			<input type = "hidden" name = "rank" id = "rank" value = "">
-			<input type = "hidden" name = "deptName" id = "deptName" value = "">
-			<input type = "hidden" name = "rankName" id = "rankName" value = "">
-	</div>
-		<input type = "hidden" id = "dept" name = "formDept" value = "">
-       <input type = "hidden" id = "rank" name = "formRank" value = "">	
+		<div class = "final">
+			<div class = "rank-head">
+				결재자
+			</div>
+				<table id = "signFinal" class = "signFinal">
+					
+
+				</table>
+		</div>
+		
+		<input type = "hidden" id = "deptname" name="deptname" value = "">
+		<input type = "hidden" id = "rankname" name="rankname" value = "">
+		
+		<input type = "hidden" id = "dept" name="dept" value = "">
+		<input type = "hidden" id = "rank" name="rank" value = "">
+		<input type = "hidden" id = "name" name="name" value = "">
+
 	<div class = "group-foot">
 			<button class = "ok-button" type= "button" onclick="click_Ok();">확인</button>
 	</div>

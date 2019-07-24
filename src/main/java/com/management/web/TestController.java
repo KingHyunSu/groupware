@@ -6,11 +6,12 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.management.dto.SignDTO;
 import com.management.service.SignService;
 
 @Controller
@@ -35,21 +36,36 @@ public class TestController {
 		return "/signPopup";
 	}
 	
+//	@ResponseBody
+//	@RequestMapping(value = "/selectDeptShowMember", method=RequestMethod.POST)
+//	public Map<String,Object> selectDeptShowMember(@RequestBody String dept) throws Exception {
+//		
+//		Map<String,Object> map = new HashMap<String,Object>();
+//		map.put("list", service.selectDeptShowMember(dept));
+//		return map;
+//	}
+	
+	@RequestMapping(value = "/selectDeptShowMember")
+	public String selectDeptShowMember(String dept, Model model) throws Exception {
+
+		model.addAttribute("list",service.selectDeptShowMember(dept));
+
+		return "/test4";
+	}
+
+	
 	@ResponseBody
-	@RequestMapping(value = "/selectDeptShowMember", method=RequestMethod.POST)
-	public Map<String,Object> selectDeptShowMember(@RequestBody String dept) throws Exception {
-		
+	@RequestMapping(value = "/selectSignUser")
+	public Map<String, Object> selectSignUser(@RequestBody SignDTO dto, Model model) throws Exception {
+		System.out.println(dto.getName());
+		System.out.println(dto.getRank());
+		System.out.println(dto.getDept());
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("list", service.selectDeptShowMember(dept));
+	
+		map.put("list",service.selectSignUser(dto));
+		
 		return map;
+		
 	}
 	
-//	@ResponseBody
-//	@RequestMapping(value = "/selectDeptShowMember", method=RequestMethod.POST, produces = "application/json")
-//	public List<SignDTO> selectDeptShowMember(@RequestBody String dept) throws Exception {
-//		
-//		List<SignDTO> list = service.selectDeptShowMember(dept);
-//		System.out.println(list.size());
-//		return list;
-//	}	
 }

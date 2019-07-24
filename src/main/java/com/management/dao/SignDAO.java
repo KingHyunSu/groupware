@@ -22,4 +22,8 @@ public class SignDAO {
 		return sqlSession.selectList(namespace + ".selectDeptShowMember", dto);
 	}
 	
+	public SignDTO selectSignUser(SignDTO dto) {
+		return sqlSession.selectOne(namespace + ".selectSignUser", dto);  
+	}
+	
 }

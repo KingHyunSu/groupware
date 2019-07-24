@@ -6,7 +6,7 @@
     <mapper namespace = "com.management.dao.SignDAO">
     	<select id="selectDeptShowMember" parameterType = "SignDTO" resultType = "SignDTO">
     		SELECT
-    			member.num, member.name, rank.rankname
+    			member.num, member.name, member.rank, rank.rankname
     		FROM
     			member
     		JOIN
@@ -20,7 +20,31 @@
     		WHERE 
     			member.dept = #{dept}
     		ORDER BY
-    			member.num
-    		DESC
+    			member.rank
+			ASC
+    	</select>
+    	
+    	<select id="selectSignUser" parameterType="SignDTO" resultType="SignDTO">
+	   		SELECT
+    			member.name, rank.rankname, dept.deptname
+    		FROM
+    			member
+    		JOIN
+    			dept
+    		ON
+    			member.dept = dept.deptno
+    		JOIN
+    			rank
+    		ON
+    			member.rank = rank.rankno
+    		WHERE 
+    			member.dept = #{dept} 
+    		AND
+    			member.rank = #{rank} 
+    		AND 
+    			member.name = #{name}
+    		ORDER BY
+    			member.rank
+			ASC
     	</select>
     </mapper>
