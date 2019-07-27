@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-    <mapper namespace = "com.management.dao.SignDAO">
+    <mapper namespace = "com.management.sign.SignDAO">
     	<select id="selectDeptShowMember" parameterType = "SignDTO" resultType = "SignDTO">
     		SELECT
     			member.num, member.name, member.rank, rank.rankname
@@ -26,7 +26,7 @@
     	
     	<select id="selectSignUser" parameterType="SignDTO" resultType="SignDTO">
 	   		SELECT
-    			member.name, rank.rankname, dept.deptname
+    			member.name, member.rank, member.dept, rank.rankname, dept.deptname
     		FROM
     			member
     		JOIN
@@ -46,5 +46,22 @@
     		ORDER BY
     			member.rank
 			ASC
+    	</select>
+    	
+    	<select id="userInfo" parameterType = "String" resultType = "SignDTO">
+    		SELECT
+    			member.name, rank.rankname, dept.deptname
+    		FROM
+    			member
+    		JOIN
+    			dept
+    		ON
+    			member.dept = dept.deptno
+    		JOIN
+    			rank
+    		ON
+    			member.rank = rank.rankno
+    		WHERE 
+    			member.id = #{id}
     	</select>
     </mapper>

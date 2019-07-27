@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-    <mapper namespace = "com.management.dao.MemberDAO">
+    <mapper namespace = "com.management.member.MemberDAO">
     	<insert id="join">
     		INSERT INTO
     			member(id,pw,name,dept,rank)
@@ -21,7 +21,7 @@
     	
     	<select id="login" resultType="CustomUserDetails">
     		SELECT
-    			*
+    			id,pw,name,authority
     		FROM
     			member
     		WHERE

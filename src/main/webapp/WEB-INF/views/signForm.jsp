@@ -1,10 +1,8 @@
+<%@page import="com.management.sign.SignDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import = "java.util.List" %>
-<%@page import = "java.util.ArrayList" %>
-<%@page import = "com.management.sign.SignDTO" %>
 <%
-	List<SignDTO> list = (ArrayList<SignDTO>)request.getAttribute("list");
+	SignDTO userInfo = (SignDTO)request.getAttribute("userInfo");
 %>
 <!DOCTYPE html>
 <html>
@@ -26,37 +24,39 @@
 	<!-- custom -->
 	<link href="resources/custom/css/signPopup.css" rel="stylesheet" />
 	<script src="resources/custom/js/sign.js" type="text/javascript"></script>
-
+	
+	<script>
+		$(document).ready(function(){
+			
+			$.ajax({
+				type : "GET",
+				url : "signPopup",
+				dataType : "text",
+				success : function(data) {
+					console.log(data);
+					var deptname = $('input#deptname').val();
+					console.log(deptname);
+				}
+			})
+		})
+	</script>
 </head>
 <body>
 
-<table>
-<%
-	for(int i=0; i < list.size(); i++) {
-		SignDTO dto = list.get(i);
-%>
-	<tr>
-		<td class = "right-td">
-			<div class = "rank-list">
-				<button type = "button" class = "rank-button-none" name = <%=dto.getRankname() %> value = <%=dto.getRank() %> 
-					disabled >
-					<%=dto.getRankname() %>
-				</button>
-			</div>
-		</td>
-		<td>
-				<button type = "button" class = "rank-button" name = <%=dto.getName()%> value = <%=dto.getRank() %> 
-					onclick="click_rank(name,value);">
-					<%=dto.getName()%> 
-				</button>
-		</td>
-	</tr>
+	<button class = "add-button" type = "button" onclick="click_signPath();">일정 추가</button>
 
-<%
-	}
-%>
-</table>
+<%= userInfo.getName() %>
+<%= userInfo.getDeptname() %>
+<%= userInfo.getRankname() %>
 
-
+		<input type = "hidden" id = "deptname" name="deptname" value = "">
+		<input type = "hidden" id = "rankname" name="rankname" value = "">
+		
+		<input type = "hidden" id = "dept" name="dept" value = "">
+		<input type = "hidden" id = "rank" name="rank" value = "">
+		<input type = "hidden" id = "name" name="name" value = "">
+		
+		<div id = "signname">
+		</div>
 </body>
 </html>

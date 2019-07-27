@@ -1,6 +1,8 @@
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="org.springframework.security.core.Authentication"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import = "com.management.dto.ScheduleDTO" %>
+<%@page import = "com.management.schedule.ScheduleDTO" %>
 <%@page import = "java.util.List" %>
 <%@page import = "java.util.ArrayList" %>
 
@@ -340,7 +342,7 @@
                             <span class="profile-ava">
                                 <img alt="" src="img/avatar1_small.jpg">
                             </span>
-                            <span class="username">Jenifer Smith</span>
+                            <span class="username"></span>
                             <b class="caret"></b>
                         </a>
             <ul class="dropdown-menu extended logout">
@@ -367,6 +369,15 @@
                 <a href="documentation.html"><i class="icon_key_alt"></i> Documentation</a>
               </li>
             </ul>
+          </li>
+          
+          <li>
+	          	<sec:authorize access="isAuthenticated()">
+				    <form action="logout" method="POST">
+				        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				        <button type="submit">LOGOUT</button>
+				    </form>
+				</sec:authorize>
           </li>
           <!-- user login dropdown end -->
         </ul>

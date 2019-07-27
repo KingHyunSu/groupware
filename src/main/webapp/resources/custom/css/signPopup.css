@@ -7,7 +7,7 @@ table {
 }
 select {
     width: 50px; /* 원하는 너비설정 */
-    padding: .3em .3em; /* 여백으로 높이 설정 */
+    padding: .3em .0em; /* 여백으로 높이 설정 */
     border: 1px solid #999;
 	font-size : 12px;
 	background : white;

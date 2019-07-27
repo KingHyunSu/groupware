@@ -6,6 +6,9 @@
     <configuration>
 		
 		<typeAliases>
-			<package name = "com.management.dto"></package>
+			<typeAlias type = "com.management.member.MemberDTO" alias = "MemberDTO"/>
+			<typeAlias type = "com.management.schedule.ScheduleDTO" alias = "ScheduleDTO"/>
+			<typeAlias type = "com.management.security.CustomUserDetails" alias = "CustomUserDetails"/>
+			<typeAlias type = "com.management.sign.SignDTO" alias = "SignDTO"/>
 		</typeAliases>
     </configuration>

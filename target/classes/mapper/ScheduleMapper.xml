@@ -3,12 +3,14 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-    <mapper namespace = "com.management.dao.ScheduleDAO">
-    	<select id="showSchedule" resultType = "ScheduleDTO">
+    <mapper namespace = "com.management.schedule.ScheduleDAO">
+    	<select id="showSchedule" parameterType = "String" resultType = "ScheduleDTO">
     		SELECT
     			subject,startDate,endDate,memo
     		FROM
     			schedule
+    		WHERE
+    			id = #{id}
     		ORDER BY
     			num
     		DESC

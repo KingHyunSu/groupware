@@ -13,32 +13,38 @@
   <title>Form Validation | Creative - Bootstrap 3 Responsive Admin Template</title>
 
   <!-- Bootstrap CSS -->
-  <link href="resources/main/css/bootstrap.min.css" rel="stylesheet">
+  <link href="resources/origin/css/bootstrap.min.css" rel="stylesheet">
   <!-- bootstrap theme -->
-  <link href="resources/main/css/bootstrap-theme.css" rel="stylesheet">
+  <link href="resources/origin/css/bootstrap-theme.css" rel="stylesheet">
   <!--external css-->
   <!-- font icon -->
-  <link href="resources/main/css/elegant-icons-style.css" rel="stylesheet" />
-  <link href="resources/main/css/font-awesome.min.css" rel="stylesheet" />
+  <link href="resources/origin/css/elegant-icons-style.css" rel="stylesheet" />
+  <link href="resources/origin/css/font-awesome.min.css" rel="stylesheet" />
   <!-- Custom styles -->
-  <link href="resources/main/css/style.css" rel="stylesheet">
-  <link href="resources/main/css/style-responsive.css" rel="stylesheet" />
-  <!-- modify -->
+  <link href="resources/origin/css/style.css" rel="stylesheet">
+  <link href="resources/origin/css/style-responsive.css" rel="stylesheet" />
+    <!-- ajax -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+  <!-- custom -->
   <link href="resources/css_modify/PaymentA4_basic.css" rel="stylesheet" />
+  <script src="resources/custom/js/sign.js" type="text/javascript"></script>
 
-  <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
-  <!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
-      <script src="js/respond.min.js"></script>
-      <script src="js/lte-ie7.js"></script>
-    <![endif]-->
-
-    <!-- =======================================================
-      Theme Name: NiceAdmin
-      Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-      Author: BootstrapMade
-      Author URL: https://bootstrapmade.com
-    ======================================================= -->
+  	<script>
+		$(document).ready(function(){
+			
+			$.ajax({
+				type : "GET",
+				url : "signPopup",
+				dataType : "text",
+				success : function(data) {
+					console.log(data);
+					var deptname = $('input#deptname').val();
+					console.log(deptname);
+				}
+			})
+		})
+	</script>
 </head>
 
 <body>
@@ -435,42 +441,50 @@
               <div class="panel-body">
                 <div class="form">
                   <form class="form-validate form-horizontal" id="feedback_form" method="get" action="">
-                    a4용지 기준 이하 작성 불가
-                    <div class = "a4">
-                    	<div class = "a4-head">
+                    결재선 5개 이상 불가
+                    <div class = "main-form">
+                    	<div class = "form-title">
                     		<h1 style = "text-align : center;">TEST 결재 양식</h1>
-                    		<div class = "sign">
-                    			<div class = "sign-top">
-                    				기&nbsp;안&nbsp;자
-                    			</div>
+                    		<button class = "add-button" type = "button" onclick="click_signPath();">일정 추가</button>
+                    	</div>
+                    	<div class = "form-head">
+                    		<table class = "gian">
+                    			<tr>
+                    				<td class = "gian-left">부서</td>
+                    				<td class = "gian-right"></td>
+                    			</tr>
+                    			<tr>
+                    				<td class = "gian-left">기안자</td>
+                    				<td class = "gian-right"></td>
+                    			</tr>
+                    			<tr>
+                    				<td class = "gian-left">기안 날짜</td>
+                    				<td class = "gian-right"></td>
+                    			</tr>
+                    		</table>
+                    		<div class = "sign">        
                     			<div class = "sign-left">
-                    				결<br>
-                    				재
+                    				결<br>재
                     			</div>
+                    			<div id = "sign-zone">
+	                 				<div class = "sign-top">
+	                 				</div>
+	                 				<div class = "sign-bottom">
+	                 					결재날짜(임시)
+	                 				</div>  
+								</div>	
                     		</div>
                     	</div>
-                    	<div class = "a4-body">
+                    	<div class = "form-body">
                     		<table class = "sign-table">
                     			<tr>
-                    				<td class= "sign-table-left">문서번호</td>
-                    				<td class= "sign-table-right">자동</td>
-                    				<td class= "sign-table-left">기안일자</td>
-                    				<td class= "sign-table-right">자동</td>
-                    			</tr>
-                    			<tr>
-                    				<td class= "sign-table-left">기안자</td>
-                    				<td class= "sign-table-right"></td>
-                    				<td class= "sign-table-left">기안부서</td>
-                    				<td class= "sign-table-right"></td>
-                    			</tr>
-                    			<tr>
                     				<td class= "sign-table-left">문서제목</td>
-                    				<td colspan = "3"><input class= "sign-table-input1" type = "text" name = "title"></td>
+                    				<td><input class= "sign-table-input1" type = "text" name = "title"></td>
                     			</tr>
                     		</table>
                     		<textarea class= "sign-table-textarea1" rows = "35"></textarea>
                     	</div>
-                    	<div class = "a4-foot">
+                    	<div class = "form-foot">
                     	</div>
                     </div>
                     <div class="form-group">
@@ -479,6 +493,12 @@
                         <button class="btn btn-default" type="button">Cancel</button>
                       </div>
                     </div>
+                    
+                    		<!-- hidden -->
+                 <div id = "hidden-sign">
+
+                  </div>
+                  
                   </form>
                 </div>
 

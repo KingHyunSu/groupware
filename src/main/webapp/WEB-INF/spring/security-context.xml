@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-		<context:component-scan base-package="com.management.dao"></context:component-scan>
+		<context:component-scan base-package="com.management.*"></context:component-scan>
 		
 		<security:http auto-config="true" use-expressions="true">
 			<security:intercept-url pattern="/loginPage" access="permitAll"/>
@@ -27,7 +27,13 @@
 				login-page="/loginPage"
 				default-target-url="/schedule"
 			/>
+			
+			<security:logout
+       		logout-url="/logout"
+       		logout-success-url="/loginPage"
+       		/>
        </security:http>
+
         
         <security:authentication-manager>
         	 <security:authentication-provider ref = "userAuthProvider"></security:authentication-provider>
@@ -36,8 +42,8 @@
         </security:authentication-manager>
 
 		<bean id = "bcryptPasswordEncoder" class = "org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
-		<bean id = "userService" class = "com.management.service.CustomUserDetailsService"></bean>
-		<bean id = "userAuthProvider" class = "com.management.service.CustomAuthenticationProvider"></bean>
+		<bean id = "userService" class = "com.management.security.CustomUserDetailsService"></bean>
+		<bean id = "userAuthProvider" class = "com.management.security.CustomAuthenticationProvider"></bean>
 		
 	
 </beans>

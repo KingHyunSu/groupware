@@ -8,14 +8,13 @@ $(function() {
 	});
 });
 
-//add schedule popup open
-function click_add() {
-	var url = "schedulePopup";
-	var name = "schedulePopup";
-	var option = "width = 600, height = 600 left = 100, top=50,location=no";
+//signForm 결재경로 지정 클릭
+function click_signPath() {
+	var url = "signPopup";
+	var name = "signPopup";
+	var option = "width = 920, height = 460 left = 200, top=30,location=no";
 	window.open(url,name,option)
 };
-
 
 // 부서/직급 선택하기 클릭
 function click_group() {
@@ -78,8 +77,10 @@ function click_rank(name, value) {
 			dataType : 'json',
 			contentType : "application/json; charset=UTF-8",
 			success : function(data) {
-				console.log(data);
+
 				var result = data.list;
+
+				
 				console.log(result.name);
 				console.log(result.rankname);
 				console.log(result.deptname);
@@ -93,7 +94,16 @@ function click_rank(name, value) {
 							+result.name+
 							"</td><td class='signFinal-rank'>"
 							+result.rankname+
-							"</td></tr>");
+							"</td></tr>"		
+				);
+				
+				$('div#hidden-sign',opener.document).append(
+						"<input type = 'hidden' name = 'deptname' value = "+result.deptname+">"+
+						"<input type = 'hidden' name = 'rankname' value = "+result.rankname+">"+
+						"<input type = 'hidden' id = 'signname' name = 'name' value = "+result.name+">"+
+						"<input type = 'hidden' name = 'dept' value = "+result.dept+">"+
+						"<input type = 'hidden' name = 'rank' value = "+result.rank+">"
+						);
 			}
 		});
 };
@@ -101,22 +111,35 @@ function click_rank(name, value) {
 
 // 확인 버튼
 function click_Ok() {
-	var realDept = $("input#dept").val();
-	var realRank = $("input#rank").val();
-	var deptName = $("input#deptName").val();
-	var rankName = $("input#rankName").val();
+	var deptname = $('input#deptname').val()
+	var rankname = $('input#rankname').val()
+	var dept = $('input#dept').val()
+	var rank = $('input#rank').val()
+	//var name = $('input#name').val()
+	
+	
+	//console.log($('input#signname',opener.document).val());
+	var list = new Array();
+	$($('input#signname',opener.document).val()).each(function(index, item){
+		list.push($(item).val());
+	});
+	//var list = $('input[name=name]').get();
 
-	$("input#realDept").val(realDept);
-	$("input#realRank").val(realRank);
+	for(var i = 0; i < list.length; i++) {
+		$('.sign',opener.document).append("<div class = 'sign-top'>"+list[i].innerHTML+"</div");
+		alert(list[i]);
+	};
 
-	$(".group-text").css("margin-bottom", "16px");
-	$(".group-text").css("color", "#34aadc");
-	$(".group-text").css("text-align", "center");
-	$(".group-text").text(deptName + "/" + rankName);
 
-	$('#popupGroup').hide();
-	$(".login-wrap").show();
+	//window.opener.document.getElementById("deptname").value = deptname;
+	//window.opener.document.getElementById("rankname").value = rankname;
+	//window.opener.document.getElementById("dept").value = dept;
+	//window.opener.document.getElementById("rank").value = rank;
+	//window.opener.document.getElementById("name").value = name;
+	
+	//$('div#sign-zone',opener.document).append("<div>"+name+"</div>");
 
+	window.close();
 };
 
 // 닫기 버튼
@@ -124,4 +147,6 @@ function close_group() {
 	$('#popupGroup').hide();
 	$(".login-wrap").show();
 };
+
+
 
