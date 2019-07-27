@@ -21,12 +21,7 @@ public class ScheduleController {
 	@Inject
 	private ScheduleService service;
 	
-	
-	@RequestMapping(value = "/schedulePopup")
-	public String test2() throws Exception {
-		return "/schedulePopup";
-	}
-	
+	//일정 관리 페이지
 	@RequestMapping(value = "/schedule")
 	public String schedule(Model model)throws Exception {
 		
@@ -35,9 +30,16 @@ public class ScheduleController {
 		
 		model.addAttribute("showSchedule" , service.showSchedule(id));
 		
-		return "/schedule";
+		return "/main/schedule";
 	}
 	
+	//일정 추가 팝업
+	@RequestMapping(value = "/schedulePopup")
+	public String test2() throws Exception {
+		return "/main/schedulePopup";
+	}
+	
+	//일정 추가 버튼 클릭 Ajax
 	@ResponseBody
 	@RequestMapping(value = "/addSchedule", method = RequestMethod.POST)
 	public Map<Object,Object> addSchedule(@RequestBody ScheduleDTO dto) throws Exception{
@@ -48,7 +50,7 @@ public class ScheduleController {
 		return map;
 	}
 
-	
+	//일정 보이기 (임시)
 	@ResponseBody
 	@RequestMapping(value = "/showSchedule")
 	public List<ScheduleDTO> showSchedule() throws Exception {

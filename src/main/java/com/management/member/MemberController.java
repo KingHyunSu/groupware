@@ -18,19 +18,22 @@ public class MemberController {
 	@Inject
 	private MemberService service;
 	
+	//회원가입 페이지
 	@RequestMapping(value = "/join")
 	public String join() throws Exception {
 		
 		return "/join";
 	}
 	
+	//회원가입 버튼 클릭
 	@RequestMapping(value = "/joinAction", method = RequestMethod.POST)
 	public String joinAction(MemberDTO dto, @RequestParam String formDept, @RequestParam String formRank) throws Exception {
 		service.joinAction(dto,formDept,formRank);
 		
-		return "redirect:/loginPage";
+		return "redirect:/login";
 	}
 	
+	//아이디 중복 검사 Ajax
 	@ResponseBody
 	@RequestMapping(value = "/idCheck", method = RequestMethod.POST, produces = "application/json")
 	public Map<Object, Object> idCheck(@RequestBody String id) throws Exception {
@@ -44,17 +47,7 @@ public class MemberController {
 		return map;
 	}
 	
-	@RequestMapping(value = "/loginPage")
-	public String login() throws Exception {
-		
-		return "/loginPage";
-	}
-	@RequestMapping(value = "/main")
-	public String main() throws Exception {
-		
-		return "/form_validation";
-	}
-	
+	//부서 선택 Ajax
 	@ResponseBody
 	@RequestMapping(value = "/join/selectDeptName", method = RequestMethod.POST, produces = "application/json")
 	public Map<Object,Object> selectDeptName(@RequestBody String deptNum) 
@@ -66,6 +59,7 @@ public class MemberController {
 		return map;
 	}
 	
+	//직급 선택 Ajax
 	@ResponseBody
 	@RequestMapping(value = "/join/selectRankName", method = RequestMethod.POST, produces = "application/json")
 	public Map<Object,Object> selectRankName(@RequestBody String rankNum) 
@@ -77,8 +71,22 @@ public class MemberController {
 		return map;
 	}
 	
+	//로그인 페이지
+	@RequestMapping(value = "/login")
+	public String login() throws Exception {
+		
+		return "/login";
+	}
+	
+	//로그아웃
 	@RequestMapping(value = "/logout")
 	public String logout() throws Exception {
-		return "redirect:/loginPage";
+		return "redirect:/login";
+	}
+	
+	@RequestMapping(value = "/main")
+	public String main() throws Exception {
+		
+		return "/form_validation";
 	}
 }

@@ -10,13 +10,13 @@
 		<context:component-scan base-package="com.management.*"></context:component-scan>
 		
 		<security:http auto-config="true" use-expressions="true">
-			<security:intercept-url pattern="/loginPage" access="permitAll"/>
+			<security:intercept-url pattern="/login" access="permitAll"/>
 			<security:intercept-url pattern="/join" access="permitAll"/>
 			<security:intercept-url pattern="/joinAction" access="permitAll"/>
 			<security:intercept-url pattern="/idCheck" access="permitAll"/>
 			<security:intercept-url pattern="/resources/**" access="permitAll"/>
 			<security:intercept-url pattern="/join/*" access="permitAll"/>
-			<security:intercept-url pattern="/**" access="hasAnyRole('USER, ADMIN')" />
+			<security:intercept-url pattern="/main/**" access="hasAnyRole('USER, ADMIN')" />
 			
 			<!-- csrf 토큰 임시 비활성화 -->
 			<security:csrf disabled="true"/>
@@ -24,13 +24,13 @@
 			<security:form-login
 				username-parameter ="id"
 				password-parameter="pw"
-				login-page="/loginPage"
+				login-page="/login"
 				default-target-url="/schedule"
 			/>
 			
 			<security:logout
        		logout-url="/logout"
-       		logout-success-url="/loginPage"
+       		logout-success-url="/login"
        		/>
        </security:http>
 
