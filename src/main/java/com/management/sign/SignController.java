@@ -1,6 +1,7 @@
 package com.management.sign;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -57,5 +59,21 @@ public class SignController {
 		
 		return map;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/signTest", method=RequestMethod.POST)
+	public Map<String, Object> signTest(@RequestBody SignDTO dto) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		System.out.println("부서 :"+dto.getDept());
+		System.out.println("이름 :"+dto.getName());
+		List<String> list = dto.getTestname();
+		
+		for(int i = 0; i < list.size(); i++) {
+			System.out.print(list.get(i));
+		}
+		
+		return map;
+	}
+	
 	
 }

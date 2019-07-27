@@ -44,12 +44,12 @@
 	width : 90px;
 	border-right : 1px solid;
 	background-color : #ccc;
+	color : black;
 }
 .gian-right {
 	width : 160px;
 }
-.sign {
-	width : 150px;
+.sign-zone {
 	border : 1px solid;
 	float: right;
 	margin-top : 35px;
@@ -57,6 +57,19 @@
 	top : 0;
 	right : 0;
 }
+.sign-zone ul {
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+
+.sign-zone li {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    border : 0;
+    float: left;
+}
+
 .sign-left {
 	width : 30px;
 	height : 150px;
@@ -64,32 +77,43 @@
 	text-align : center;
 	line-height : 73px;
 	border-right : 1px solid;
+	color : black;
+}
+.sign {
+	width : 120px;
+	height : 150px;
+	border : 1px solid;
 	position : relative;
 }
+
 .sign-top {
 	width : 119px;
 	height : 30px;
-	background-color : #ccc;
+	background-color : white;
 	text-align : center;
 	line-height : 27px;
-	border-bottom : 1px solid;
-	border-right : 1px solid;
 	position : absolute;
 	top : 0;
-	left : 30px;
+}
+.sign-middle {
+	width : 119px;
+	height : 93px;
+	background-color : white;
+	border-top : 1px solid;
+	position : absolute;
+	top : 30px;
 }
 .sign-bottom {
 	width : 119px;
-	height : 30px;
-	background-color : #ccc;
+	height : 28px;
+	background-color : white;
 	text-align : center;
 	line-height : 27px;
 	border-top : 1px solid;
-	border-right : 1px solid;
 	position : absolute;
 	bottom : 0px;
-	left : 30px;
 }
+
 .sign-table {
 	width : 100%;
 	text-align: center;
@@ -101,6 +125,8 @@
 .sign-table-left {
 	width : 15%;
 	background-color : #ccc;
+	border-right : 1px solid;
+	color : black;
 }
 .sign-table-input1 {
 	border : none;
@@ -110,4 +136,37 @@
 	border : none;
 	width : 95%;
 	margin-left: 5%;
+}
+.path-button {
+    top: 1px;
+    right : 235px;
+    background: #2C3E50;
+    border: 0;
+    color: white;
+    height: 35px;
+    border-radius: 3px;
+    width: 93px;
+    position :absolute;
+}
+.keep-button {
+    top: 1px;
+    right : 135px;
+    background: #2C3E50;
+    border: 0;
+    color: white;
+    height: 35px;
+    border-radius: 3px;
+    width: 93px;
+    position :absolute;
+}
+.add-button {
+    top: 1px;
+    right : 35px;
+    background: #2C3E50;
+    border: 0;
+    color: white;
+    height: 35px;
+    border-radius: 3px;
+    width: 93px;
+    position :absolute;
 }

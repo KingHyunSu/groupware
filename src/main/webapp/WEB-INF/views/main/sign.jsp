@@ -87,11 +87,13 @@
               <div class="panel-body">
                 <div class="form">
                   <form class="form-validate form-horizontal" id="feedback_form" method="get" action="">
-                    결재선 5개 이상 불가
+                    결재선 3개 이상 불가
                     <div class = "main-form">
                     	<div class = "form-title">
                     		<h1 style = "text-align : center;">TEST 결재 양식</h1>
-                    		<button class = "add-button" type = "button" onclick="click_signPath();">일정 추가</button>
+                    		<button class = "path-button" type = "button" onclick="click_signPath();">결재 경로</button>
+                    		<button class = "keep-button" type = "button" onclick="click_signPath();">임시 저장</button>
+                    		<button class = "add-button" type = "submit" onclick="click_signPath();">결재 상신</button>
                     	</div>
                     	<div class = "form-head">
                     		<table class = "gian">
@@ -108,17 +110,16 @@
                     				<td class = "gian-right"></td>
                     			</tr>
                     		</table>
-                    		<div class = "sign">        
-                    			<div class = "sign-left">
-                    				결<br>재
-                    			</div>
-                    			<div id = "sign-zone">
-	                 				<div class = "sign-top">
-	                 				</div>
-	                 				<div class = "sign-bottom">
-	                 					결재날짜(임시)
-	                 				</div>  
-								</div>	
+                    		<div class = "sign-zone">        
+                    			
+                    			<ul id = "sign-add">
+                    				<li>
+                    					<div class = "sign-left">
+		                    				결<br>재
+		                    			</div>	
+                    				</li>
+								</ul>	
+                    			
                     		</div>
                     	</div>
                     	<div class = "form-body">
@@ -135,8 +136,7 @@
                     </div>
                     <div class="form-group">
                       <div class="col-lg-offset-2 col-lg-10">
-                        <button class="btn btn-primary" type="submit">Save</button>
-                        <button class="btn btn-default" type="button">Cancel</button>
+   
                       </div>
                     </div>
                     

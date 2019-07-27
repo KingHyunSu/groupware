@@ -101,13 +101,12 @@
 
 				</table>
 		</div>
+		<div id = "sign-zone">
+		</div>
 		
-		<input type = "hidden" id = "deptname" name="deptname" value = "">
-		<input type = "hidden" id = "rankname" name="rankname" value = "">
-		
-		<input type = "hidden" id = "dept" name="dept" value = "">
-		<input type = "hidden" id = "rank" name="rank" value = "">
-		<input type = "hidden" id = "name" name="name" value = "">
+		<input type = "hidden" id = "popup-deptname" name="deptname" value = "">		
+		<input type = "hidden" id = "popup-dept" name="dept" value = "">
+
 
 	<div class = "group-foot">
 			<button class = "ok-button" type= "button" onclick="click_Ok();">확인</button>

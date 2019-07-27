@@ -12,7 +12,7 @@ $(function() {
 function click_signPath() {
 	var url = "signPopup";
 	var name = "signPopup";
-	var option = "width = 920, height = 460 left = 200, top=30,location=no";
+	var option = "width = 945, height = 460 left = 200, top=30,location=no";
 	window.open(url,name,option)
 };
 
@@ -27,48 +27,21 @@ function click_group() {
 	}
 };
 
-// 부서 클릭
-//function click_dept1(name, value) {
-//
-//	var rank = name;
-//
-//	
-//	 $.ajax({
-//			url : 'selectDeptShowMember',
-//			type : "POST",
-//			data : rank,
-//			dataType : 'json',
-//			contentType : "application/json; charset=UTF-8",
-//			success : function(data) {
-//
-//				$.each(data.list ,function(idx,val){
-//				console.log(idx + "," + val);
-//				console.log(val);
-//				$(".rank-list").append("<button type='button' class='rank-button'>"
-//												+val.name+"&nbsp;&nbsp;&nbsp;"+val.rankname+
-//												"</button>"
-//												);
-//				});
-//			}
-//		});
-//};
-
-
+//부서 클릭
 function click_dept(name, value) {
 	$(".rank-list").load("selectDeptShowMember?dept="+name);
-	$('input#dept').val(name);
-	$('input#deptname').val(value);
+	$('input#popup-dept').val(name);
+	$('input#popup-deptname').val(value);
 };
 
+//직원 클릭
 function click_rank(name, value) {
-	var deptname = $('input#deptname').val();
-	var dept = $('input#dept').val();
+	var deptname = $('input#popup-deptname').val();
+	var dept = $('input#popup-dept').val();
 	var name = name;
 	var rank = value;
 	
 	var signUser = JSON.stringify({name:name, dept:dept, rank:rank});
-//	$('input#name').val(name);
-//	$('input#rank').val(value);
 	
 	 $.ajax({
 			url : 'selectSignUser',
@@ -80,73 +53,72 @@ function click_rank(name, value) {
 
 				var result = data.list;
 
-				
-				console.log(result.name);
-				console.log(result.rankname);
-				console.log(result.deptname);
-				$('#signFinal').append("<tr><td><select>" +
+				$('#signFinal').append("<tr id = 'tr'><td><select>" +
 							"<option value = '1' selected>결재</option>"+
 							"<option value = '2'>합의</option>"+
 							"<option value = '3'>협의</option>"+
-							"<td class='signFinal-dept'>"
-							+result.deptname+
-							"</td><td class='signFinal-name'>"
-							+result.name+
-							"</td><td class='signFinal-rank'>"
-							+result.rankname+
+							"<td class='signFinal-dept'>"+
+							"<button class='path-button' name='buttondept' value="+result.deptname+">"+result.deptname+"</button>"+
+							"</td><td class='signFinal-name'>"+
+							"<button class='path-button' name='buttonname' value="+result.name+">"+result.name+"</button>"+
+							"</td><td class='signFinal-rank'>"+
+							"<button class='path-button' name='buttonrank' value="+result.rankname+">"+result.rankname+"</button>"+
+							"</td><td><button type='button' class='cancle-button' onclick='cancle(name);'>취소</buttom>"+
 							"</td></tr>"		
 				);
-				
-				$('div#hidden-sign',opener.document).append(
-						"<input type = 'hidden' name = 'deptname' value = "+result.deptname+">"+
-						"<input type = 'hidden' name = 'rankname' value = "+result.rankname+">"+
-						"<input type = 'hidden' id = 'signname' name = 'name' value = "+result.name+">"+
-						"<input type = 'hidden' name = 'dept' value = "+result.dept+">"+
-						"<input type = 'hidden' name = 'rank' value = "+result.rank+">"
+
+				$('div#sign-zone').append(
+						"<input type = 'hidden' id = 'deptname' name = 'deptname' value = "+result.deptname+">"+
+						"<input type = 'hidden' id = 'rankname' name = 'rankname' value = "+result.rankname+">"+
+						"<input type = 'hidden' id = 'name' name = 'name' value = "+result.name+">"+
+						"<input type = 'hidden' id = 'dept' name = 'dept' value = "+result.dept+">"+
+						"<input type = 'hidden' id = 'sign' name = 'rank' value = "+result.rank+">"
 						);
+				
 			}
 		});
 };
 
-
-// 확인 버튼
+//확인 클릭
 function click_Ok() {
 	var deptname = $('input#deptname').val()
 	var rankname = $('input#rankname').val()
+	var name = $('input#name').val()
 	var dept = $('input#dept').val()
 	var rank = $('input#rank').val()
-	//var name = $('input#name').val()
+		
+	$("button[name=buttonname]").each(function(idx){
+			var eqValue = $("button[name=buttonname]:eq("+idx+")").val();
+		$('#sign-add',opener.document).append("<li>" +
+									"<div class='sign'>" +
+										"<div class='sign-top'>"+eqValue+"</div>" +
+										"<div class='sign-middle'></div>" +
+										"<div class='sign-bottom'></div>" +
+									"</div>"+
+								"</li>");
+		$('div#hidden-sign',opener.document).append(
+				"<input type = 'hidden' name = 'name' value = "+eqValue+">");
+		});
 	
+	$("button[name=buttondept]").each(function(idx){
+		var eqValue = $("button[name=buttondept]:eq("+idx+")").val();
+
+		$('div#hidden-sign',opener.document).append(
+				"<input type = 'hidden' name = 'deptname' value = "+eqValue+">");
+		});
 	
-	//console.log($('input#signname',opener.document).val());
-	var list = new Array();
-	$($('input#signname',opener.document).val()).each(function(index, item){
-		list.push($(item).val());
-	});
-	//var list = $('input[name=name]').get();
+	$("button[name=buttonrank]").each(function(idx){
+		var eqValue = $("button[name=buttonrank]:eq("+idx+")").val();
+		console.log(eqValue);
+		$('div#hidden-sign',opener.document).append(
+				"<input type = 'hidden' name = 'rankname' value = "+eqValue+">");
+		});
 
-	for(var i = 0; i < list.length; i++) {
-		$('.sign',opener.document).append("<div class = 'sign-top'>"+list[i].innerHTML+"</div");
-		alert(list[i]);
-	};
-
-
-	//window.opener.document.getElementById("deptname").value = deptname;
-	//window.opener.document.getElementById("rankname").value = rankname;
-	//window.opener.document.getElementById("dept").value = dept;
-	//window.opener.document.getElementById("rank").value = rank;
-	//window.opener.document.getElementById("name").value = name;
-	
-	//$('div#sign-zone',opener.document).append("<div>"+name+"</div>");
 
 	window.close();
 };
 
-// 닫기 버튼
-function close_group() {
-	$('#popupGroup').hide();
-	$(".login-wrap").show();
-};
-
-
-
+//결재 경로 취소
+function cancle(name) {
+	$('#tr'+name).remove();
+}

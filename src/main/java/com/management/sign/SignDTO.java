@@ -1,5 +1,7 @@
 package com.management.sign;
 
+import java.util.List;
+
 public class SignDTO {
 
 	private String num;
@@ -8,8 +10,16 @@ public class SignDTO {
 	private String name;
 	private String rankname;
 	private String deptname;
+	private List<String> testname;
 	
 	
+	
+	public List<String> getTestname() {
+		return testname;
+	}
+	public void setTestname(List<String> testname) {
+		this.testname = testname;
+	}
 	public String getDeptname() {
 		return deptname;
 	}
