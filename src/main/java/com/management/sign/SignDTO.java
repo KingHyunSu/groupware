@@ -1,35 +1,36 @@
 package com.management.sign;
 
-import java.util.List;
+import java.sql.Date;
 
 public class SignDTO {
 
-	private String num;
+	private int num;
 	private String dept;
 	private String rank;
 	private String name;
 	private String rankname;
 	private String deptname;
-	private List<String> testname;
 	
+	private String title;
+	private String content;
+	private Date date;
+	private String id;
 	
+	private String signName;
+	private String signDept;
+	private String signRank;
+	private String sign;
 	
-	public List<String> getTestname() {
-		return testname;
-	}
-	public void setTestname(List<String> testname) {
-		this.testname = testname;
-	}
 	public String getDeptname() {
 		return deptname;
 	}
 	public void setDeptname(String deptname) {
 		this.deptname = deptname;
 	}
-	public String getNum() {
+	public int getNum() {
 		return num;
 	}
-	public void setNum(String num) {
+	public void setNum(int num) {
 		this.num = num;
 	}
 	public String getDept() {
@@ -56,6 +57,55 @@ public class SignDTO {
 	public void setRankname(String rankname) {
 		this.rankname = rankname;
 	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getSignName() {
+		return signName;
+	}
+	public void setSignName(String signName) {
+		this.signName = signName;
+	}
+	public String getSignDept() {
+		return signDept;
+	}
+	public void setSignDept(String signDept) {
+		this.signDept = signDept;
+	}
+	public String getSignRank() {
+		return signRank;
+	}
+	public void setSignRank(String signRank) {
+		this.signRank = signRank;
+	}
+	public String getSign() {
+		return sign;
+	}
+	public void setSign(String sign) {
+		this.sign = sign;
+	}
+	
 	
 	
 	

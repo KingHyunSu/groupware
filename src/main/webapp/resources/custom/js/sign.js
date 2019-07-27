@@ -97,21 +97,21 @@ function click_Ok() {
 									"</div>"+
 								"</li>");
 		$('div#hidden-sign',opener.document).append(
-				"<input type = 'hidden' name = 'name' value = "+eqValue+">");
+				"<input type = 'hidden' name = 'signName' value = "+eqValue+">");
 		});
 	
 	$("button[name=buttondept]").each(function(idx){
 		var eqValue = $("button[name=buttondept]:eq("+idx+")").val();
 
 		$('div#hidden-sign',opener.document).append(
-				"<input type = 'hidden' name = 'deptname' value = "+eqValue+">");
+				"<input type = 'hidden' name = 'signDept' value = "+eqValue+">");
 		});
 	
 	$("button[name=buttonrank]").each(function(idx){
 		var eqValue = $("button[name=buttonrank]:eq("+idx+")").val();
 		console.log(eqValue);
 		$('div#hidden-sign',opener.document).append(
-				"<input type = 'hidden' name = 'rankname' value = "+eqValue+">");
+				"<input type = 'hidden' name = 'signRank' value = "+eqValue+">");
 		});
 
 

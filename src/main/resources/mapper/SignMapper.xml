@@ -4,6 +4,10 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
     <mapper namespace = "com.management.sign.SignDAO">
+    	<select id="selectUser" parameterType = "SignDTO" resultType = "SignDTO">
+    		SELECT
+    			
+    	</select>
     	<select id="selectDeptShowMember" parameterType = "SignDTO" resultType = "SignDTO">
     		SELECT
     			member.num, member.name, member.rank, rank.rankname
@@ -64,4 +68,31 @@
     		WHERE 
     			member.id = #{id}
     	</select>
+    	
+    	<insert id="insertSign" parameterType = "SignDTO">
+    		INSERT INTO
+    			sign(title,content,name,id)
+    		VALUES
+    			(#{title},#{content},#{name},#{id})
+    			
+    		<selectKey keyProperty = "num" resultType = "Integer" order="AFTER">
+    			 SELECT LAST_INSERT_ID()
+    		</selectKey>
+    	</insert>
+    	
+    	<select id="selectNum" parameterType = "SignDTO" resultType = "SignDTO">
+    		SELECT
+    			num
+    		FROM
+    			sign
+    		WHERE
+    			num = #{num}
+    	</select> 
+    	
+    	<insert id="insertSignPath" parameterType = "SignDTO">
+    		INSERT INTO
+    			signPath
+    		VALUES
+    			(#{num},#{signName},#{signDept},#{signRank},#{sign})
+    	</insert>
     </mapper>

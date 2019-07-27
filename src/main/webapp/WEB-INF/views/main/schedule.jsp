@@ -122,9 +122,8 @@
             		 일정 관리
             </h3>
             <ol class="breadcrumb">
-              <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-              <li><i class="icon_document_alt"></i>Forms</li>
-              <li><i class="fa fa-files-o"></i>스케줄 관리</li>
+              <li><i class="fa fa-home"></i><a href="">메인</a></li>
+              <li><i class="fa fa-files-o"></i>일정 관리</li>
             </ol>
           </div>
         </div>

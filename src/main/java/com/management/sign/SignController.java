@@ -1,7 +1,6 @@
 package com.management.sign;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -27,7 +26,10 @@ public class SignController {
 	
 	//기안 페이지
 	@RequestMapping(value = "/sign")
-	public String PaymentForm2() throws Exception {
+	public String sign(Model model) throws Exception {
+		
+		model.addAttribute("user",service.userInfo());
+		
 		return "/main/sign";
 	}
 	
@@ -50,9 +52,6 @@ public class SignController {
 	@ResponseBody
 	@RequestMapping(value = "/selectSignUser")
 	public Map<String, Object> selectSignUser(@RequestBody SignDTO dto, Model model) throws Exception {
-		System.out.println(dto.getName());
-		System.out.println(dto.getRank());
-		System.out.println(dto.getDept());
 		Map<String,Object> map = new HashMap<String,Object>();
 	
 		map.put("list",service.selectSignUser(dto));
@@ -60,20 +59,11 @@ public class SignController {
 		return map;
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/signTest", method=RequestMethod.POST)
-	public Map<String, Object> signTest(@RequestBody SignDTO dto) {
-		Map<String,Object> map = new HashMap<String,Object>();
-		System.out.println("부서 :"+dto.getDept());
-		System.out.println("이름 :"+dto.getName());
-		List<String> list = dto.getTestname();
-		
-		for(int i = 0; i < list.size(); i++) {
-			System.out.print(list.get(i));
-		}
-		
-		return map;
+	@RequestMapping(value = "/insertSign", method=RequestMethod.POST)
+	public String insertSign(SignDTO dto) throws Exception {
+		System.out.println(dto.getSignName());
+		service.insertSign(dto);
+
+		return "schedule"; //임시, 나중에 결재 대기함으로 이동
 	}
-	
-	
 }

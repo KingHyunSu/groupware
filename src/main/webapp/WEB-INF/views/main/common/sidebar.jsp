@@ -24,15 +24,15 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-              <li><a class="" href="sign">기안하기</a></li>
-              <li><a class="" href="">결재대기(미구현)</a></li>
-              <li><a class="" href="">결재완료(미구현)</a></li>
+              <li><a class="" href="sign">기안문서 작성</a></li>
+              <li><a class="" href="">결재 대기(미구현)</a></li>
+              <li><a class="" href="">결재 완료(미구현)</a></li>
             </ul>
           </li>        
           <li>
             <a class="" href="schedule">
                           <i class="icon_table"></i>
-                          <span>일정관리</span>
+                          <span>일정 관리</span>
                       </a>
           </li>         
           <li>

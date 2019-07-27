@@ -1,5 +1,16 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="com.management.sign.SignDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	SignDTO dto = (SignDTO)request.getAttribute("user");
+
+	Calendar cal = Calendar.getInstance();
+	
+	int year = cal.get(Calendar.YEAR);
+	int mon = cal.get(Calendar.MONTH)+1;
+	int day = cal.get(Calendar.DAY_OF_MONTH);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,11 +80,11 @@
       <section class="wrapper">
         <div class="row">
           <div class="col-lg-12">
-            <h3 class="page-header"><i class="fa fa-files-o"></i> Form Validation</h3>
+            <h3 class="page-header"><i class="fa fa-files-o"></i> 기안문서 작성</h3>
             <ol class="breadcrumb">
-              <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-              <li><i class="icon_document_alt"></i>Forms</li>
-              <li><i class="fa fa-files-o"></i>Form Validation</li>
+              <li><i class="fa fa-home"></i><a href="">메인</a></li>
+              <li><i class="icon_document_alt"></i>결재</li>
+              <li><i class="fa fa-files-o"></i>기안문서 작성</li>
             </ol>
           </div>
         </div>
@@ -82,32 +93,31 @@
           <div class="col-lg-12">
             <section class="panel">
               <header class="panel-heading">
-                결제 서류 작성
+                기본 결재 양식
               </header>
               <div class="panel-body">
                 <div class="form">
-                  <form class="form-validate form-horizontal" id="feedback_form" method="get" action="">
-                    결재선 3개 이상 불가
+                  <form class="form-validate form-horizontal" id="feedback_form" action = "insertSign" method="post">
                     <div class = "main-form">
                     	<div class = "form-title">
                     		<h1 style = "text-align : center;">TEST 결재 양식</h1>
                     		<button class = "path-button" type = "button" onclick="click_signPath();">결재 경로</button>
                     		<button class = "keep-button" type = "button" onclick="click_signPath();">임시 저장</button>
-                    		<button class = "add-button" type = "submit" onclick="click_signPath();">결재 상신</button>
+                    		<input class = "add-button" type = "submit" value = "결재 상신">
                     	</div>
                     	<div class = "form-head">
                     		<table class = "gian">
                     			<tr>
                     				<td class = "gian-left">부서</td>
-                    				<td class = "gian-right"></td>
+                    				<td class = "gian-right"><%= dto.getDeptname() %></td>
                     			</tr>
                     			<tr>
                     				<td class = "gian-left">기안자</td>
-                    				<td class = "gian-right"></td>
+                    				<td class = "gian-right"><%= dto.getName() %></td>
                     			</tr>
                     			<tr>
                     				<td class = "gian-left">기안 날짜</td>
-                    				<td class = "gian-right"></td>
+                    				<td class = "gian-right"><%=year %>-<%=mon %>-<%=day %></td>
                     			</tr>
                     		</table>
                     		<div class = "sign-zone">        

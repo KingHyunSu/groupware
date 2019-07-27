@@ -29,4 +29,15 @@ public class SignDAO {
 		return sqlSession.selectOne(namespace + ".userInfo", id);
 	}
 	
+	public void insertSign(SignDTO dto) {
+		sqlSession.insert(namespace + ".insertSign", dto);
+	}
+	
+	public SignDTO selectNum(SignDTO dto) {
+		return sqlSession.selectOne(namespace + ".selectNum", dto);
+	}
+	
+	public void insertSignPath(SignDTO dto) {
+		sqlSession.insert(namespace + ".insertSignPath", dto);
+	}
 }
