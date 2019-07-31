@@ -54,17 +54,31 @@
     			COUNT(*)
     		FROM
     			sign
-    		JOIN
-    			signPath
-    		ON
-    			sign.num = signPath.num
     		WHERE
-    			signPath.signName = #{signName}
+    			id = #{id}
     		AND
-    			signPath.signDept = #{signDept}
+    			signCheck = "1"
+    	</select>
+    	
+    	<select id="checkUser" parameterType="CommonDTO" resultType="int">
+    		SELECT
+    			COUNT(*)
+    		FROM
+    			signPath
+    		WHERE
+    			signName = #{signName}
     		AND
-    			signPath.signRank = #{signRank}
+    			signDept = #{signDept}
     		AND
-    			sign.signCheck = "1"
+    			signRank = #{signRank}
+    	</select>
+    	
+    	<select id="checkUser2" parameterType="CommonDTO" resultType="int">
+    		SELECT
+    			COUNT(*)
+    		FROM
+    			sign
+    		WHERE
+    			id = #{id}
     	</select>
     </mapper>

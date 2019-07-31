@@ -67,10 +67,9 @@
     	
     	<insert id="insertSign" parameterType = "SignDTO">
     		INSERT INTO
-    			sign(title,content,writer,id,sign)
+    			sign(title,content,writer,date,deptname,id,signCheck)
     		VALUES
-    			(#{title},#{content},#{writer},#{id},#{sign})
-    			
+    			(#{title},#{content},#{writer},#{date},#{deptname},#{id},#{signCheck})
     		<selectKey keyProperty = "num" resultType = "Integer" order="AFTER">
     			 SELECT LAST_INSERT_ID()
     		</selectKey>
@@ -87,7 +86,7 @@
     	
     	<insert id="insertSignPath" parameterType = "SignDTO">
     		INSERT INTO
-    			signPath
+    			signPath(num,signName,signDept,signRank,sign)
     		VALUES
     			(#{num},#{signName},#{signDept},#{signRank},#{sign})
     	</insert>
@@ -120,6 +119,17 @@
     			signPath.sign = "0"
     	</select>
     	
+    	<select id="signFinishList" parameterType = "SignDTO" resultType = "SignDTO">
+    		SELECT
+    			*
+    		FROM
+    			sign
+    		WHERE
+    			id = #{id}
+    		AND
+    			signCheck = "1"
+    	</select>
+    	
     	<select id="selectSignDoc" parameterType = "SignDTO" resultType = "SignDTO">
     		SELECT
     			*		
@@ -131,7 +141,7 @@
     	
     	<select id="selectSignPath" parameterType = "SignDTO" resultType = "SignDTO">
     		SELECT
-    			signName,signDept,signRank,sign
+    			signName,signDept,signRank,sign,signDate
     		FROM
     			signPath
     		WHERE
@@ -142,7 +152,7 @@
     		UPDATE
     			signPath
     		SET
-    			sign = "1"
+    			sign = "1", signDate = #{signDate}
     		WHERE 
     			num = #{num}
     		AND

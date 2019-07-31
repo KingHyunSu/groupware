@@ -1,5 +1,16 @@
+<%@page import="com.management.schedule.ScheduleDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.management.notice.NoticeDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	List<NoticeDTO> noticeList = (ArrayList<NoticeDTO>)request.getAttribute("noticeList");
+	int process = (int)request.getAttribute("signProcessCount");
+	int stay = (int)request.getAttribute("signStayCount");
+	int finish = (int)request.getAttribute("signFinishCount");
+	List<ScheduleDTO> scheduleList = (ArrayList<ScheduleDTO>)request.getAttribute("showSchedule");
+%>
 <!DOCTYPE html>
 <html>
 
@@ -21,9 +32,6 @@
   <!-- font icon -->
   <link href="resources/origin/css/elegant-icons-style.css" rel="stylesheet" />
   <link href="resources/origin/css/font-awesome.min.css" rel="stylesheet" />
-  <!-- full calendar css-->
-  <link href="resources/origin/assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
-  <link href="resources/origin/assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
   <!-- easy pie chart-->
   <link href="resources/origin/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen" />
   <!-- owl carousel -->
@@ -36,7 +44,66 @@
   <link href="resources/origin/css/style-responsive.css" rel="stylesheet" />
   <link href="resources/origin/css/xcharts.min.css" rel=" stylesheet">
   <link href="resources/origin/css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+  
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/5.10.0/css/font-awesome.min.css">
 
+   <link href="resources/sb-admin-2/sb-admin-2.css" rel="stylesheet" />
+   
+   <link href="resources/custom/css/schedule.css" rel="stylesheet">
+	<script src='resources/custom/js/schedule.js'></script>
+	
+	<!-- fullcalendar -->
+	<link href='resources/fullcalendar/packages/core/main.css' rel='stylesheet' />
+	<link href='resources/fullcalendar/packages/daygrid/main.css' rel='stylesheet' />
+	<link href='resources/fullcalendar/packages/timegrid/main.css' rel='stylesheet' />
+	<link href='resources/fullcalendar/packages/list/main.css' rel='stylesheet' />
+	<script src='resources/fullcalendar/packages/core/main.js'></script>
+	<script src='resources/fullcalendar/packages/interaction/main.js'></script>
+	<script src='resources/fullcalendar/packages/daygrid/main.js'></script>
+	<script src='resources/fullcalendar/packages/timegrid/main.js'></script>
+	<script src='resources/fullcalendar/packages/list/main.js'></script>
+
+	<script>
+	  document.addEventListener('DOMContentLoaded', function() {
+			 
+		    var calendarEl = document.getElementById('calendar');
+			
+		    var calendar = new FullCalendar.Calendar(calendarEl, {
+		      plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
+		      header: {
+		        left: 'prev,next today',
+		        center: 'title',
+		        right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+		      },
+		      locale : "ko",
+		      //defaultDate: "2019-08-22",
+		      navLinks: true, // can click day/week names to navigate views
+		      businessHours: true, // display business hours
+		      editable: true,
+		      events: [
+		<% 
+		  	  for (int i = 0; i < scheduleList.size(); i++) {
+		  	  	ScheduleDTO dto = (ScheduleDTO)scheduleList.get(i);
+		%>	
+		  	  {
+		  	   title : '<%= dto.getSubject() %>',
+		  	   start : '<%= dto.getStartDate() %>',
+		  	   end : '<%= dto.getEndDate() %>'
+		  	   },
+		<%
+			}
+		%>
+				{
+				   title : 'defult',
+				   start : "2019-01-01",
+				   end : "2019-01-01"
+				  }
+		      ]
+		    });
+
+		    calendar.render();
+		});
+	</script>
 </head>
 
 <body>
@@ -64,13 +131,12 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row" style ="position:relative;">
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="info-box blue-bg">
-              <i class="fa fa-cloud-download"></i>
-
-              <div class="count">6.674</div>
-              <div class="title">Download</div>
+              <i class="fa fa-file-text"></i>
+              <div class="count"><a href = "signProcess" style = "color:white;"><%=process %></a></div>
+              <div class="title">결재 진행 중인 문서</div>
             </div>
             <!--/.info-box-->
           </div>
@@ -78,9 +144,9 @@
 
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="info-box brown-bg">
-              <i class="fa fa-shopping-cart"></i>
-              <div class="count">7.538</div>
-              <div class="title">Purchased</div>
+              <i class="fa fa-file-text"></i>
+              <div class="count"><a href = "signStay" style = "color:white;"><%=stay %></a></div>
+              <div class="title">결재 대기 중인 문서</div>
             </div>
             <!--/.info-box-->
           </div>
@@ -88,229 +154,72 @@
 
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="info-box dark-bg">
-              <i class="fa fa-thumbs-o-up"></i>
-              <div class="count">4.362</div>
-              <div class="title">Order</div>
+              <i class="fa fa-file-text"></i>
+              <div class="count"><a href = "signFinish" style = "color:white;"><%=finish %></a></div>
+              <div class="title">결재 완료된 문서</div>
             </div>
             <!--/.info-box-->
           </div>
           <!--/.col-->
 
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box green-bg">
+            <div class="info-box green-bg" style = "height:580px;">
               <i class="fa fa-cubes"></i>
-              <div class="count">1.426</div>
-              <div class="title">Stock</div>
+              <div class="count">채팅 자리</div>
+              <div class="title">(예정)</div>
             </div>
             <!--/.info-box-->
           </div>
           <!--/.col-->
+          
+			<div class="col-lg-9 col-md-12" style = "position:absolute; top:160px;">
 
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h2><i class="fa fa-map-marker red"></i><strong>공지사항</strong></h2>
+              </div>
+              <div class="panel-body">
+                	<div class="listHead">
+						<div class="listHiddenField pull-left field60">No.</div>
+						<div class="listHiddenField pull-right field130">날짜</div>
+						<div class="listHiddenField pull-right field130">글쓴이</div>
+						<div class="listTitle">제목</div>
+					</div>
+<%
+	for(int i = 0; i < noticeList.size(); i++){
+		NoticeDTO dto = noticeList.get(i);
+%>
+					<div class="listBody">
+						<div class="listHiddenField pull-left field60 textCenter"><%=dto.getNum() %></div>
+						<div class="listHiddenField pull-right field130 textCenter"></div>
+						<div class="listHiddenField pull-right field130 textCenter"></div>
+						<div class="listTitle" style="text-align:center;">
+							<a href="noticeDoc?num=<%= dto.getNum() %>">
+							<%=dto.getTitle() %></a>
+						</div>
+					</div>
+<%
+	}
+%>				
+				</div>
+            </div>
+          </div>
+          
         </div>
         <!--/.row-->
 
 
-        <div class="row">
-          <div class="col-lg-9 col-md-12">
-
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h2><i class="fa fa-map-marker red"></i><strong>Countries</strong></h2>
-                <div class="panel-actions">
-                  <a href="index.html#" class="btn-setting"><i class="fa fa-rotate-right"></i></a>
-                  <a href="index.html#" class="btn-minimize"><i class="fa fa-chevron-up"></i></a>
-                  <a href="index.html#" class="btn-close"><i class="fa fa-times"></i></a>
-                </div>
-              </div>
-              <div class="panel-body-map">
-                <div id="map" style="height:380px;"></div>
-              </div>
-
-            </div>
-          </div>
-          <div class="col-md-3">
-            <!-- List starts -->
-            <ul class="today-datas">
-              <!-- List #1 -->
-              <li>
-                <!-- Graph -->
-                <div><span id="todayspark1" class="spark"></span></div>
-                <!-- Text -->
-                <div class="datas-text">11,500 visitors/day</div>
-              </li>
-              <li>
-                <div><span id="todayspark2" class="spark"></span></div>
-                <div class="datas-text">15,000 Pageviews</div>
-              </li>
-              <li>
-                <div><span id="todayspark3" class="spark"></span></div>
-                <div class="datas-text">30.55% Bounce Rate</div>
-              </li>
-              <li>
-                <div><span id="todayspark4" class="spark"></span></div>
-                <div class="datas-text">$16,00 Revenue/Day</div>
-              </li>
-              <li>
-                <div><span id="todayspark5" class="spark"></span></div>
-                <div class="datas-text">12,000000 visitors every Month</div>
-              </li>
-            </ul>
-          </div>
-
-
-        </div>
-
-
-        <!-- Today status end -->
-
-
 
         <div class="row">
 
           <div class="col-lg-9 col-md-12">
             <div class="panel panel-default">
               <div class="panel-heading">
-                <h2><i class="fa fa-flag-o red"></i><strong>Registered Users</strong></h2>
-                <div class="panel-actions">
-                  <a href="index.html#" class="btn-setting"><i class="fa fa-rotate-right"></i></a>
-                  <a href="index.html#" class="btn-minimize"><i class="fa fa-chevron-up"></i></a>
-                  <a href="index.html#" class="btn-close"><i class="fa fa-times"></i></a>
-                </div>
+                <h2><i class="fa fa-flag-o red"></i><strong>일정</strong></h2>
               </div>
               <div class="panel-body">
-                <table class="table bootstrap-datatable countries">
-                  <thead>
-                    <tr>
-                      <th></th>
-                      <th>Country</th>
-                      <th>Users</th>
-                      <th>Online</th>
-                      <th>Performance</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><img src="img/Germany.png" style="height:18px; margin-top:-2px;"></td>
-                      <td>Germany</td>
-                      <td>2563</td>
-                      <td>1025</td>
-                      <td>
-                        <div class="progress thin">
-                          <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100" style="width: 73%">
-                          </div>
-                          <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="27" aria-valuemin="0" aria-valuemax="100" style="width: 27%">
-                          </div>
-                        </div>
-                        <span class="sr-only">73%</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><img src="img/India.png" style="height:18px; margin-top:-2px;"></td>
-                      <td>India</td>
-                      <td>3652</td>
-                      <td>2563</td>
-                      <td>
-                        <div class="progress thin">
-                          <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
-                          </div>
-                          <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100" style="width: 43%">
-                          </div>
-                        </div>
-                        <span class="sr-only">57%</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><img src="img/Spain.png" style="height:18px; margin-top:-2px;"></td>
-                      <td>Spain</td>
-                      <td>562</td>
-                      <td>452</td>
-                      <td>
-                        <div class="progress thin">
-                          <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="93" aria-valuemin="0" aria-valuemax="100" style="width: 93%">
-                          </div>
-                          <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="7" aria-valuemin="0" aria-valuemax="100" style="width: 7%">
-                          </div>
-                        </div>
-                        <span class="sr-only">93%</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><img src="img/India.png" style="height:18px; margin-top:-2px;"></td>
-                      <td>Russia</td>
-                      <td>1258</td>
-                      <td>958</td>
-                      <td>
-                        <div class="progress thin">
-                          <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                          </div>
-                          <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                          </div>
-                        </div>
-                        <span class="sr-only">20%</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><img src="img/Spain.png" style="height:18px; margin-top:-2px;"></td>
-                      <td>USA</td>
-                      <td>4856</td>
-                      <td>3621</td>
-                      <td>
-                        <div class="progress thin">
-                          <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                          </div>
-                          <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                          </div>
-                        </div>
-                        <span class="sr-only">20%</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><img src="img/Germany.png" style="height:18px; margin-top:-2px;"></td>
-                      <td>Brazil</td>
-                      <td>265</td>
-                      <td>102</td>
-                      <td>
-                        <div class="progress thin">
-                          <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                          </div>
-                          <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                          </div>
-                        </div>
-                        <span class="sr-only">20%</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><img src="img/Germany.png" style="height:18px; margin-top:-2px;"></td>
-                      <td>Coloumbia</td>
-                      <td>265</td>
-                      <td>102</td>
-                      <td>
-                        <div class="progress thin">
-                          <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                          </div>
-                          <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                          </div>
-                        </div>
-                        <span class="sr-only">20%</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><img src="img/Germany.png" style="height:18px; margin-top:-2px;"></td>
-                      <td>France</td>
-                      <td>265</td>
-                      <td>102</td>
-                      <td>
-                        <div class="progress thin">
-                          <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                          </div>
-                          <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                          </div>
-                        </div>
-                        <span class="sr-only">20%</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                <div id='calendar'>
+                 </div>
               </div>
 
             </div>
@@ -375,335 +284,6 @@
 
         </div>
 
-
-
-        <!-- statics end -->
-
-
-
-
-        <!-- project team & activity start -->
-        <div class="row">
-          <div class="col-md-4 portlets">
-            <!-- Widget -->
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <div class="pull-left">Message</div>
-                <div class="widget-icons pull-right">
-                  <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
-                  <a href="#" class="wclose"><i class="fa fa-times"></i></a>
-                </div>
-                <div class="clearfix"></div>
-              </div>
-
-              <div class="panel-body">
-                <!-- Widget content -->
-                <div class="padd sscroll">
-
-                  <ul class="chats">
-
-                    <!-- Chat by us. Use the class "by-me". -->
-                    <li class="by-me">
-                      <!-- Use the class "pull-left" in avatar -->
-                      <div class="avatar pull-left">
-                        <img src="img/user.jpg" alt="" />
-                      </div>
-
-                      <div class="chat-content">
-                        <!-- In meta area, first include "name" and then "time" -->
-                        <div class="chat-meta">John Smith <span class="pull-right">3 hours ago</span></div>
-                        Vivamus diam elit diam, consectetur dapibus adipiscing elit.
-                        <div class="clearfix"></div>
-                      </div>
-                    </li>
-
-                    <!-- Chat by other. Use the class "by-other". -->
-                    <li class="by-other">
-                      <!-- Use the class "pull-right" in avatar -->
-                      <div class="avatar pull-right">
-                        <img src="img/user22.png" alt="" />
-                      </div>
-
-                      <div class="chat-content">
-                        <!-- In the chat meta, first include "time" then "name" -->
-                        <div class="chat-meta">3 hours ago <span class="pull-right">Jenifer Smith</span></div>
-                        Vivamus diam elit diam, consectetur fconsectetur dapibus adipiscing elit.
-                        <div class="clearfix"></div>
-                      </div>
-                    </li>
-
-                    <li class="by-me">
-                      <div class="avatar pull-left">
-                        <img src="img/user.jpg" alt="" />
-                      </div>
-
-                      <div class="chat-content">
-                        <div class="chat-meta">John Smith <span class="pull-right">4 hours ago</span></div>
-                        Vivamus diam elit diam, consectetur fermentum sed dapibus eget, Vivamus consectetur dapibus adipiscing elit.
-                        <div class="clearfix"></div>
-                      </div>
-                    </li>
-
-                    <li class="by-other">
-                      <!-- Use the class "pull-right" in avatar -->
-                      <div class="avatar pull-right">
-                        <img src="img/user22.png" alt="" />
-                      </div>
-
-                      <div class="chat-content">
-                        <!-- In the chat meta, first include "time" then "name" -->
-                        <div class="chat-meta">3 hours ago <span class="pull-right">Jenifer Smith</span></div>
-                        Vivamus diam elit diam, consectetur fermentum sed dapibus eget, Vivamus consectetur dapibus adipiscing elit.
-                        <div class="clearfix"></div>
-                      </div>
-                    </li>
-
-                  </ul>
-
-                </div>
-                <!-- Widget footer -->
-                <div class="widget-foot">
-
-                  <form class="form-inline">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Type your message here...">
-                    </div>
-                    <button type="submit" class="btn btn-info">Send</button>
-                  </form>
-
-
-                </div>
-              </div>
-
-
-            </div>
-          </div>
-
-          <div class="col-lg-8">
-            <!--Project Activity start-->
-            <section class="panel">
-              <div class="panel-body progress-panel">
-                <div class="row">
-                  <div class="col-lg-8 task-progress pull-left">
-                    <h1>To Do Everyday</h1>
-                  </div>
-                  <div class="col-lg-4">
-                    <span class="profile-ava pull-right">
-                                        <img alt="" class="simple" src="img/avatar1_small.jpg">
-                                        Jenifer smith
-                                </span>
-                  </div>
-                </div>
-              </div>
-              <table class="table table-hover personal-task">
-                <tbody>
-                  <tr>
-                    <td>Today</td>
-                    <td>
-                      web design
-                    </td>
-                    <td>
-                      <span class="badge bg-important">Upload</span>
-                    </td>
-                    <td>
-                      <span class="profile-ava">
-                                        <img alt="" class="simple" src="img/avatar1_small.jpg">
-                                    </span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Yesterday</td>
-                    <td>
-                      Project Design Task
-                    </td>
-                    <td>
-                      <span class="badge bg-success">Task</span>
-                    </td>
-                    <td>
-                      <div id="work-progress2"></div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>21-10-14</td>
-                    <td>
-                      Generate Invoice
-                    </td>
-                    <td>
-                      <span class="badge bg-success">Task</span>
-                    </td>
-                    <td>
-                      <div id="work-progress3"></div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>22-10-14</td>
-                    <td>
-                      Project Testing
-                    </td>
-                    <td>
-                      <span class="badge bg-primary">To-Do</span>
-                    </td>
-                    <td>
-                      <span class="profile-ava">
-                                        <img alt="" class="simple" src="img/avatar1_small.jpg">
-                                      </span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>24-10-14</td>
-                    <td>
-                      Project Release Date
-                    </td>
-                    <td>
-                      <span class="badge bg-info">Milestone</span>
-                    </td>
-                    <td>
-                      <div id="work-progress4"></div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>28-10-14</td>
-                    <td>
-                      Project Release Date
-                    </td>
-                    <td>
-                      <span class="badge bg-primary">To-Do</span>
-                    </td>
-                    <td>
-                      <div id="work-progress5"></div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Last week</td>
-                    <td>
-                      Project Release Date
-                    </td>
-                    <td>
-                      <span class="badge bg-primary">To-Do</span>
-                    </td>
-                    <td>
-                      <div id="work-progress1"></div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>last month</td>
-                    <td>
-                      Project Release Date
-                    </td>
-                    <td>
-                      <span class="badge bg-success">To-Do</span>
-                    </td>
-                    <td>
-                      <span class="profile-ava">
-                                        <img alt="" class="simple" src="img/avatar1_small.jpg">
-                                      </span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </section>
-            <!--Project Activity end-->
-          </div>
-        </div><br><br>
-
-        <div class="row">
-          <div class="col-md-6 portlets">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h2><strong>Calendar</strong></h2>
-                <div class="panel-actions">
-                  <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
-                  <a href="#" class="wclose"><i class="fa fa-times"></i></a>
-                </div>
-
-              </div><br><br><br>
-              <div class="panel-body">
-                <!-- Widget content -->
-
-                <!-- Below line produces calendar. I am using FullCalendar plugin. -->
-                <div id="calendar"></div>
-
-              </div>
-            </div>
-
-          </div>
-
-          <div class="col-md-6 portlets">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <div class="pull-left">Quick Post</div>
-                <div class="widget-icons pull-right">
-                  <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
-                  <a href="#" class="wclose"><i class="fa fa-times"></i></a>
-                </div>
-                <div class="clearfix"></div>
-              </div>
-              <div class="panel-body">
-                <div class="padd">
-
-                  <div class="form quick-post">
-                    <!-- Edit profile form (not working)-->
-                    <form class="form-horizontal">
-                      <!-- Title -->
-                      <div class="form-group">
-                        <label class="control-label col-lg-2" for="title">Title</label>
-                        <div class="col-lg-10">
-                          <input type="text" class="form-control" id="title">
-                        </div>
-                      </div>
-                      <!-- Content -->
-                      <div class="form-group">
-                        <label class="control-label col-lg-2" for="content">Content</label>
-                        <div class="col-lg-10">
-                          <textarea class="form-control" id="content"></textarea>
-                        </div>
-                      </div>
-                      <!-- Cateogry -->
-                      <div class="form-group">
-                        <label class="control-label col-lg-2">Category</label>
-                        <div class="col-lg-10">
-                          <select class="form-control">
-                                                  <option value="">- Choose Cateogry -</option>
-                                                  <option value="1">General</option>
-                                                  <option value="2">News</option>
-                                                  <option value="3">Media</option>
-                                                  <option value="4">Funny</option>
-                                                </select>
-                        </div>
-                      </div>
-                      <!-- Tags -->
-                      <div class="form-group">
-                        <label class="control-label col-lg-2" for="tags">Tags</label>
-                        <div class="col-lg-10">
-                          <input type="text" class="form-control" id="tags">
-                        </div>
-                      </div>
-
-                      <!-- Buttons -->
-                      <div class="form-group">
-                        <!-- Buttons -->
-                        <div class="col-lg-offset-2 col-lg-9">
-                          <button type="submit" class="btn btn-primary">Publish</button>
-                          <button type="submit" class="btn btn-danger">Save Draft</button>
-                          <button type="reset" class="btn btn-default">Reset</button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-
-
-                </div>
-                <div class="widget-foot">
-                  <!-- Footer goes here -->
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-        <!-- project team & activity end -->
-
       </section>
       <div class="text-right">
         <div class="credits">
@@ -736,13 +316,7 @@
   <script src="resources/origin/js/jquery.sparkline.js" type="text/javascript"></script>
   <script src="resources/origin/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
   <script src="resources/origin/js/owl.carousel.js"></script>
-  <!-- jQuery full calendar -->
-  <<script src="resources/origin/js/fullcalendar.min.js"></script>
-    <!-- Full Google Calendar - Calendar -->
-    <script src="resources/origin/assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
-    <!--script for this page only-->
-    <script src="resources/origin/js/calendar-custom.js"></script>
-    <script src="resources/origin/js/jquery.rateit.min.js"></script>
+
     <!-- custom select -->
     <script src="resources/origin/js/jquery.customSelect.min.js"></script>
     <script src="resources/origin/assets/chart-master/Chart.js"></script>
@@ -789,23 +363,6 @@
         $('select.styled').customSelect();
       });
 
-      /* ---------- Map ---------- */
-      $(function() {
-        $('#map').vectorMap({
-          map: 'world_mill_en',
-          series: {
-            regions: [{
-              values: gdpData,
-              scale: ['#000', '#000'],
-              normalizeFunction: 'polynomial'
-            }]
-          },
-          backgroundColor: '#eef3f7',
-          onLabelShow: function(e, el, code) {
-            el.html(el.html() + ' (GDP - ' + gdpData[code] + ')');
-          }
-        });
-      });
     </script>
 
 </body>

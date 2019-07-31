@@ -25,10 +25,7 @@ public class ScheduleController {
 	@RequestMapping(value = "/schedule")
 	public String schedule(Model model)throws Exception {
 		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String id = auth.getName();
-		
-		model.addAttribute("showSchedule" , service.showSchedule(id));
+		model.addAttribute("showSchedule" , service.showSchedule());
 		
 		return "/main/schedule";
 	}
@@ -57,7 +54,7 @@ public class ScheduleController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String id = auth.getName();
 		
-		List<ScheduleDTO> list = service.showSchedule(id);
+		List<ScheduleDTO> list = service.showSchedule();
 		
 		return list;
 	}

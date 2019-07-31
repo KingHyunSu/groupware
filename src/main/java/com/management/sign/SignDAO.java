@@ -49,6 +49,10 @@ public class SignDAO {
 		return sqlSession.selectList(namespace + ".signStayList", dto);
 	}
 	
+	public List<SignDTO> signFinishList(SignDTO dto) {
+		return sqlSession.selectList(namespace + ".signFinishList", dto);
+	}
+	
 	public SignDTO signDocView(SignDTO dto){
 		return sqlSession.selectOne(namespace + ".selectSignDoc", dto);
 	}

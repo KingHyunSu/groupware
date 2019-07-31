@@ -99,7 +99,7 @@
 						<div class="listHiddenField pull-right field100 textCenter"><%=dto.getSignCheck() %></div>
 						<div class="listHiddenField pull-right field130 textCenter"></div>
 						<div class="listHiddenField pull-right field130 textCenter"><%=dto.getDate() %></div>
-						<div class="listHiddenField pull-right field130 textCenter"><%=dto.getName() %></div>
+						<div class="listHiddenField pull-right field130 textCenter"><%=dto.getWriter() %></div>
 						<div class="listTitle" style="text-align:center;">
 							<a href="signProcessDoc?num=<%= dto.getNum() %>">
 							<%=dto.getTitle() %></a>

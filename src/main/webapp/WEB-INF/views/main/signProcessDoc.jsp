@@ -92,7 +92,7 @@
                     		<table class = "gian">
                     			<tr>
                     				<td class = "gian-left">부서</td>
-                    				<td class = "gian-right"></td>
+                    				<td class = "gian-right"><%= dto.getDeptname() %></td>
                     			</tr>
                     			<tr>
                     				<td class = "gian-left">기안자</td>
@@ -119,8 +119,19 @@
 										<div class='sign'>
 											<div class='sign-top'><%= path.getSignName() %></div>
 											<div class='sign-middle'>
+<%
+	if(path.getSign().equals("1")) {
+%>
+											<button class = "sign-fin-button" type = "button">
+												결재 완료
+											</button>
+<%	
+	}
+%>
 											</div>
-											<div class='sign-bottom'></div>
+											<div class='sign-bottom'>
+												<%=path.getSignDate() %>
+											</div>
 										</div>
 									</li>
 <% 

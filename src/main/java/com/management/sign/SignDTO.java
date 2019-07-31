@@ -1,7 +1,5 @@
 package com.management.sign;
 
-import java.sql.Date;
-
 public class SignDTO {
 
 	private int num;
@@ -14,7 +12,7 @@ public class SignDTO {
 	private String title;
 	private String content;
 	private String writer;
-	private Date date;
+	private String date;
 	private String id;
 	private String signCheck;
 	
@@ -22,7 +20,14 @@ public class SignDTO {
 	private String signDept;
 	private String signRank;
 	private String sign;
+	private String signDate;
 	
+	public String getSignDate() {
+		return signDate;
+	}
+	public void setSignDate(String signDate) {
+		this.signDate = signDate;
+	}
 	private String checkSignPath;
 	
 	
@@ -94,12 +99,6 @@ public class SignDTO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
-	}
 	public String getId() {
 		return id;
 	}
@@ -130,6 +129,16 @@ public class SignDTO {
 	public void setSign(String sign) {
 		this.sign = sign;
 	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+
+
+
 	
 	
 	

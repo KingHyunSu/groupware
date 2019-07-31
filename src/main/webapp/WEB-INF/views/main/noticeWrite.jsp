@@ -23,20 +23,15 @@
   <!-- Custom styles -->
   <link href="resources/origin/css/style.css" rel="stylesheet">
   <link href="resources/origin/css/style-responsive.css" rel="stylesheet" />
-
-  <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
-  <!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
-      <script src="js/respond.min.js"></script>
-      <script src="js/lte-ie7.js"></script>
-    <![endif]-->
-
-    <!-- =======================================================
-      Theme Name: NiceAdmin
-      Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-      Author: BootstrapMade
-      Author URL: https://bootstrapmade.com
-    ======================================================= -->
+  
+  <script type="text/javascript" src="resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+	
+	<script>
+		function formSubmit() {
+			oEditors.getById["Seditor"].exec("UPDATE_CONTENTS_FIELD", []);	
+			$("#feedback_form").submit();
+		};
+	</script>
 </head>
 
 <body>
@@ -55,11 +50,11 @@
       <section class="wrapper">
         <div class="row">
           <div class="col-lg-12">
-            <h3 class="page-header"><i class="fa fa-files-o"></i> Form Validation</h3>
+            <h3 class="page-header"><i class="fa fa-files-o"></i>공지사항 작성</h3>
             <ol class="breadcrumb">
-              <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-              <li><i class="icon_document_alt"></i>Forms</li>
-              <li><i class="fa fa-files-o"></i>Form Validation</li>
+              <li><i class="fa fa-home"></i><a href="index.html">메인</a></li>
+              <li><i class="icon_document_alt"></i>공지사항</li>
+              <li><i class="fa fa-files-o"></i>글쓰기</li>
             </ol>
           </div>
         </div>
@@ -68,45 +63,55 @@
           <div class="col-lg-12">
             <section class="panel">
               <header class="panel-heading">
-                결제 서류 작성
+                
               </header>
               <div class="panel-body">
                 <div class="form">
-                  <form class="form-validate form-horizontal" id="feedback_form" method="get" action="">
+                  <form class="form-validate form-horizontal" id="feedback_form" method="post" action="noticeAdd">
                     <div class="form-group ">
-                      <label for="cname" class="control-label col-lg-1">제목<span class="required">*</span></label>
+                      <label for="cname" class="control-label col-lg-1">제목</label>
                       <div class="col-lg-10">
-                        <input class="form-control" id="cname" name="fullname" minlength="5" type="text" required />
+                        <input class="form-control" id="cname" name="title" type="text" required />
                       </div>
                     </div>
                     <div class="form-group ">
-                      <label for="cemail" class="control-label col-lg-1">E-Mail <span class="required">*</span></label>
+                      <label for="cname" class="control-label col-lg-1">첨부파일</label>
                       <div class="col-lg-10">
-                        <input class="form-control " id="cemail" type="email" name="email" required />
-                      </div>
-                    </div>
-                    <div class="form-group ">
-                      <label for="curl" class="control-label col-lg-1">Website</label>
-                      <div class="col-lg-10">
-                        <input class="form-control " id="curl" type="url" name="url" />
-                      </div>
-                    </div>
-                    <div class="form-group ">
-                      <label for="cname" class="control-label col-lg-1">Subject <span class="required">*</span></label>
-                      <div class="col-lg-10">
-                        <input class="form-control" id="subject" name="subject" minlength="5" type="text" required />
+                        <input class="form-control" id="cname" name="file" type="text" required />
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="ccomment" class="control-label col-lg-1">내용</label>
                       <div class="col-lg-10">
-                        <textarea class="form-control " id="ccomment" name="comment" required></textarea>
+                        <textarea class="form-control" id = "Seditor" name="content" 
+                        style = "height:500px; resize:none; display:none;" required></textarea>
+	                        <script>
+		                        var oEditors = [];
+		                        
+		                        nhn.husky.EZCreator.createInIFrame({
+		                        	oAppRef: oEditors,
+		                        	elPlaceHolder: "Seditor",
+		                        	sSkinURI: "resources/smarteditor/SmartEditor2Skin.html",	
+		                        	htParams : {
+		                        		bUseToolbar : true,		
+		                        		bUseVerticalResizer : true,	
+		                        		bUseModeChanger : true,	
+		                        		},
+		                        		fCreator: "createSEditor2"
+		                        	});
+		                        
+		                        function setDefaultFont() {
+		                        	var sDefaultFont = '궁서';
+		                        	var nFontSize = 24;
+		                        	oEditors.getById["Seditor"].setDefaultFont(sDefaultFont, nFontSize);
+		                     	   }
+								</script>
                       </div>
                     </div>
                     <div class="form-group">
                       <div class="col-lg-offset-2 col-lg-10">
-                        <button class="btn btn-primary" type="submit">Save</button>
-                        <button class="btn btn-default" type="button">Cancel</button>
+                        <button class="btn btn-primary" type="button"
+                        	style = "margin-left:33%; width :100px;" onclick="formSubmit();">작성</button>
                       </div>
                     </div>
                   </form>
@@ -136,16 +141,14 @@
   <!-- container section end -->
 
   <!-- javascripts -->
-  <script src="resources/orgin/js/jquery.js"></script>
-  <script src="resources/orgin/js/bootstrap.min.js"></script>
+  <script src="resources/origin/js/jquery.js"></script>
+  <script src="resources/origin/js/bootstrap.min.js"></script>
   <!-- nice scroll -->
   <script src="resources/origin/js/jquery.scrollTo.min.js"></script>
   <script src="resources/origin/js/jquery.nicescroll.js" type="text/javascript"></script>
   <!-- jquery validate js -->
   <script type="text/javascript" src="resources/origin/js/jquery.validate.min.js"></script>
 
-  <!-- custom form validation script for this page-->
-  <script src="resources/origin/js/form-validation-script.js"></script>
   <!--custome script for all page-->
   <script src="resources/origin/js/scripts.js"></script>
 

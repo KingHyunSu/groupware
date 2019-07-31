@@ -148,8 +148,8 @@
                     
                     		<!-- hidden -->
                  <div id = "hidden-sign">
-						<input type = "hidden" name = "name"value = <%=dto.getName() %>>
-						
+						<input type = "hidden" name = "writer" value = <%=dto.getName() %>>
+						<input type = "hidden" name = "deptname" value = <%=dto.getDeptname() %>>
                   </div>
                   
                   </form>

@@ -32,6 +32,10 @@
        		logout-url="/logout"
        		logout-success-url="/login"
        		/>
+       		
+           	<security:headers>
+					<security:frame-options disabled="true"/>
+				</security:headers>
        </security:http>
 
         

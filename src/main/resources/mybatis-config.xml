@@ -11,5 +11,6 @@
 			<typeAlias type = "com.management.security.CustomUserDetails" alias = "CustomUserDetails"/>
 			<typeAlias type = "com.management.sign.SignDTO" alias = "SignDTO"/>
 			<typeAlias type = "com.management.common.CommonDTO" alias = "CommonDTO"/>
+			<typeAlias type = "com.management.notice.NoticeDTO" alias = "NoticeDTO"/>
 		</typeAliases>
     </configuration>

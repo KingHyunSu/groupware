@@ -49,7 +49,7 @@ function showCount() {
               	</a></li>
               <li><a class="" href="signStay">결재 대기 <i class="check-i" id="stay"></i>
               	</a></li>
-              <li><a class="" href="">결재 완료 <i class="check-i" id ="finish"></i>
+              <li><a class="" href="signFinish">결재 완료 <i class="check-i" id ="finish"></i>
               	</a></li>
             </ul>
           </li>        
@@ -60,9 +60,9 @@ function showCount() {
                       </a>
           </li>         
           <li>
-            <a class="" href="">
+            <a class="" href="notice">
                           <i class="icon_documents_alt"></i>
-                          <span>공지사항(미구현)</span>
+                          <span>공지사항</span>
                       </a>
           </li>
 

@@ -37,6 +37,17 @@ public class CommonService {
 	}
 	
 	public int signFinishCount() {
+		
+		CommonDTO dto = new CommonDTO();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String id = auth.getName();
+		dto.setId(id);
+
+		return dao.signFinishCount(dto);
+	}
+	
+	public int checkUser() {
+		
 		CommonDTO dto = new CommonDTO();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String id = auth.getName();
@@ -47,6 +58,16 @@ public class CommonService {
 		dto.setSignDept(user.getDeptname());
 		dto.setSignRank(user.getRankname());
 		
-		return dao.signFinishCount(dto);
+		return dao.checkUser(dto);
+	}
+	
+	public int checkUser2() {
+		
+		CommonDTO dto = new CommonDTO();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String id = auth.getName();
+		dto.setId(id);
+		
+		return dao.checkUser2(dto);
 	}
 }

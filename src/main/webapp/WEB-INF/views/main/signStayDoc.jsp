@@ -91,7 +91,7 @@
                     		<table class = "gian">
                     			<tr>
                     				<td class = "gian-left">부서</td>
-                    				<td class = "gian-right"></td>
+                    				<td class = "gian-right"><%= dto.getDeptname() %></td>
                     			</tr>
                     			<tr>
                     				<td class = "gian-left">기안자</td>

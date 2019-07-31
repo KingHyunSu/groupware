@@ -29,6 +29,7 @@ public class SignController {
 	@RequestMapping(value = "/sign")
 	public String sign(Model model) throws Exception {
 		
+		
 		model.addAttribute("user",service.userInfo());
 		
 		return "/main/sign";
@@ -118,5 +119,26 @@ public class SignController {
 		
 		
 		return map;
+	}
+	
+	@RequestMapping(value = "/signFinish")
+	public String signFinish(Model model) throws Exception {
+		
+		model.addAttribute("list",service.signFinishList());
+		
+		return "/main/signFinish";
+	}
+	
+	@RequestMapping(value = "/signFinishDoc")
+	public String signFinishDocView(@RequestParam String num, Model model) throws Exception{
+		
+		SignDTO dto = new SignDTO();
+		dto.setNum(Integer.parseInt(num));
+		
+		model.addAttribute("signDoc", service.signDocView(dto));
+		model.addAttribute("signPath", service.signDocPath(dto));
+		model.addAttribute("userInfo", service.userInfo());
+		
+		return "/main/signFinishDoc";
 	}
 }
