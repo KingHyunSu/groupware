@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -64,6 +65,58 @@ public class SignController {
 		System.out.println(dto.getSignName());
 		service.insertSign(dto);
 
-		return "schedule"; //임시, 나중에 결재 대기함으로 이동
+		return "redirect:/signProcess";
+	}
+	
+	@RequestMapping(value = "/signProcess")
+	public String signProcess(Model model) {
+		
+		model.addAttribute("list", service.signProcessList());
+
+		return "/main/signProcess";
+	}
+	
+	@RequestMapping(value = "/signStay")
+	public String signStay(Model model) {
+		
+		model.addAttribute("signStayList", service.signStayList());
+		
+		return "/main/signStay";
+	}
+	
+	@RequestMapping(value = "/signProcessDoc")
+	public String signProcessDocView(@RequestParam String num, Model model) throws Exception{
+		
+		SignDTO dto = new SignDTO();
+		dto.setNum(Integer.parseInt(num));
+		
+		model.addAttribute("signDoc", service.signDocView(dto));
+		model.addAttribute("signPath", service.signDocPath(dto));
+		
+		return "/main/signProcessDoc";
+	}
+	
+	@RequestMapping(value = "/signStayDoc")
+	public String signStayDocView(@RequestParam String num, Model model) throws Exception{
+		
+		SignDTO dto = new SignDTO();
+		dto.setNum(Integer.parseInt(num));
+		
+		model.addAttribute("signDoc", service.signDocView(dto));
+		model.addAttribute("signPath", service.signDocPath(dto));
+		model.addAttribute("userInfo", service.userInfo());
+		
+		return "/main/signStayDoc";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/signOK", method = RequestMethod.POST)
+	public Map<String,Object> signOK(@RequestBody String pageNum)throws Exception {
+		Map<String,Object> map = new HashMap<String,Object>();
+
+		service.signOK(pageNum);
+		
+		
+		return map;
 	}
 }

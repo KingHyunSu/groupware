@@ -86,7 +86,13 @@ function click_Ok() {
 	var name = $('input#name').val()
 	var dept = $('input#dept').val()
 	var rank = $('input#rank').val()
-		
+	
+	$("#sign-add",opener.document).append("<li>"+
+									"<div class = 'sign-left'>"+
+	                    				"결<br>재" +
+	                    			"</div>"+
+	                    		"</li>");
+	
 	$("button[name=buttonname]").each(function(idx){
 			var eqValue = $("button[name=buttonname]:eq("+idx+")").val();
 		$('#sign-add',opener.document).append("<li>" +
@@ -121,4 +127,22 @@ function click_Ok() {
 //결재 경로 취소
 function cancle(name) {
 	$('#tr'+name).remove();
+}
+
+function click_signOK(){
+	
+	var pageNum = $('input#docNum').val();
+	
+	$.ajax({
+		url : "signOK",
+		data : pageNum,
+		type : "POST",
+		dataType : 'json',
+		contentType : "application/json; charset=UTF-8",
+		success : function(data) {
+			alert("결재가 완료되었습니다.");
+			
+			
+		}
+	})
 }

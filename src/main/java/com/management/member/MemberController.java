@@ -83,10 +83,4 @@ public class MemberController {
 	public String logout() throws Exception {
 		return "redirect:/login";
 	}
-	
-	@RequestMapping(value = "/main")
-	public String main() throws Exception {
-		
-		return "/form_validation";
-	}
 }

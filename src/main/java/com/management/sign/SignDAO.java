@@ -25,8 +25,8 @@ public class SignDAO {
 		return sqlSession.selectOne(namespace + ".selectSignUser", dto);  
 	}
 	
-	public SignDTO userInfo(String id) {
-		return sqlSession.selectOne(namespace + ".userInfo", id);
+	public SignDTO userInfo(SignDTO dto) {
+		return sqlSession.selectOne(namespace + ".userInfo", dto);
 	}
 	
 	public void insertSign(SignDTO dto) {
@@ -40,4 +40,33 @@ public class SignDAO {
 	public void insertSignPath(SignDTO dto) {
 		sqlSession.insert(namespace + ".insertSignPath", dto);
 	}
+	
+	public List<SignDTO> signProcessList(SignDTO dto) {
+		return sqlSession.selectList(namespace + ".signProcessList", dto);
+	}
+	
+	public List<SignDTO> signStayList(SignDTO dto) {
+		return sqlSession.selectList(namespace + ".signStayList", dto);
+	}
+	
+	public SignDTO signDocView(SignDTO dto){
+		return sqlSession.selectOne(namespace + ".selectSignDoc", dto);
+	}
+	
+	public List<SignDTO> signDocPath(SignDTO dto) {
+		return sqlSession.selectList(namespace + ".selectSignPath", dto);
+	}
+	
+	public void signOK(SignDTO dto) {
+		sqlSession.update(namespace + ".signOK", dto);
+	}
+	
+	public int signCount(SignDTO dto) {
+		return sqlSession.selectOne(namespace + ".signCount", dto);
+	}
+	
+	public void signFinish(SignDTO dto) {
+		sqlSession.update(namespace + ".signFinish", dto);
+	}
 }
+

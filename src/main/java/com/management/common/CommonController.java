@@ -1,0 +1,29 @@
+package com.management.common;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class CommonController {
+
+	@Inject
+	private CommonService service;
+	
+	@ResponseBody
+	@RequestMapping(value = "sidebar") 
+	public Map<String, Object> sidebar() throws Exception{
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("signStayCount", service.signStayCount());
+		map.put("signProcessCount", service.signProcessCount());
+		map.put("signFinishCount", service.signFinishCount());
+		
+		return map;
+	}
+}

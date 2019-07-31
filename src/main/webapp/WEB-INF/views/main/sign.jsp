@@ -123,11 +123,7 @@
                     		<div class = "sign-zone">        
                     			
                     			<ul id = "sign-add">
-                    				<li>
-                    					<div class = "sign-left">
-		                    				결<br>재
-		                    			</div>	
-                    				</li>
+
 								</ul>	
                     			
                     		</div>
@@ -139,7 +135,7 @@
                     				<td><input class= "sign-table-input1" type = "text" name = "title"></td>
                     			</tr>
                     		</table>
-                    		<textarea class= "sign-table-textarea1" rows = "35"></textarea>
+                    		<textarea class= "sign-table-textarea1" name = "content" rows = "35"></textarea>
                     	</div>
                     	<div class = "form-foot">
                     	</div>
@@ -152,7 +148,8 @@
                     
                     		<!-- hidden -->
                  <div id = "hidden-sign">
-
+						<input type = "hidden" name = "name"value = <%=dto.getName() %>>
+						
                   </div>
                   
                   </form>

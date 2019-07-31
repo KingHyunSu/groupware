@@ -13,14 +13,39 @@ public class SignDTO {
 	
 	private String title;
 	private String content;
+	private String writer;
 	private Date date;
 	private String id;
+	private String signCheck;
 	
 	private String signName;
 	private String signDept;
 	private String signRank;
 	private String sign;
 	
+	private String checkSignPath;
+	
+	
+	
+
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+	public String getCheckSignPath() {
+		return checkSignPath;
+	}
+	public void setCheckSignPath(String checkSignPath) {
+		this.checkSignPath = checkSignPath;
+	}
+	public String getSignCheck() {
+		return signCheck;
+	}
+	public void setSignCheck(String signCheck) {
+		this.signCheck = signCheck;
+	}
 	public String getDeptname() {
 		return deptname;
 	}
