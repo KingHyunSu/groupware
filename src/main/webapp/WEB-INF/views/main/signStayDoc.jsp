@@ -80,12 +80,12 @@
               </header>
               <div class="panel-body">
                 <div class="form">
-                  <form class="form-validate form-horizontal" id="feedback_form" action = "insertSign" method="post">
+                  <form class="form-validate form-horizontal" id="feedback_form" action = "" method="post">
                     <div class = "main-form">
                     	<div class = "form-title">
                     		<h1 style = "text-align : center;">TEST 결재 양식</h1>
-                    		<button class = "keep-button" type = "button" onclick="click_signPath();">반려</button>
-                    		<input class = "add-button" type = "submit" value = "결제">
+                    		<!--<button class = "keep-button" type = "button" onclick="click_signPath();">반려</button>-->
+                    		<!-- <input class = "add-button" type = "submit" value = "결제"> -->
                     	</div>
                     	<div class = "form-head">
                     		<table class = "gian">
@@ -134,12 +134,6 @@
 %>
 											<button class = "sign-button" type = "button" id = "nowUser"onclick = "click_signOK();">
 												전자 결재
-											</button>
-<%
-	} else { 
-%>
-											<button class = "sign-fin-button"type = "button">
-												결재 완료
 											</button>
 <% 
 		}

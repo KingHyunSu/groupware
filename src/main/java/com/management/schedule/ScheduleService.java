@@ -8,6 +8,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.management.sign.SignDTO;
+
 @Service
 public class ScheduleService {
 
@@ -23,6 +25,13 @@ public class ScheduleService {
 	}
 	
 	public void addSchedule(ScheduleDTO dto) throws Exception{
+
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String id = auth.getName();
+		
+		dto.setId(id);
+		
 		dao.addSchedule(dto);
 	}
 }

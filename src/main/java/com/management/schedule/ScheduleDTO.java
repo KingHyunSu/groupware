@@ -2,12 +2,19 @@ package com.management.schedule;
 
 public class ScheduleDTO {
 
+	private String id;
 	private String subject;
 	private String startDate;
 	private String endDate;
 	private String memo;
 	
 	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getSubject() {
 		return subject;
 	}

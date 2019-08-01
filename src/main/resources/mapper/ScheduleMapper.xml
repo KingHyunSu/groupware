@@ -17,9 +17,9 @@
     	</select>
     	<insert id="addSchedule" parameterType = "ScheduleDTO">
 	    	INSERT INTO
-	    		schedule(subject,startDate,endDate,memo)
+	    		schedule(id,subject,startDate,endDate,memo)
 	    	VALUES
-	    		(#{subject},#{startDate},#{endDate},#{memo})
+	    		(#{id},#{subject},#{startDate},#{endDate},#{memo})
     	</insert>
     </mapper>
     
