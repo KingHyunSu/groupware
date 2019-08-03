@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,7 +66,19 @@ function showCount() {
                           <span>공지사항</span>
                       </a>
           </li>
-
+        <sec:authorize access = "hasAnyRole('ADMIN')">
+          <li class="sub-menu">
+            <a href="javascript:;" class="" onclick="showCount();">
+                          <i class="fa fa-group"></i>
+                          <span>직원 관리</span>
+                          <span class="menu-arrow arrow_carrot-right"></span>
+                      </a>
+            <ul class="sub">
+              <li><a class="" href="joinManage">회원가입 요청</a></li>
+              <li><a class="" href="memberManage">부서/직급 변경</a></li>
+            </ul>
+          </li>   
+		</sec:authorize>
         </ul>
         <!-- sidebar menu end-->
       </div>

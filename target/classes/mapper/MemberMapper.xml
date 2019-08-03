@@ -45,4 +45,38 @@
     		WHERE
     			rankno = #{rankno}
     	</select>
+    	
+    	<select id = "showUser" resultType = "MemberDTO">
+    		SELECT
+    			member.num, member.id, member.name, dept.deptname, rank.rankname
+    		FROM
+    			member
+    		JOIN
+    			dept
+    		ON
+    			member.dept = dept.deptno
+    		JOIN
+    			rank
+    		ON
+    			member.rank = rank.rankno
+    		WHERE
+    			member.authority = 'anonymous'
+    	</select>
+    	
+    	<select id="selectDept" parameterType = "MemberDTO" resultType = "MemberDTO">
+    		SELECT
+    			member.num, member.name, dept.deptname, rank.rankname
+    		FROM
+    			member
+    		JOIN
+    			dept
+    		ON
+    			member.dept = dept.deptno
+    		JOIN
+    			rank
+    		ON
+    			member.rank = rank.rankno
+    		WHERE
+    			member.dept = #{dept}
+    	</select>
     </mapper>

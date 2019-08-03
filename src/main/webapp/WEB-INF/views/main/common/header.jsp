@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,8 +29,6 @@
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
 
- 
-     
           
           <li>
 	          	<sec:authorize access="isAuthenticated()">

@@ -1,5 +1,7 @@
 package com.management.member;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -35,4 +37,11 @@ public class MemberDAO {
 		return sqlSession.selectOne(namespace + ".rankname", rankno);
 	}
 
+	public List<MemberDTO> showUser() throws Exception {
+		return sqlSession.selectList(namespace + ".showUser");
+	}
+	
+	public List<MemberDTO> selectDept(MemberDTO dto) throws Exception {
+		return sqlSession.selectList(namespace + ".selectDept", dto);
+	}
 }

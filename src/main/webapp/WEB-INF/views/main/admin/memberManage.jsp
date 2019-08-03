@@ -1,14 +1,6 @@
-<%@page import="com.management.notice.NoticeDTO"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
-<%@page import="com.management.sign.SignDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
-<%
-	List<NoticeDTO> list = (ArrayList<NoticeDTO>)request.getAttribute("list");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,8 +13,7 @@
 
   <title>기안</title>
 
-	<!-- 부트스트랩 기본 템플릿 -->
-  <!-- Bootstrap CSS -->
+	 <!-- Bootstrap CSS -->
   <link href="resources/origin/css/bootstrap.min.css" rel="stylesheet">
   <!-- bootstrap theme -->
   <link href="resources/origin/css/bootstrap-theme.css" rel="stylesheet">
@@ -38,34 +29,41 @@
   	<!-- 부트스트랩 기본 템플릿 end -->
   	
   	<!-- 템플릿 custom -->
-  <!-- ajax -->
+  	<!-- ajax -->
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-  <!-- custom -->
+  <!-- Tree -->
+  	<link rel="stylesheet" href="resources/Tree/css/jquery.treeview.css" />
+	<link rel="stylesheet" href="resources/Tree/css/screen.css" />
+	
+	<script src="resources/Tree/lib/jquery.js" type="text/javascript"></script>
+	<script src="resources/Tree/lib/jquery.cookie.js" type="text/javascript"></script>
+	<script src="resources/Tree/lib/jquery.treeview.js" type="text/javascript"></script>
+	<script src="resources/custom/js/manage.js" type="text/javascript"></script>
+	
+	<link href="resources/custom/css/popupGroup.css" rel="stylesheet" />
   <link href="resources/sb-admin-2/sb-admin-2.css" rel="stylesheet" />
-  <script src="resources/custom/js/sign.js" type="text/javascript"></script>
   	<!-- 템플릿 custom end -->
 
-	<style type="text/css">
-		.write-button {
-			float: right;
-		    margin-top: 10px;
-		    border: none;
-		    background: #394a59;
-		    color: white;
-		    border-radius: 5px;
-		}
-	</style>
-</head>
+<script type="text/javascript">
+$(function() {
+	$("#tree").treeview({
+		collapsed : false,
+		animated : "medium",
+		control : "#sidetreecontrol",
+		persist : "location"
+	});
+});
+</script>
 
+</head>
 <body>
   <!-- container section start -->
   <section id="container" class="">
     <!--header start-->
-    <jsp:include page = "common/header.jsp"/>
+    <jsp:include page = "../common/header.jsp"/>
     <!--header end-->
     <!--sidebar start-->
-    <jsp:include page = "common/sidebar.jsp"/>
+    <jsp:include page = "../common/sidebar.jsp"/>
     <!--sidebar end-->
 
     <!--main content start-->
@@ -73,50 +71,93 @@
       <section class="wrapper">
         <div class="row">
           <div class="col-lg-12">
-            <h3 class="page-header"><i class="fa fa-files-o"></i>공지사항</h3>
+            <h3 class="page-header"><i class="fa fa-user"></i>부서/직급 변경</h3>
             <ol class="breadcrumb">
               <li><i class="fa fa-home"></i><a href="">메인</a></li>
-              <li><i class="icon_document_alt"></i>공지사항</li>
+              <li><i class="fa fa-group"></i>직원 관리</li>
+              <li><i class="fa fa-user"></i>부서/직급 변경</li>
             </ol>
           </div>
         </div>
         <!-- Form validations -->
         <div class="row">
-          <div class="col-lg-12">
+          <div class="col-lg-4">
             <section class="panel">
               <header class="panel-heading">
-                공지사항 목록
+                	부서 목록
               </header>
-              
+              <div class="panel-body" style = "padding-top:0;">
+					<div id="sidetree">
+						<ul id="tree"> 
+							
+							<li>
+								<input class = "tree-button" type = "button" name = "1" value = "총무" onclick="click_dept(name);">
+							</li>
+							<li>
+								<input class = "tree-button" type = "button" name = "2" value = "회계" onclick="click_dept(name);">
+							</li>
+							<li>
+								<input class = "tree-button" type = "button" name = "3" value = "인사" onclick="click_dept(name);">
+							</li>
+							<li>
+								<input class = "tree-button" type = "button" name = "4" value = "영업본부" onclick="click_dept(name);">
+									<ul>
+										<li>
+											<input class = "tree-button-sub" type = "button" name = "5" value = "영업1팀" onclick="click_dept(name);">
+										</li>
+									</ul>
+									<ul>
+										<li>
+											<input class = "tree-button-sub" type = "button" name = "6" value = "영업2팀" onclick="click_dept(name);">
+										</li>
+									</ul>
+							</li>
+							<li>
+								<input class = "tree-button" type = "button" name = "7" value = "디자인" onclick="click_dept(name);">
+							</li>
+							<li>
+								<input class = "tree-button" type = "button" name = "8" value = "IT" onclick="click_dept(name);">
+									<ul>
+										<li>
+											<input class = "tree-button-sub" type = "button" name = "9" value = "개발1팀" onclick="click_dept(name);">
+										</li>
+									</ul>
+									<ul>
+										<li>
+											<input class = "tree-button-sub" type = "button" name = "10" value = "개발2팀" onclick="click_dept(name);">
+										</li>
+									</ul>
+									<ul>
+										<li>
+											<input class = "tree-button-sub" type = "button" name = "11" value = "개발3팀" onclick="click_dept(name);">
+										</li>
+									</ul>
+							</li>
+						</ul>
+					</div>
+              </div>
+            </section>
+          </div>
+          <div class="col-lg-8">
+            <section class="panel">
+              <header class="panel-heading">
+                	직원 목록
+              </header>
               <div class="panel-body">
-              	*글쓰기는 관리자만 가능합니다.
                 	<div class="listHead">
 						<div class="listHiddenField pull-left field60">No.</div>
-						<div class="listHiddenField pull-right field130">날짜</div>
-						<div class="listHiddenField pull-right field130">글쓴이</div>
-						<div class="listTitle">제목</div>
+						<div class="listHiddenField pull-right field60">삭제</div>
+						<div class="listHiddenField pull-right field100" style="width:20%;">부서</div>
+						<div class="listHiddenField pull-right field100" style="width:20%;">직급</div>
+						<div class="listTitle">이름</div>
 					</div>
-<%
-	for(int i = 0; i < list.size(); i++){
-		NoticeDTO dto = list.get(i);
-%>
+					
 					<div class="listBody">
-						<div class="listHiddenField pull-left field60 textCenter"><%=dto.getNum() %></div>
-						<div class="listHiddenField pull-right field130 textCenter"></div>
-						<div class="listHiddenField pull-right field130 textCenter"></div>
-						<div class="listTitle" style="text-align:center;">
-							<a href="noticeDoc?num=<%= dto.getNum() %>">
-							<%=dto.getTitle() %></a>
-						</div>
+				
 					</div>
-<%
-	}
-%>					
-					<sec:authorize access="hasAnyRole('ADMIN')">
-						<button type = "button" class = "write-button" onclick="location.href='noticeWrite'">글쓰기</button>
-					</sec:authorize>
-				</div>
+              </div>
             </section>
+            
           </div>
         </div>
        
@@ -140,7 +181,6 @@
   <!-- container section end -->
 
   <!-- javascripts -->
-  <script src="resources/origin/js/jquery.js"></script>
   <script src="resources/origin/js/bootstrap.min.js"></script>
   <!-- nice scroll -->
   <script src="resources/origin/js/jquery.scrollTo.min.js"></script>

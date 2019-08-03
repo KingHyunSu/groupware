@@ -18,12 +18,7 @@ public class SignController {
 
 	@Inject
 	private SignService service;
-	
-	@RequestMapping(value = "/form_validation")
-	public String PaymentForm() throws Exception {
-		
-		return "/main/form_validation";
-	}
+
 	
 	//기안 페이지
 	@RequestMapping(value = "/sign")

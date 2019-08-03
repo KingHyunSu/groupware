@@ -12,5 +12,6 @@
 			<typeAlias type = "com.management.sign.SignDTO" alias = "SignDTO"/>
 			<typeAlias type = "com.management.common.CommonDTO" alias = "CommonDTO"/>
 			<typeAlias type = "com.management.notice.NoticeDTO" alias = "NoticeDTO"/>
+			<typeAlias type = "com.management.manage.ManageDTO" alias = "ManageDTO"/>
 		</typeAliases>
     </configuration>

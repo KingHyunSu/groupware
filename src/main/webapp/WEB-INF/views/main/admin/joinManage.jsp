@@ -1,13 +1,10 @@
-<%@page import="com.management.notice.NoticeDTO"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="com.management.member.MemberDTO"%>
 <%@page import="java.util.List"%>
-<%@page import="com.management.sign.SignDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
-
 <%
-	List<NoticeDTO> list = (ArrayList<NoticeDTO>)request.getAttribute("list");
+	List<MemberDTO> list = (ArrayList<MemberDTO>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
@@ -46,26 +43,16 @@
   <script src="resources/custom/js/sign.js" type="text/javascript"></script>
   	<!-- 템플릿 custom end -->
 
-	<style type="text/css">
-		.write-button {
-			float: right;
-		    margin-top: 10px;
-		    border: none;
-		    background: #394a59;
-		    color: white;
-		    border-radius: 5px;
-		}
-	</style>
 </head>
 
 <body>
   <!-- container section start -->
   <section id="container" class="">
     <!--header start-->
-    <jsp:include page = "common/header.jsp"/>
+    <jsp:include page = "../common/header.jsp"/>
     <!--header end-->
     <!--sidebar start-->
-    <jsp:include page = "common/sidebar.jsp"/>
+    <jsp:include page = "../common/sidebar.jsp"/>
     <!--sidebar end-->
 
     <!--main content start-->
@@ -73,10 +60,11 @@
       <section class="wrapper">
         <div class="row">
           <div class="col-lg-12">
-            <h3 class="page-header"><i class="fa fa-files-o"></i>공지사항</h3>
+            <h3 class="page-header"><i class="fa fa-user"></i>회원가입 요청</h3>
             <ol class="breadcrumb">
               <li><i class="fa fa-home"></i><a href="">메인</a></li>
-              <li><i class="icon_document_alt"></i>공지사항</li>
+              <li><i class="fa fa-group"></i>직원 관리</li>
+              <li><i class="fa fa-user"></i>회원가입 요청</li>
             </ol>
           </div>
         </div>
@@ -85,36 +73,51 @@
           <div class="col-lg-12">
             <section class="panel">
               <header class="panel-heading">
-                공지사항 목록
+                회원가입 요청 목록
               </header>
-              
               <div class="panel-body">
-              	*글쓰기는 관리자만 가능합니다.
+              
                 	<div class="listHead">
 						<div class="listHiddenField pull-left field60">No.</div>
-						<div class="listHiddenField pull-right field130">날짜</div>
-						<div class="listHiddenField pull-right field130">글쓴이</div>
-						<div class="listTitle">제목</div>
+						<div class="listHiddenField pull-right field100">거절</div>
+						<div class="listHiddenField pull-right field100">승인</div>
+						<div class="listHiddenField pull-right field130">직급</div>
+						<div class="listHiddenField pull-right field130">부서</div>
+						<div class="listHiddenField pull-right field130">이름</div>
+						<div class="listTitle">아아디</div>
 					</div>
 <%
-	for(int i = 0; i < list.size(); i++){
-		NoticeDTO dto = list.get(i);
+	if (list.size() == 0) {
 %>
+					<div class = "listBody">
+						<div style = "text-align:center;margin-top:10px;margin-bottom:10px;">회원가입 요청이 없습니다.</div>
+					</div> 
+<%
+}
+	for (int i = 0; i < list.size(); i++) {
+		MemberDTO dto = list.get(i);
+		
+		int no = i;
+%>
+
 					<div class="listBody">
-						<div class="listHiddenField pull-left field60 textCenter"><%=dto.getNum() %></div>
-						<div class="listHiddenField pull-right field130 textCenter"></div>
-						<div class="listHiddenField pull-right field130 textCenter"></div>
+						<div class="listHiddenField pull-left field60"><%= no %></div>
+						<div class="listHiddenField pull-right field100">
+							<a style = "color:red;" href="joinNO?num=<%= dto.getNum() %>">거절</a>
+						</div>
+						<div class="listHiddenField pull-right field100">
+							<a style = "color:springgreen;" href="joinOK?num=<%= dto.getNum() %>">승인</a>
+						</div>
+						<div class="listHiddenField pull-right field130"><%= dto.getRankname() %></div>
+						<div class="listHiddenField pull-right field130"><%= dto.getDeptname() %></div>
+						<div class="listHiddenField pull-right field130"><%= dto.getName() %></div>
 						<div class="listTitle" style="text-align:center;">
-							<a href="noticeDoc?num=<%= dto.getNum() %>">
-							<%=dto.getTitle() %></a>
+							<%=dto.getId() %>
 						</div>
 					</div>
 <%
 	}
 %>					
-					<sec:authorize access="hasAnyRole('ADMIN')">
-						<button type = "button" class = "write-button" onclick="location.href='noticeWrite'">글쓰기</button>
-					</sec:authorize>
 				</div>
             </section>
           </div>

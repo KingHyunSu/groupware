@@ -1,5 +1,7 @@
 package com.management.member;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -40,6 +42,18 @@ public class MemberService{
 	public String selectRankName(String rankNum) throws Exception {
 		int rankno = Integer.parseInt(rankNum);
 		return dao.selectRankName(rankno);
+	}
+	
+	public List<MemberDTO> showUser() throws Exception {
+		return dao.showUser();
+	}
+	
+	public List<MemberDTO> selectDept(String dept) throws Exception {
+		MemberDTO dto = new MemberDTO();
+		
+		dto.setDept(Integer.parseInt(dept));
+		
+		return dao.selectDept(dto);
 	}
 	
 	
