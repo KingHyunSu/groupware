@@ -22,7 +22,7 @@
       </div>
 
       <!--logo start-->
-      <a href="index.html" class="logo">그룹 <span class="lite">웨어</span></a>
+      <a href="main" class="logo">그룹 <span class="lite">웨어</span></a>
       <!--logo end-->
 
       <div class="top-nav notification-row">

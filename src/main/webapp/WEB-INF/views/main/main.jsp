@@ -176,7 +176,7 @@
 
             <div class="panel panel-default">
               <div class="panel-heading">
-                <h2><i class="fa fa-map-marker red"></i><strong>공지사항</strong></h2>
+                <h2><i class="icon_documents_alt"></i><strong><a href="notice">공지사항 바로가기</a></strong></h2>
               </div>
               <div class="panel-body">
                 	<div class="listHead">
@@ -215,7 +215,7 @@
           <div class="col-lg-9 col-md-12">
             <div class="panel panel-default">
               <div class="panel-heading">
-                <h2><i class="fa fa-flag-o red"></i><strong>일정</strong></h2>
+                <h2><i class="icon_table"></i><strong><a href="schedule">일정관리 바로가기</a></strong></h2>
               </div>
               <div class="panel-body">
                 <div id='calendar'>
