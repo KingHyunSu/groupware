@@ -9,6 +9,11 @@ branches:
 befor_install:
  - chmod +x mvnw
 
+before_deploy:
+  - zip -r spring-project-groupware *
+  - mkdir -p deploy
+  - mv spring-project-groupware.zip deploy/spring-project-groupware.zip
+
 deploy:
   - provider: s3
     access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
@@ -17,6 +22,7 @@ deploy:
     region: ap-northeast-2
     skip_cleanup: true
     acl: public_read
+    local_dir: deploy
     wait-until-deployed: true
     on:
       repo: https://github.com/KingHyunSu/groupware.git #Github 주소
