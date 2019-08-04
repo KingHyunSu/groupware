@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace = "com.management.member.MemberDAO">
+    	<insert id="join">
+    		INSERT INTO
+    			member(id,pw,name,dept,rank)
+    		VALUES
+    			(#{id},#{pw},#{name},#{dept},#{rank})
+    	</insert>
+    	
+    	<select id="idCheck" resultType = "int" parameterType = "String">
+    		SELECT COUNT(id)
+    		FROM
+    			member
+    		WHERE
+    			id = #{id}	
+    	</select>
+    	
+    	<select id="login" resultType="CustomUserDetails">
+    		SELECT
+    			id,pw,name,authority
+    		FROM
+    			member
+    		WHERE
+    			id = #{id}
+    	</select>
+    	
+    	<select id="deptname" parameterType="int" resultType = "String">
+    		SELECT
+    			deptname
+    		FROM
+    			dept
+    		WHERE
+    			deptno = #{deptno}
+    	</select>
+    	
+    	<select id="rankname" parameterType="int" resultType = "String">
+    		SELECT
+    			rankname
+    		FROM
+    			rank
+    		WHERE
+    			rankno = #{rankno}
+    	</select>
+    	
+    	<select id = "showUser" resultType = "MemberDTO">
+    		SELECT
+    			member.num, member.id, member.name, dept.deptname, rank.rankname
+    		FROM
+    			member
+    		JOIN
+    			dept
+    		ON
+    			member.dept = dept.deptno
+    		JOIN
+    			rank
+    		ON
+    			member.rank = rank.rankno
+    		WHERE
+    			member.authority = 'anonymous'
+    	</select>
+    	
+    	<select id="selectDept" parameterType = "MemberDTO" resultType = "MemberDTO">
+    		SELECT
+    			member.num, member.name, dept.deptname, rank.rankname
+    		FROM
+    			member
+    		JOIN
+    			dept
+    		ON
+    			member.dept = dept.deptno
+    		JOIN
+    			rank
+    		ON
+    			member.rank = rank.rankno
+    		WHERE
+    			member.dept = #{dept}
+    	</select>
+    </mapper>

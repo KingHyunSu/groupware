@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+    
+    <configuration>
+		
+		<typeAliases>
+			<typeAlias type = "com.management.member.MemberDTO" alias = "MemberDTO"/>
+			<typeAlias type = "com.management.schedule.ScheduleDTO" alias = "ScheduleDTO"/>
+			<typeAlias type = "com.management.security.CustomUserDetails" alias = "CustomUserDetails"/>
+			<typeAlias type = "com.management.sign.SignDTO" alias = "SignDTO"/>
+			<typeAlias type = "com.management.common.CommonDTO" alias = "CommonDTO"/>
+			<typeAlias type = "com.management.notice.NoticeDTO" alias = "NoticeDTO"/>
+			<typeAlias type = "com.management.manage.ManageDTO" alias = "ManageDTO"/>
+		</typeAliases>
+    </configuration>

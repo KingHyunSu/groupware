@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace = "com.management.schedule.ScheduleDAO">
+    	<select id="showSchedule" parameterType = "String" resultType = "ScheduleDTO">
+    		SELECT
+    			subject,startDate,endDate,memo
+    		FROM
+    			schedule
+    		WHERE
+    			id = #{id}
+    		ORDER BY
+    			num
+    		DESC
+    	</select>
+    	<insert id="addSchedule" parameterType = "ScheduleDTO">
+	    	INSERT INTO
+	    		schedule(id,subject,startDate,endDate,memo)
+	    	VALUES
+	    		(#{id},#{subject},#{startDate},#{endDate},#{memo})
+    	</insert>
+    </mapper>
+    

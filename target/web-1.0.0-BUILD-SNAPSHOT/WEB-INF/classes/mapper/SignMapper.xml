@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace = "com.management.sign.SignDAO">
+    	<select id="selectDeptShowMember" parameterType = "SignDTO" resultType = "SignDTO">
+    		SELECT
+    			member.num, member.name, member.rank, rank.rankname
+    		FROM
+    			member
+    		JOIN
+    			dept
+    		ON
+    			member.dept = dept.deptno
+    		JOIN
+    			rank
+    		ON
+    			member.rank = rank.rankno
+    		WHERE 
+    			member.dept = #{dept}
+    		ORDER BY
+    			member.rank
+			ASC
+    	</select>
+    	
+    	<select id="selectSignUser" parameterType="SignDTO" resultType="SignDTO">
+	   		SELECT
+    			member.name, member.rank, member.dept, rank.rankname, dept.deptname
+    		FROM
+    			member
+    		JOIN
+    			dept
+    		ON
+    			member.dept = dept.deptno
+    		JOIN
+    			rank
+    		ON
+    			member.rank = rank.rankno
+    		WHERE 
+    			member.dept = #{dept} 
+    		AND
+    			member.rank = #{rank} 
+    		AND 
+    			member.name = #{name}
+    		ORDER BY
+    			member.rank
+			ASC
+    	</select>
+    	
+    	<select id="userInfo" parameterType = "SignDTO" resultType = "SignDTO">
+    		SELECT
+    			member.name, rank.rankname, dept.deptname
+    		FROM
+    			member
+    		JOIN
+    			dept
+    		ON
+    			member.dept = dept.deptno
+    		JOIN
+    			rank
+    		ON
+    			member.rank = rank.rankno
+    		WHERE 
+    			member.id = #{id}
+    	</select>
+    	
+    	<insert id="insertSign" parameterType = "SignDTO">
+    		INSERT INTO
+    			sign(title,content,writer,date,deptname,id,signCheck)
+    		VALUES
+    			(#{title},#{content},#{writer},#{date},#{deptname},#{id},#{signCheck})
+    		<selectKey keyProperty = "num" resultType = "Integer" order="AFTER">
+    			 SELECT LAST_INSERT_ID()
+    		</selectKey>
+    	</insert>
+    	
+    	<select id="selectNum" parameterType = "SignDTO" resultType = "SignDTO">
+    		SELECT
+    			num
+    		FROM
+    			sign
+    		WHERE
+    			num = #{num}
+    	</select> 
+    	
+    	<insert id="insertSignPath" parameterType = "SignDTO">
+    		INSERT INTO
+    			signPath(num,signName,signDept,signRank,sign)
+    		VALUES
+    			(#{num},#{signName},#{signDept},#{signRank},#{sign})
+    	</insert>
+    	
+    	<select id="signProcessList" parameterType = "SignDTO" resultType = "SignDTO">
+    		SELECT
+    			*
+    		FROM
+    			sign
+    		WHERE
+    			id = #{id}
+    	</select> 
+
+    	<select id="signStayList" parameterType = "SignDTO" resultType = "SignDTO">
+    		SELECT
+    			sign.*, signPath.sign
+    		FROM
+    			sign
+    		JOIN
+    			signPath
+    		ON
+    			sign.num = signPath.num
+    		WHERE
+    			signPath.signName = #{signName}
+    		AND
+    			signPath.signDept = #{signDept}
+    		AND
+    			signPath.signRank = #{signRank}
+    		AND
+    			signPath.sign = "0"
+    	</select>
+    	
+    	<select id="signFinishList" parameterType = "SignDTO" resultType = "SignDTO">
+    		SELECT
+    			*
+    		FROM
+    			sign
+    		WHERE
+    			id = #{id}
+    		AND
+    			signCheck = "1"
+    	</select>
+    	
+    	<select id="selectSignDoc" parameterType = "SignDTO" resultType = "SignDTO">
+    		SELECT
+    			*		
+    		FROM
+    			sign
+    		WHERE
+    			num = #{num}
+    	</select>
+    	
+    	<select id="selectSignPath" parameterType = "SignDTO" resultType = "SignDTO">
+    		SELECT
+    			signName,signDept,signRank,sign,signDate
+    		FROM
+    			signPath
+    		WHERE
+    			num = #{num}
+    	</select>
+    	
+    	<update id="signOK" parameterType = "SignDTO">
+    		UPDATE
+    			signPath
+    		SET
+    			sign = "1", signDate = #{signDate}
+    		WHERE 
+    			num = #{num}
+    		AND
+    			signName = #{signName}
+    		AND
+    			signDept = #{signDept}
+    		AND
+    			signRank = #{signRank}
+    	</update>
+    	
+    	<select id="signCount" parameterType = "SignDTO" resultType = "int">
+    		SELECT
+    			COUNT(*)
+    		FROM
+    			signPath
+    		WHERE
+    			num = #{num}
+    	</select>
+    	
+    	<update id="signFinish" parameterType = "SignDTO">
+    		UPDATE
+    			sign
+    		SET
+    			signCheck = "1"
+   			WHERE
+   				num = #{num}
+    	</update>
+    	
+    	<select id=""></select>
+
+    </mapper>

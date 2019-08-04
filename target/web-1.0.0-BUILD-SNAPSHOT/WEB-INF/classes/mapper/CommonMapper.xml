@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace = "com.management.common.CommonDAO">
+    	<select id="userInfo" parameterType = "CommonDTO" resultType = "CommonDTO">
+    		SELECT
+    			member.name, rank.rankname, dept.deptname
+    		FROM
+    			member
+    		JOIN
+    			dept
+    		ON
+    			member.dept = dept.deptno
+    		JOIN
+    			rank
+    		ON
+    			member.rank = rank.rankno
+    		WHERE 
+    			member.id = #{id}
+    	</select>
+    	
+    	<select id="signProcessCount" parameterType="CommonDTO" resultType="int">
+    		SELECT
+    			COUNT(*)
+    		FROM
+    			sign
+    		WHERE
+    			id = #{id}
+    	</select>
+    	
+    	<select id="signStayCount" parameterType="CommonDTO" resultType="int">
+    		SELECT
+    			COUNT(*)
+    		FROM
+    			sign
+    		JOIN
+    			signPath
+    		ON
+    			sign.num = signPath.num
+    		WHERE
+    			signPath.signName = #{signName}
+    		AND
+    			signPath.signDept = #{signDept}
+    		AND
+    			signPath.signRank = #{signRank}
+    		AND
+    			signPath.sign = "0"
+    	</select>
+    	
+    	<select id="signFinishCount" parameterType="CommonDTO" resultType="int">
+    		SELECT
+    			COUNT(*)
+    		FROM
+    			sign
+    		WHERE
+    			id = #{id}
+    		AND
+    			signCheck = "1"
+    	</select>
+    	
+    	<select id="checkUser" parameterType="CommonDTO" resultType="int">
+    		SELECT
+    			COUNT(*)
+    		FROM
+    			signPath
+    		WHERE
+    			signName = #{signName}
+    		AND
+    			signDept = #{signDept}
+    		AND
+    			signRank = #{signRank}
+    	</select>
+    	
+    	<select id="checkUser2" parameterType="CommonDTO" resultType="int">
+    		SELECT
+    			COUNT(*)
+    		FROM
+    			sign
+    		WHERE
+    			id = #{id}
+    	</select>
+    </mapper>
