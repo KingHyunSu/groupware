@@ -36,7 +36,7 @@ function click_dept(name, value) {
 
 //직원 클릭
 function click_rank(name, value) {
-	var deptname = $('input#popup-deptname').val();
+
 	var dept = $('input#popup-dept').val();
 	var name = name;
 	var rank = value;

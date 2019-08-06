@@ -25,15 +25,21 @@ public class MainController {
 		
 		model.addAttribute("noticeList", notice.noticeList());
 		
+		
 		if(common.checkUser() == 0) {
 			model.addAttribute("signStayCount", 0);
+		} else {
+			model.addAttribute("signStayCount", common.signStayCount());
+		}
+		
+		if(common.checkUser2() == 0) {
 			model.addAttribute("signProcessCount", 0);
 			model.addAttribute("signFinishCount", 0);
 		} else {
-		model.addAttribute("signStayCount", common.signStayCount());
-		model.addAttribute("signProcessCount", common.signProcessCount());
-		model.addAttribute("signFinishCount", common.signFinishCount());
+			model.addAttribute("signProcessCount", common.signProcessCount());
+			model.addAttribute("signFinishCount", common.signFinishCount());
 		}
+		
 		model.addAttribute("showSchedule" , shedule.showSchedule());
 		
 		return "/main/main";
