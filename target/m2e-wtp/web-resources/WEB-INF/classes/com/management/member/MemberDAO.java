@@ -44,4 +44,8 @@ public class MemberDAO {
 	public List<MemberDTO> selectDept(MemberDTO dto) throws Exception {
 		return sqlSession.selectList(namespace + ".selectDept", dto);
 	}
+	
+	public MemberDTO selectName(MemberDTO dto) throws Exception {
+		return sqlSession.selectOne(namespace + ".selectName", dto);
+	}
 }

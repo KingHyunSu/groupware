@@ -23,7 +23,7 @@ public class CommonController {
 		if(service.checkUser() == 0) {
 			map.put("signStayCount", 0);
 		} else {
-		map.put("signStayCount", service.signStayCount());
+			map.put("signStayCount", service.signStayCount());
 		}
 		
 		if(service.checkUser2() == 0) {

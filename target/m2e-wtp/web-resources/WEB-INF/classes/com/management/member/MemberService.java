@@ -56,5 +56,12 @@ public class MemberService{
 		return dao.selectDept(dto);
 	}
 	
+	public MemberDTO selectName(String name) throws Exception {
+		MemberDTO dto = new MemberDTO();
+		
+		dto.setName(name);
+		
+		return dao.selectName(dto);
+	}
 	
 }

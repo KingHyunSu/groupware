@@ -79,4 +79,21 @@
     		WHERE
     			member.dept = #{dept}
     	</select>
+    	
+    	<select id="selectName" parameterType = "MemberDTO" resultType = "MemberDTO">
+    		SELECT
+    			member.name, dept.deptname, rank.rankname
+    		FROM
+    			member
+    		JOIN
+    			dept
+    		ON
+    			member.dept = dept.deptno
+    		JOIN
+    			rank
+    		ON
+    			member.rank = rank.rankno
+    		WHERE
+    			member.name = #{name}
+    	</select>
     </mapper>

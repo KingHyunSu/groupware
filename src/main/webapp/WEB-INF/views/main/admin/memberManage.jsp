@@ -138,6 +138,7 @@ $(function() {
               </div>
             </section>
           </div>
+          
           <div class="col-lg-8">
             <section class="panel">
               <header class="panel-heading">
@@ -146,7 +147,6 @@ $(function() {
               <div class="panel-body">
                 	<div class="listHead">
 						<div class="listHiddenField pull-left field60">No.</div>
-						<div class="listHiddenField pull-right field60">삭제</div>
 						<div class="listHiddenField pull-right field100" style="width:20%;">부서</div>
 						<div class="listHiddenField pull-right field100" style="width:20%;">직급</div>
 						<div class="listTitle">이름</div>
@@ -158,9 +158,22 @@ $(function() {
               </div>
             </section>
             
+          </div>       
+        </div>
+        
+        <div class="row">
+        	<div class="col-lg-12">
+          		<section class="panel">
+              <header class="panel-heading">
+                	직원 정보
+              </header>
+              <div class="panel-body" id = "suv2">
+                	
+              </div>
+            </section>
           </div>
         </div>
-       
+        
         <!-- page end-->
       </section>
     </section>

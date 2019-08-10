@@ -54,4 +54,12 @@ public class ManageController {
 		
 		return "/main/admin/memberManageSuv";
 	}
+	
+	@RequestMapping(value = "/selectName")
+	public String selectName(String name, Model model) throws Exception {
+		
+		model.addAttribute("memberInfo", member.selectName(name));
+		
+		return "/main/admin/memberManageSuv2";
+	}
 }
