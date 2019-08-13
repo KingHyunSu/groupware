@@ -127,7 +127,7 @@ function click_Ok() {
 //결재 경로 취소
 function cancle(name) {
 	$('#tr'+name).remove();
-}
+};
 
 //결재 하기
 function click_signOK(){
@@ -142,8 +142,8 @@ function click_signOK(){
 		contentType : "application/json; charset=UTF-8",
 		success : function(data) {
 			alert("결재가 완료되었습니다.");
-			location.href="signStayList";
+			location.href="signStay";
 			
 		}
-	})
-}
+	});
+};
