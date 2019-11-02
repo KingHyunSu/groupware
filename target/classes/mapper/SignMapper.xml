@@ -136,7 +136,7 @@
     		FROM
     			sign
     		WHERE
-    			num = #{num}
+    			num = ${num}
     	</select>
     	
     	<select id="selectSignPath" parameterType = "SignDTO" resultType = "SignDTO">

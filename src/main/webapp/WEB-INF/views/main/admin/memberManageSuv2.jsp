@@ -1,4 +1,4 @@
-<%@page import="com.management.member.MemberDTO"%>
+<%@page import="com.groupware.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% 

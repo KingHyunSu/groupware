@@ -1,7 +1,7 @@
-<%@page import="com.management.notice.NoticeDTO"%>
+<%@page import="com.groupware.dto.NoticeDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
-<%@page import="com.management.sign.SignDTO"%>
+<%@page import="com.groupware.dto.SignDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>

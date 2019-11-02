@@ -3,7 +3,20 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-    <mapper namespace = "com.management.member.MemberDAO">
+    <mapper namespace = "com.groupware.member.MemberDAO">
+    	<resultMap type="CustomUserDetails" id="userInfo">
+    		<result column="id" property="id"/>
+    		<result column="pw" property="pw"/>
+    		<result column="name" property="name"/>
+    		<result column="authority" property="authority"/>
+    		<association property="deptDto" javaType="DeptDTO">
+    			<result column="dept_name" property="dept_name"/>
+    		</association>
+    		<association property="rankDto" javaType="RankDTO">
+				<result column="rank_name" property="rank_name"/>    		
+    		</association>
+    	</resultMap>
+    	
     	<insert id="join">
     		INSERT INTO
     			member(id,pw,name,dept,rank)
@@ -19,11 +32,19 @@
     			id = #{id}	
     	</select>
     	
-    	<select id="login" resultType="CustomUserDetails">
+    	<select id="login" resultMap="userInfo">
     		SELECT
-    			id,pw,name,authority
+    			id, pw, name, authority, dept_name, rank_name
     		FROM
     			member
+    		JOIN
+    			dept
+    		ON
+    			member.dept_no = dept.dept_no
+    		JOIN
+    			rank
+    		ON
+    			member.rank_no = rank.rank_no
     		WHERE
     			id = #{id}
     	</select>

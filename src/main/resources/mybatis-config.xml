@@ -6,12 +6,14 @@
     <configuration>
 		
 		<typeAliases>
-			<typeAlias type = "com.management.member.MemberDTO" alias = "MemberDTO"/>
-			<typeAlias type = "com.management.schedule.ScheduleDTO" alias = "ScheduleDTO"/>
-			<typeAlias type = "com.management.security.CustomUserDetails" alias = "CustomUserDetails"/>
-			<typeAlias type = "com.management.sign.SignDTO" alias = "SignDTO"/>
-			<typeAlias type = "com.management.common.CommonDTO" alias = "CommonDTO"/>
-			<typeAlias type = "com.management.notice.NoticeDTO" alias = "NoticeDTO"/>
-			<typeAlias type = "com.management.manage.ManageDTO" alias = "ManageDTO"/>
+			<typeAlias type = "com.groupware.dto.DeptDTO" alias = "DeptDTO"/>
+			<typeAlias type = "com.groupware.dto.MemberDTO" alias = "MemberDTO"/>
+			<typeAlias type = "com.groupware.dto.NoticeDTO" alias = "NoticeDTO"/>
+			<typeAlias type = "com.groupware.dto.RankDTO" alias = "RankDTO"/>
+			<typeAlias type = "com.groupware.dto.ScheduleDTO" alias = "ScheduleDTO"/>
+			<typeAlias type = "com.groupware.dto.SignDTO" alias = "SignDTO"/>
+			<typeAlias type = "com.groupware.dto.SignPathDTO" alias = "SignPathDTO"/>
+			<typeAlias type = "com.groupware.dto.StateDTO" alias = "StateDTO"/>
+			<typeAlias type = "com.groupware.security.CustomUserDetails" alias = "CustomUserDetails"/>
 		</typeAliases>
     </configuration>

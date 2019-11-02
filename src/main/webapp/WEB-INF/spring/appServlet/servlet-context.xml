@@ -25,6 +25,6 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.management.*" />
+	<context:component-scan base-package="com.groupware.*" />
 	
 </beans:beans>

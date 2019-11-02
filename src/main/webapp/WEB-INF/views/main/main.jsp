@@ -1,6 +1,6 @@
-<%@page import="com.management.schedule.ScheduleDTO"%>
+<%@page import="com.groupware.dto.ScheduleDTO"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.management.notice.NoticeDTO"%>
+<%@page import="com.groupware.dto.NoticeDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

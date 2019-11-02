@@ -4,24 +4,37 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
     <mapper namespace = "com.management.common.CommonDAO">
-    	<select id="userInfo" parameterType = "CommonDTO" resultType = "CommonDTO">
+    	<resultMap type="MemberDTO" id="userInfo">
+    		<result column="id" property="id"/>
+    		<result column="pw" property="pw"/>
+    		<result column="name" property="name"/>
+    		<result column="authority" property="authority"/>
+    		<association property="deptDto" javaType="DeptDTO">
+    			<result column="dept_name" property="dept_name"/>
+    		</association>
+    		<association property="rankDto" javaType="RankDTO">
+				<result column="rank_name" property="rank_name"/>    		
+    		</association>
+    	</resultMap>
+    	
+    	<select id="userInfo" parameterType = "MemberDTO" resultMap = "userInfo">
     		SELECT
-    			member.name, rank.rankname, dept.deptname
+    			member.id, member.name, rank.rank_name, dept.dept_name
     		FROM
     			member
     		JOIN
     			dept
     		ON
-    			member.dept = dept.deptno
+    			member.dept_no = dept.dept_no
     		JOIN
     			rank
     		ON
-    			member.rank = rank.rankno
+    			member.rank_no = rank.rank_no
     		WHERE 
     			member.id = #{id}
     	</select>
     	
-    	<select id="signProcessCount" parameterType="CommonDTO" resultType="int">
+    	<select id="signProcessCount" parameterType="MemberDTO" resultType="int">
     		SELECT
     			COUNT(*)
     		FROM
@@ -30,26 +43,26 @@
     			id = #{id}
     	</select>
     	
-    	<select id="signStayCount" parameterType="CommonDTO" resultType="int">
+    	<select id="signStayCount" parameterType="MemberDTO" resultType="int">
     		SELECT
     			COUNT(*)
     		FROM
     			sign
     		JOIN
-    			signPath
+    			sign_path
     		ON
-    			sign.num = signPath.num
+    			sign.sign_no = sign_path.sign_no
     		WHERE
-    			signPath.signName = #{signName}
+    			sign_path.name = #{name}
     		AND
-    			signPath.signDept = #{signDept}
+    			sign_path.dept_name = #{dept_name}
     		AND
-    			signPath.signRank = #{signRank}
+    			sign_path.rank_name = #{rank_name}
     		AND
-    			signPath.sign = "0"
+    			sign_path.state_no = "0"
     	</select>
     	
-    	<select id="signFinishCount" parameterType="CommonDTO" resultType="int">
+    	<select id="signFinishCount" parameterType="MemberDTO" resultType="int">
     		SELECT
     			COUNT(*)
     		FROM
@@ -57,23 +70,23 @@
     		WHERE
     			id = #{id}
     		AND
-    			signCheck = "1"
+    			state_no = "1"
     	</select>
     	
-    	<select id="checkUser" parameterType="CommonDTO" resultType="int">
+    	<select id="checkUser" parameterType="MemberDTO" resultType="int">
     		SELECT
     			COUNT(*)
     		FROM
-    			signPath
+    			sign_path
     		WHERE
-    			signName = #{signName}
+    			name = #{name}
     		AND
-    			signDept = #{signDept}
+    			dept_name = #{dept_name}
     		AND
-    			signRank = #{signRank}
+    			rank_name = #{rank_name}
     	</select>
     	
-    	<select id="checkUser2" parameterType="CommonDTO" resultType="int">
+    	<select id="checkUser2" parameterType="MemberDTO" resultType="int">
     		SELECT
     			COUNT(*)
     		FROM

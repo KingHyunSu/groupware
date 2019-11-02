@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@page import = "java.util.List" %>
 <%@page import = "java.util.ArrayList" %>
-<%@page import = "com.management.sign.SignDTO" %>
+<%@page import = "com.groupware.dto.SignDTO" %>
 <%
 	List<SignDTO> list = (ArrayList<SignDTO>)request.getAttribute("list");
 %>

@@ -1,5 +1,5 @@
 <%@page import="java.util.Calendar"%>
-<%@page import="com.management.sign.SignDTO"%>
+<%@page import="com.groupware.dto.SignDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%

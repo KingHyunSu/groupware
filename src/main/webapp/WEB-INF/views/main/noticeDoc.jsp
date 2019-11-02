@@ -1,4 +1,4 @@
-<%@page import="com.management.notice.NoticeDTO"%>
+<%@page import="com.groupware.dto.NoticeDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
