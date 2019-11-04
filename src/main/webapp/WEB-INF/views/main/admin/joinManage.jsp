@@ -108,8 +108,8 @@
 						<div class="listHiddenField pull-right field100">
 							<a style = "color:springgreen;" href="joinOK?num=<%= dto.getNum() %>">승인</a>
 						</div>
-						<div class="listHiddenField pull-right field130"><%= dto.getRankname() %></div>
-						<div class="listHiddenField pull-right field130"><%= dto.getDeptname() %></div>
+						<div class="listHiddenField pull-right field130"><%= dto.getRank_no() %></div>
+						<div class="listHiddenField pull-right field130"><%= dto.getDept_no() %></div>
 						<div class="listHiddenField pull-right field130"><%= dto.getName() %></div>
 						<div class="listTitle" style="text-align:center;">
 							<%=dto.getId() %>

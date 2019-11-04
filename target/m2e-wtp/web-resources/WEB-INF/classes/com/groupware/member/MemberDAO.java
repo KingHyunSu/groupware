@@ -16,7 +16,7 @@ public class MemberDAO {
 	@Inject
 	private SqlSession sqlSession;
 	
-	private static final String namespace = "com.management.member.MemberDAO";
+	private static final String namespace = "com.groupware.member.MemberDAO";
 	
 	public void joinAction(MemberDTO dto) throws Exception {
 		sqlSession.insert(namespace + ".join", dto);
@@ -27,6 +27,7 @@ public class MemberDAO {
 	}
 
 	public CustomUserDetails login(String id) {
+		System.out.println("----------------------------------" + id);
 		return sqlSession.selectOne(namespace + ".login", id);
 	}
 

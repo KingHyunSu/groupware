@@ -24,8 +24,8 @@ public class MemberService{
 		String pass = passEncoder.encode(dto.getPw());
 		
 		dto.setPw(pass);
-		dto.setDept(Integer.parseInt(formDept));
-		dto.setRank(Integer.parseInt(formRank));
+		dto.setDept_no(Integer.parseInt(formDept));
+		dto.setRank_no(Integer.parseInt(formRank));
 				
 		dao.joinAction(dto);
 	}
@@ -53,7 +53,7 @@ public class MemberService{
 	public List<MemberDTO> selectDept(String dept) throws Exception {
 		MemberDTO dto = new MemberDTO();
 		
-		dto.setDept(Integer.parseInt(dept));
+		dto.setDept_no(Integer.parseInt(dept));
 		
 		return dao.selectDept(dto);
 	}

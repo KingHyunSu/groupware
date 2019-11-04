@@ -50,11 +50,11 @@
 		</tr>
 		<tr>
 			<td class = "left-td">부서</td>
-			<td class = "right-td"><%= memberInfo.getDeptname() %></td>
+			<td class = "right-td"><%= memberInfo.getDept_no() %></td>
 		</tr>
 		<tr>
 			<td class = "left-td">직급</td>
-			<td class = "right-td"><%= memberInfo.getRankname() %></td>
+			<td class = "right-td"><%= memberInfo.getRank_no() %></td>
 		</tr>
 		<tr>
 			<td class = "left-td">H.P</td>

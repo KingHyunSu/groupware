@@ -19,9 +19,9 @@
     	
     	<insert id="join">
     		INSERT INTO
-    			member(id,pw,name,dept,rank)
+    			member(id,pw,name,dept_no,rank_no)
     		VALUES
-    			(#{id},#{pw},#{name},#{dept},#{rank})
+    			(#{id},#{pw},#{name},#{dept_no},#{rank_no})
     	</insert>
     	
     	<select id="idCheck" resultType = "int" parameterType = "String">
@@ -51,54 +51,54 @@
     	
     	<select id="deptname" parameterType="int" resultType = "String">
     		SELECT
-    			deptname
+    			dept_name
     		FROM
     			dept
     		WHERE
-    			deptno = #{deptno}
+    			dept_no = #{dept_no}
     	</select>
     	
     	<select id="rankname" parameterType="int" resultType = "String">
     		SELECT
-    			rankname
+    			rank_name
     		FROM
     			rank
     		WHERE
-    			rankno = #{rankno}
+    			rank_no = #{rank_no}
     	</select>
     	
     	<select id = "showUser" resultType = "MemberDTO">
     		SELECT
-    			member.num, member.id, member.name, dept.deptname, rank.rankname
+    			member.num, member.id, member.name, dept.dept_name, rank.rank_name
     		FROM
     			member
     		JOIN
     			dept
     		ON
-    			member.dept = dept.deptno
+    			member.dept_no = dept.dept_no
     		JOIN
     			rank
     		ON
-    			member.rank = rank.rankno
+    			member.rank_no = rank.rank_no
     		WHERE
     			member.authority = 'anonymous'
     	</select>
     	
     	<select id="selectDept" parameterType = "MemberDTO" resultType = "MemberDTO">
     		SELECT
-    			member.num, member.name, dept.deptname, rank.rankname
+    			member.num, member.name, dept.dept_name, rank.rank_name
     		FROM
     			member
     		JOIN
     			dept
     		ON
-    			member.dept = dept.deptno
+    			member.dept_no = dept.dept_no
     		JOIN
     			rank
     		ON
-    			member.rank = rank.rankno
+    			member.rank_no = rank.rank_no
     		WHERE
-    			member.dept = #{dept}
+    			member.dept_no = #{dept_no}
     	</select>
     	
     	<select id="selectName" parameterType = "MemberDTO" resultType = "MemberDTO">

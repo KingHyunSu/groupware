@@ -28,7 +28,7 @@
 </div>
 <div class="listHiddenField pull-right field100" style="width:20%;">
 	<select name = "dept">
-		<option selected><%= dto.getDeptname() %></option>
+		<option selected><%= dto.getDept_no() %></option>
 		<option value = "1">총무</option>
 		<option value = "2">회계</option>
 		<option value = "3">인사</option>
@@ -44,7 +44,7 @@
 </div>
 <div class="listHiddenField pull-right field100" style="width:20%;">
 	<select name = "rank">
-		<option selected><%= dto.getRankname() %></option>
+		<option selected><%= dto.getRank_no() %></option>
 		<option value = "1">이사</option>
 		<option value = "2">부장</option>
 		<option value = "3">과장</option>

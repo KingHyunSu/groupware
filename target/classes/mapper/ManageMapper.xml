@@ -4,7 +4,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
     <mapper namespace = "com.management.manage.ManageDAO">
-    	<update id="joinOK" parameterType = "ManageDTO">
+    	<update id="joinOK" parameterType = "MemberDTO">
     		UPDATE
     			member
     		SET
@@ -13,7 +13,7 @@
     			num = #{num}
     	</update>
     	
-    	<update id="joinNO" parameterType = "ManageDTO">
+    	<update id="joinNO" parameterType = "MemberDTO">
     		DELETE FROM
     			member
     		WHERE

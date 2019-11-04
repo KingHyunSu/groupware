@@ -11,55 +11,55 @@ import com.groupware.member.MemberService;
 
 @Controller
 public class ManageController {
-
-	@Inject
-	private ManageService service;
-	
-	@Inject
-	private MemberService member;
-	
-	@RequestMapping(value = "/joinManage")
-		public String joinManage(Model model) throws Exception{
-		
-		model.addAttribute("list", member.showUser());
-		
-		return "/main/admin/joinManage";
-	}
-	
-	@RequestMapping(value = "/joinOK")
-	public String joinOK(@RequestParam String num) throws Exception {
-		
-		service.joinOK(num);
-		
-		return "redirect:/joinManage";
-	}
-	
-	@RequestMapping(value = "/joinNO")
-	public String joinNO(@RequestParam String num) throws Exception {
-		
-		service.joinNO(num);
-		
-		return "redirect:/joinManage";
-	}
-	
-	@RequestMapping(value = "/memberManage")
-	public String memberManage() throws Exception {
-		return "/main/admin/memberManage";
-	}
-	
-	@RequestMapping(value = "/selectDept")
-	public String selectDept(String dept, Model model) throws Exception {
-		
-		model.addAttribute("deptMemberList", member.selectDept(dept));
-		
-		return "/main/admin/memberManageSuv";
-	}
-	
-	@RequestMapping(value = "/selectName")
-	public String selectName(String name, Model model) throws Exception {
-		
-		model.addAttribute("memberInfo", member.selectName(name));
-		
-		return "/main/admin/memberManageSuv2";
-	}
+//
+//	@Inject
+//	private ManageService service;
+//	
+//	@Inject
+//	private MemberService member;
+//	
+//	@RequestMapping(value = "/joinManage")
+//		public String joinManage(Model model) throws Exception{
+//		
+//		model.addAttribute("list", member.showUser());
+//		
+//		return "/main/admin/joinManage";
+//	}
+//	
+//	@RequestMapping(value = "/joinOK")
+//	public String joinOK(@RequestParam String num) throws Exception {
+//		
+//		service.joinOK(num);
+//		
+//		return "redirect:/joinManage";
+//	}
+//	
+//	@RequestMapping(value = "/joinNO")
+//	public String joinNO(@RequestParam String num) throws Exception {
+//		
+//		service.joinNO(num);
+//		
+//		return "redirect:/joinManage";
+//	}
+//	
+//	@RequestMapping(value = "/memberManage")
+//	public String memberManage() throws Exception {
+//		return "/main/admin/memberManage";
+//	}
+//	
+//	@RequestMapping(value = "/selectDept")
+//	public String selectDept(String dept, Model model) throws Exception {
+//		
+//		model.addAttribute("deptMemberList", member.selectDept(dept));
+//		
+//		return "/main/admin/memberManageSuv";
+//	}
+//	
+//	@RequestMapping(value = "/selectName")
+//	public String selectName(String name, Model model) throws Exception {
+//		
+//		model.addAttribute("memberInfo", member.selectName(name));
+//		
+//		return "/main/admin/memberManageSuv2";
+//	}
 }
