@@ -58,7 +58,6 @@
     			sign_path.dept_name = #{dept_name}
     		AND
     			sign_path.rank_name = #{rank_name}
-    		AND
     			sign_path.state_no = "0"
     	</select>
     	

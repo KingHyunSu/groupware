@@ -87,6 +87,9 @@ function click_group() {
 	}
 };
 
+var dept_name;
+var rank_name;
+
 // 부서 클릭
 function click_dept(name, value) {
 
@@ -103,7 +106,7 @@ function click_dept(name, value) {
 			var result = JSON.parse(data);
 			$(".result-dept").html("<" + result.deptname);
 			$("input#dept").val(deptNum);
-			$("input#deptName").val(deptName);
+			dept_name = deptName;
 		}
 	});
 };
@@ -123,7 +126,7 @@ function click_rank(name, value) {
 			var result = JSON.parse(data);
 			$(".result-rank").html(result.rankname + ">");
 			$("input#rank").val(rankNum);
-			$("input#rankName").val(rankName);
+			rank_name = rankName;
 		}
 	});
 };
@@ -141,7 +144,7 @@ function click_Ok() {
 	$(".group-text").css("margin-bottom", "16px");
 	$(".group-text").css("color", "#34aadc");
 	$(".group-text").css("text-align", "center");
-	$(".group-text").text(deptName + "/" + rankName);
+	$(".group-text").text(dept_name + "/" + rank_name);
 
 	$('#popupGroup').hide();
 	$(".login-wrap").show();

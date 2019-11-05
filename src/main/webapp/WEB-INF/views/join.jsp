@@ -180,10 +180,9 @@
 		</div>
 		<button class = "ok-button" type= "button" onclick="click_Ok();">확인</button>
 		
-		<input type = "hidden" name = "dept" id = "dept" value = "">
-		<input type = "hidden" name = "rank" id = "rank" value = "">
-		<input type = "hidden" name = "deptName" id = "deptName" value = "">
-		<input type = "hidden" name = "rankName" id = "rankName" value = "">
+		<input type = "hidden" name = "dept_no" id = "dept" value = "">
+		<input type = "hidden" name = "rank_no" id = "rank" value = "">
+		
 	</div>	
 </div>
 
