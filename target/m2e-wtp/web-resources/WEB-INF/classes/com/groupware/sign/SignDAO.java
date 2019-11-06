@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.groupware.dto.DeptDTO;
 import com.groupware.dto.MemberDTO;
 import com.groupware.dto.SignDTO;
 
@@ -16,13 +17,13 @@ public class SignDAO {
 	@Inject
 	SqlSession sqlSession;
 	
-	private static final String namespace = "com.management.sign.SignDAO";
+	private static final String namespace = "com.groupware.sign.SignDAO";
 	
-	public List<SignDTO> selectDeptShowMember(SignDTO dto) {
+	public List<MemberDTO> selectDeptShowMember(DeptDTO dto) {
 		return sqlSession.selectList(namespace + ".selectDeptShowMember", dto);
 	}
 	
-	public SignDTO selectSignUser(SignDTO dto) {
+	public MemberDTO selectSignUser(MemberDTO dto) {
 		return sqlSession.selectOne(namespace + ".selectSignUser", dto);  
 	}
 	
@@ -30,8 +31,8 @@ public class SignDAO {
 		return sqlSession.selectOne(namespace + ".userInfo", dto);
 	}
 	
-	public void insertSign(SignDTO dto) {
-		sqlSession.insert(namespace + ".insertSign", dto);
+	public int insertSign(SignDTO dto) {
+		return sqlSession.insert(namespace + ".insertSign", dto);
 	}
 	
 	public SignDTO selectNum(SignDTO dto) {
@@ -42,12 +43,12 @@ public class SignDAO {
 		sqlSession.insert(namespace + ".insertSignPath", dto);
 	}
 	
-	public List<SignDTO> signProcessList(SignDTO dto) {
-		return sqlSession.selectList(namespace + ".signProcessList", dto);
+	public List<SignDTO> signProcessList(String id) {
+		return sqlSession.selectList(namespace + ".signProcessList", id);
 	}
 	
-	public List<SignDTO> signStayList(SignDTO dto) {
-		return sqlSession.selectList(namespace + ".signStayList", dto);
+	public List<SignDTO> signStayList(String id) {
+		return sqlSession.selectList(namespace + ".signStayList", id);
 	}
 	
 	public List<SignDTO> signFinishList(SignDTO dto) {

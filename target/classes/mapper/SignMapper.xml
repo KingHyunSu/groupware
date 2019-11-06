@@ -3,48 +3,86 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-    <mapper namespace = "com.management.sign.SignDAO">
-    	<select id="selectDeptShowMember" parameterType = "SignDTO" resultType = "SignDTO">
+    <mapper namespace = "com.groupware.sign.SignDAO">
+		<resultMap type="MemberDTO" id="MemberInfo">
+			<result column="name" property="name"/>
+			<result column="rank_no" property="rank_no"/>
+			<result column="dept_no" property="dept_no"/>
+			<association property="rankDto" javaType="RankDTO">
+				<result column="rank_no" property="rank_no"/>
+				<result column="rank_name" property="rank_name"/>
+			</association>
+			<association property="deptDto" javaType="DeptDTO">
+				<result column="dept_name" property="dept_name"/>
+			</association>
+		</resultMap>
+		
+		<resultMap type="SignDTO" id="SignList">
+			<result column="sign_no" property="sign_no"/>
+			<result column="title" property="title"/>
+			<result column="content" property="content"/>
+			<result column="date" property="date"/>
+			<association property="stateDto" javaType="StateDTO">
+				<result column="state_name" property="state_name"/>
+			</association>
+		</resultMap>
+		
+		<resultMap type="SignPathDTO" id="SignPathList">
+			<result column="sign_no" property="sign_no"/>
+			<result column="name" property="name"/>
+			<result column="date" property="date"/>
+			<association property="stateDto" javaType="StateDTO">
+				<result column="state_name" property="state_name"/>
+			</association>
+			<association property="rankDto" javaType="RankDTO">
+				<result column="rank_name" property="rank_name"/>
+			</association>
+			<association property="deptDto" javaType="DeptDTO">
+				<result column="dept_name" property="dept_name"/>
+			</association>
+		</resultMap>
+
+    	<select id="selectDeptShowMember" parameterType = "DeptDTO" resultMap = "MemberInfo">
     		SELECT
-    			member.num, member.name, member.rank, rank.rankname
+    			member.name, member.rank_no, rank.rank_name
     		FROM
     			member
     		JOIN
     			dept
     		ON
-    			member.dept = dept.deptno
+    			member.dept_no = dept.dept_no
     		JOIN
     			rank
     		ON
-    			member.rank = rank.rankno
+    			member.rank_no = rank.rank_no
     		WHERE 
-    			member.dept = #{dept}
+    			dept.dept_no = #{dept_no}
     		ORDER BY
-    			member.rank
+    			member.rank_no
 			ASC
     	</select>
     	
-    	<select id="selectSignUser" parameterType="SignDTO" resultType="SignDTO">
+    	<select id="selectSignUser" parameterType="MemberDTO" resultMap="MemberInfo">
 	   		SELECT
-    			member.name, member.rank, member.dept, rank.rankname, dept.deptname
+    			member.name, member.rank_no, member.dept_no, rank.rank_name, dept.dept_name
     		FROM
     			member
     		JOIN
     			dept
     		ON
-    			member.dept = dept.deptno
+    			member.dept_no = dept.dept_no
     		JOIN
     			rank
     		ON
-    			member.rank = rank.rankno
+    			member.rank_no = rank.rank_no
     		WHERE 
-    			member.dept = #{dept} 
+    			member.dept_no = #{dept_no} 
     		AND
-    			member.rank = #{rank} 
+    			member.rank_no = #{rank_no} 
     		AND 
     			member.name = #{name}
     		ORDER BY
-    			member.rank
+    			member.rank_no
 			ASC
     	</select>
     	
@@ -84,39 +122,41 @@
     			num = #{num}
     	</select> 
     	
-    	<insert id="insertSignPath" parameterType = "SignDTO">
+    	<insert id="insertSignPath" parameterType = "SignPathDTO">
     		INSERT INTO
-    			signPath(num,signName,signDept,signRank,sign)
+    			sign_path(sign_no,name,date,state_no,rank_no,dept_no)
     		VALUES
-    			(#{num},#{signName},#{signDept},#{signRank},#{sign})
+    			(#{num},#{name},SYSDATE(),0,#{rank_no},#{dept_no})
     	</insert>
     	
-    	<select id="signProcessList" parameterType = "SignDTO" resultType = "SignDTO">
+    	<select id="signProcessList" parameterType = "string" resultMap = "SignList">
     		SELECT
-    			*
-    		FROM
-    			sign
-    		WHERE
-    			id = #{id}
-    	</select> 
-
-    	<select id="signStayList" parameterType = "SignDTO" resultType = "SignDTO">
-    		SELECT
-    			sign.*, signPath.sign
+    			sign.*, state.state_name
     		FROM
     			sign
     		JOIN
-    			signPath
+    			state
     		ON
-    			sign.num = signPath.num
+    			sign.state_no = state_state_no
     		WHERE
-    			signPath.signName = #{signName}
+    			id = #{id}
     		AND
-    			signPath.signDept = #{signDept}
+    			sign.state_no = 0;
+    	</select> 
+
+    	<select id="signStayList" parameterType = "string" resultMap = "SignList">
+    		SELECT
+    			sign.*, state.state_name
+    		FROM
+    			sign
+    		JOIN
+    			state
+    		ON
+    			sign.state_no = state_state_no
+    		WHERE
+    			id = #{id}
     		AND
-    			signPath.signRank = #{signRank}
-    		AND
-    			signPath.sign = "0"
+    			sign.state_no = 1;
     	</select>
     	
     	<select id="signFinishList" parameterType = "SignDTO" resultType = "SignDTO">
@@ -136,16 +176,28 @@
     		FROM
     			sign
     		WHERE
-    			num = ${num}
+    			sign_no = ${sign_no}
     	</select>
     	
-    	<select id="selectSignPath" parameterType = "SignDTO" resultType = "SignDTO">
+    	<select id="selectSignPath" parameterType = "SignDTO" resultMap="SignPathList">
     		SELECT
-    			signName,signDept,signRank,sign,signDate
+    			sign_path.name,sign.date,state.state_name,rank.rank_name,dept.dept_name
     		FROM
-    			signPath
+    			sign_path
+    		JOIN
+    			state
+    		ON
+    			sign_path.state_no = state.state_no
+    		JOIN
+    			rank
+    		ON
+    			sign_path.rank_no = rank.rank_no	
+    		JOIN
+    			dept
+    		ON
+    			sign_path.dept_no = dept.dept_no
     		WHERE
-    			num = #{num}
+    			sign_no = #{sign_no}
     	</select>
     	
     	<update id="signOK" parameterType = "SignDTO">
@@ -180,7 +232,6 @@
    			WHERE
    				num = #{num}
     	</update>
-    	
-    	<select id=""></select>
+    
 
     </mapper>

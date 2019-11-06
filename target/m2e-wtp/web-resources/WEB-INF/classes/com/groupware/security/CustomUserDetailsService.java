@@ -17,6 +17,8 @@ public class CustomUserDetailsService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
 		CustomUserDetails user = dao.login(id);
 		
+		System.out.println(user.getPassword());
+		
 		if(user == null) {
 			throw new UsernameNotFoundException(id);
 		}

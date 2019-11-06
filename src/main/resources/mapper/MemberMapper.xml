@@ -67,7 +67,7 @@
     			rank_no = #{rank_no}
     	</select>
     	
-    	<select id = "showUser" resultType = "MemberDTO">
+    	<select id="showUser" resultType = "MemberDTO">
     		SELECT
     			member.num, member.id, member.name, dept.dept_name, rank.rank_name
     		FROM

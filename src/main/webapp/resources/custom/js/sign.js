@@ -29,7 +29,7 @@ function click_group() {
 
 //부서 클릭
 function click_dept(name, value) {
-	$(".rank-list").load("selectDeptShowMember?dept="+name);
+	$(".rank-list").load("selectDeptShowMember?dept_no="+name);
 	$('input#popup-dept').val(name);
 	$('input#popup-deptname').val(value);
 };
@@ -38,10 +38,8 @@ function click_dept(name, value) {
 function click_rank(name, value) {
 	//var deptname = $('input#popup-deptname').val();
 	var dept = $('input#popup-dept').val();
-	var name = name;
-	var rank = value;
 	
-	var signUser = JSON.stringify({name:name, dept:dept, rank:rank});
+	var signUser = JSON.stringify({name:name, dept_no:dept, rank_no:value});
 	
 	 $.ajax({
 			url : 'selectSignUser',
@@ -58,21 +56,21 @@ function click_rank(name, value) {
 							"<option value = '2'>합의</option>"+
 							"<option value = '3'>협의</option>"+
 							"<td class='signFinal-dept'>"+
-							"<button class='path-button' name='buttondept' value="+result.deptname+">"+result.deptname+"</button>"+
+							"<button class='path-button' name='buttondept' value="+result.deptname+">"+result.deptDto.dept_name+"</button>"+
 							"</td><td class='signFinal-name'>"+
 							"<button class='path-button' name='buttonname' value="+result.name+">"+result.name+"</button>"+
 							"</td><td class='signFinal-rank'>"+
-							"<button class='path-button' name='buttonrank' value="+result.rankname+">"+result.rankname+"</button>"+
+							"<button class='path-button' name='buttonrank' value="+result.rankname+">"+result.rankDto.rank_name+"</button>"+
 							"</td><td><button type='button' class='cancle-button' onclick='cancle(name);'>취소</buttom>"+
 							"</td></tr>"		
 				);
 
 				$('div#sign-zone').append(
-						"<input type = 'hidden' id = 'deptname' name = 'deptname' value = "+result.deptname+">"+
-						"<input type = 'hidden' id = 'rankname' name = 'rankname' value = "+result.rankname+">"+
-						"<input type = 'hidden' id = 'name' name = 'name' value = "+result.name+">"+
-						"<input type = 'hidden' id = 'dept' name = 'dept' value = "+result.dept+">"+
-						"<input type = 'hidden' id = 'sign' name = 'rank' value = "+result.rank+">"
+						"<input type = 'hidden' id = 'deptname' name = 'dept_name' value = "+result.dept_name+">"+
+						"<input type = 'hidden' id = 'rankname' name = 'rank_name' value = "+result.rank_name+">"+
+						"<input type = 'hidden' id = 'name' name = 'signname' value = "+result.name+">"+
+						"<input type = 'hidden' id = 'dept' name = 'dept_no' value = "+result.dept_no+">"+
+						"<input type = 'hidden' id = 'sign' name = 'rank_no' value = "+result.rank_no+">"
 						);
 				
 			}

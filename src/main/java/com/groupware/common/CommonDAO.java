@@ -1,5 +1,8 @@
 package com.groupware.common;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -20,27 +23,27 @@ public class CommonDAO {
 		return sqlSession.selectOne(namespace + ".userInfo",dto);
 	}
 	
-	public int signProcessCount(MemberDTO dto) {
-		return sqlSession.selectOne(namespace + ".signProcessCount",dto);
+	public int signProcessCount(Map<String,Object> map) {
+		return sqlSession.selectOne(namespace + ".signProcessCount",map);
 	}
 	
-	public int signStayCount(MemberDTO dto) {
+	public int signStayCount(Map<String,Object> map) {
 		
-		return sqlSession.selectOne(namespace + ".signStayCount",dto);
+		return sqlSession.selectOne(namespace + ".signStayCount",map);
 	}
 	
-	public int signFinishCount(MemberDTO dto) {
+	public int signFinishCount(Map<String,Object> map) {
 		
-		return sqlSession.selectOne(namespace + ".signFinishCount",dto);
+		return sqlSession.selectOne(namespace + ".signFinishCount",map);
 	}
 	
-	public int checkUser(MemberDTO dto) {
+	public int checkUser(Map<String,Object> map) {
 		
-		return sqlSession.selectOne(namespace + ".checkUser", dto);
+		return sqlSession.selectOne(namespace + ".checkUser", map);
 	}
 	
-	public int checkUser2(MemberDTO dto) {
+	public int checkUser2(Map<String,Object> map) {
 		
-		return sqlSession.selectOne(namespace + ".checkUser2", dto);
+		return sqlSession.selectOne(namespace + ".checkUser2", map);
 	}
 }

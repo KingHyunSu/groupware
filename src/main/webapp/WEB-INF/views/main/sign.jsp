@@ -109,11 +109,11 @@
                     		<table class = "gian">
                     			<tr>
                     				<td class = "gian-left">부서</td>
-                    				<td class = "gian-right"><%= dto.getDeptname() %></td>
+                    				<td class = "gian-right"><%= session.getAttribute("dept_name") %></td>
                     			</tr>
                     			<tr>
                     				<td class = "gian-left">기안자</td>
-                    				<td class = "gian-right"><%= dto.getName() %></td>
+                    				<td class = "gian-right"><%= session.getAttribute("name") %></td>
                     			</tr>
                     			<tr>
                     				<td class = "gian-left">기안 날짜</td>
@@ -147,10 +147,7 @@
                     </div>
                     
                     		<!-- hidden -->
-                 <div id = "hidden-sign">
-						<input type = "hidden" name = "writer" value = <%=dto.getName() %>>
-						<input type = "hidden" name = "deptname" value = <%=dto.getDeptname() %>>
-                  </div>
+              
                   
                   </form>
                 </div>

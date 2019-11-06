@@ -10,7 +10,7 @@
 	int stay = (int)request.getAttribute("signStayCount");
 	int finish = (int)request.getAttribute("signFinishCount");
 	List<ScheduleDTO> scheduleList = (ArrayList<ScheduleDTO>)request.getAttribute("showSchedule");
-%>
+%> 
 <!DOCTYPE html>
 <html>
 

@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@page import = "java.util.List" %>
 <%@page import = "java.util.ArrayList" %>
-<%@page import = "com.groupware.dto.SignDTO" %>
+<%@page import = "com.groupware.dto.MemberDTO" %>
 <%
-	List<SignDTO> list = (ArrayList<SignDTO>)request.getAttribute("list");
+	List<MemberDTO> list = (ArrayList<MemberDTO>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
@@ -33,19 +33,19 @@
 <table>
 <%
 	for(int i=0; i < list.size(); i++) {
-		SignDTO dto = list.get(i);
+		MemberDTO dto = list.get(i);
 %>
 	<tr>
 		<td class = "right-td">
 			<div class = "rank-list">
-				<button type = "button" class = "rank-button-none" name = <%=dto.getRankname() %> value = <%=dto.getRank() %> 
+				<button type = "button" class = "rank-button-none" name = <%=dto.getRankDto().getRank_name() %> value = <%=dto.getRankDto().getRank_no() %> 
 					disabled >
-					<%=dto.getRankname() %>
+					<%=dto.getRankDto().getRank_name() %>
 				</button>
 			</div>
 		</td>
 		<td>
-				<button type = "button" class = "rank-button" name = <%=dto.getName()%> value = <%=dto.getRank() %> 
+				<button type = "button" class = "rank-button" name = <%=dto.getName()%> value = <%=dto.getRank_no() %> 
 					onclick="click_rank(name,value);">
 					<%=dto.getName()%> 
 				</button>

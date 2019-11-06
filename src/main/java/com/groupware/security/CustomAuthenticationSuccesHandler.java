@@ -27,6 +27,7 @@ public class CustomAuthenticationSuccesHandler implements AuthenticationSuccessH
 		session.setAttribute("dept_name",cud.getDeptDto().getDept_name());
 		session.setAttribute("rank_name", cud.getRankDto().getRank_name());
 		
+		response.sendRedirect("main");
 	}
 
 	public String getUserId() {

@@ -104,8 +104,8 @@
 		<div id = "sign-zone">
 		</div>
 		
-		<input type = "hidden" id = "popup-deptname" name="deptname" value = "">		
-		<input type = "hidden" id = "popup-dept" name="dept" value = "">
+		<input type = "hidden" id = "popup-deptname" name="dept_name" value = "">		
+		<input type = "hidden" id = "popup-dept" name="dept_no" value = "">
 
 
 	<div class = "group-foot">

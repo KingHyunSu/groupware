@@ -1,5 +1,8 @@
 package com.groupware.main;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -24,23 +27,27 @@ public class MainController {
 	@RequestMapping(value = "/main")
 	public String main(Model model, HttpSession session) throws Exception{
 		
-		String id = (String)session.getAttribute("name");
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("name",session.getAttribute("name"));
+		map.put("rank_name",session.getAttribute("rank_name"));
+		map.put("dept_name",session.getAttribute("dept_name"));
 		
 		model.addAttribute("noticeList", notice.noticeList());
 		
 		
-		if(common.checkUser() == 0) {
+		if(common.checkUser(map) == 0) {
 			model.addAttribute("signStayCount", 0);
 		} else {
-			model.addAttribute("signStayCount", common.signStayCount(id));
+			model.addAttribute("signStayCount", common.signStayCount(map));
 		}
 		
-		if(common.checkUser2() == 0) {
+		if(common.checkUser2(map) == 0) {
 			model.addAttribute("signProcessCount", 0);
 			model.addAttribute("signFinishCount", 0);
 		} else {
-			model.addAttribute("signProcessCount", common.signProcessCount());
-			model.addAttribute("signFinishCount", common.signFinishCount());
+			model.addAttribute("signProcessCount", common.signProcessCount(map));
+			model.addAttribute("signFinishCount", common.signFinishCount(map));
 		}
 		
 		model.addAttribute("showSchedule" , shedule.showSchedule());

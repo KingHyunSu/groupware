@@ -88,20 +88,15 @@
 	for (int i = 0; i < list.size(); i++) {
 		SignDTO dto = list.get(i);
 		
-		if(dto.getSignCheck().equals("0")) {
-			dto.setSignCheck("대기");
-		} else {
-			dto.setSignCheck("결재");
-		}
 %>
 	              <div class="listBody">
-						<div class="listHiddenField pull-left field60 textCenter"><%=dto.getNum() %></div>
-						<div class="listHiddenField pull-right field100 textCenter"><%=dto.getSignCheck() %></div>
+						<div class="listHiddenField pull-left field60 textCenter"><%=dto.getSign_no() %></div>
+						<div class="listHiddenField pull-right field100 textCenter">진행중</div>
 						<div class="listHiddenField pull-right field130 textCenter"></div>
 						<div class="listHiddenField pull-right field130 textCenter"><%=dto.getDate() %></div>
-						<div class="listHiddenField pull-right field130 textCenter"><%=dto.getWriter() %></div>
+						<div class="listHiddenField pull-right field130 textCenter"><%=session.getAttribute("name") %></div>
 						<div class="listTitle" style="text-align:center;">
-							<a href="signProcessDoc?num=<%= dto.getNum() %>">
+							<a href="signProcessDoc?sign_no=<%= dto.getSign_no() %>">
 							<%=dto.getTitle() %></a>
 						</div>
 					</div>
