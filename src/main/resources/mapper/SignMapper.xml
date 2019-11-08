@@ -105,10 +105,10 @@
     	
     	<insert id="insertSign" parameterType = "SignDTO">
     		INSERT INTO
-    			sign(title,content,writer,date,deptname,id,signCheck)
+    			sign(title,content,date,state_no,id)
     		VALUES
-    			(#{title},#{content},#{writer},#{date},#{deptname},#{id},#{signCheck})
-    		<selectKey keyProperty = "num" resultType = "Integer" order="AFTER">
+    			(#{title},#{content},SYSDATE(),1,#{id})
+    		<selectKey keyProperty = "sign_no" resultType = "int" order="AFTER">
     			 SELECT LAST_INSERT_ID()
     		</selectKey>
     	</insert>
@@ -126,7 +126,7 @@
     		INSERT INTO
     			sign_path(sign_no,name,date,state_no,rank_no,dept_no)
     		VALUES
-    			(#{num},#{name},SYSDATE(),0,#{rank_no},#{dept_no})
+    			(#{sign_no},#{name},SYSDATE(),1,#{rank_no},#{dept_no})
     	</insert>
     	
     	<select id="signProcessList" parameterType = "string" resultMap = "SignList">
@@ -137,11 +137,11 @@
     		JOIN
     			state
     		ON
-    			sign.state_no = state_state_no
+    			sign.state_no = state.state_no
     		WHERE
     			id = #{id}
     		AND
-    			sign.state_no = 0;
+    			sign.state_no = 1;
     	</select> 
 
     	<select id="signStayList" parameterType = "string" resultMap = "SignList">
@@ -152,7 +152,7 @@
     		JOIN
     			state
     		ON
-    			sign.state_no = state_state_no
+    			sign.state_no = state.state_no
     		WHERE
     			id = #{id}
     		AND
@@ -167,7 +167,7 @@
     		WHERE
     			id = #{id}
     		AND
-    			signCheck = "1"
+    			signCheck = "2"
     	</select>
     	
     	<select id="selectSignDoc" parameterType = "SignDTO" resultType = "SignDTO">

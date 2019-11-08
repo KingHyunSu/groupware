@@ -1,6 +1,7 @@
 package com.groupware.notice;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,27 +25,53 @@ public class NoticeController {
 		return "/main/notice";
 	}
 	
-	@RequestMapping(value = "/noticeWrite")
+	@RequestMapping(value = "/noticeInsertForm")
 	public String noticeWtire() throws Exception {
 
 		return "/main/noticeWrite";
 	}
 
-	@RequestMapping(value = "/noticeAdd", method = RequestMethod.POST)
-	public String insertNotice(NoticeDTO dto) throws Exception {
+	@RequestMapping(value = "/noticeInsertAction", method = RequestMethod.POST)
+	public String insertNotice(NoticeDTO dto,HttpSession session) throws Exception {
 		System.out.println(dto.getTitle());
 		System.out.println(dto.getContent());
 		
+		dto.setId((String)session.getAttribute("id"));
 		service.insertNotice(dto);
 		
 		return "redirect:/notice";
 	}
 	
 	@RequestMapping(value = "/noticeDoc")
-	public String noticeDoc(Model model, @RequestParam String num)throws Exception {
+	public String noticeDoc(NoticeDTO dto, Model model)throws Exception {
 		
-		model.addAttribute("noticeDoc", service.noticeDoc(num));
+		model.addAttribute("noticeDoc", service.noticeDoc(dto));
 		
 		return "/main/noticeDoc";
 	}
+	@RequestMapping(value = "/noticeUpdateForm")
+	public String noticeUpdateForm(NoticeDTO dto, Model model) throws Exception {
+		
+		model.addAttribute("noticeDoc", service.noticeDoc(dto));
+		
+		
+		return "main/noticeUpdate";
+	}
+	
+	@RequestMapping(value = "/noticeUpdateAction")
+	public String noticeUpdateAction(NoticeDTO dto) {
+		
+		service.noticeUpdate(dto);
+		
+		return "redirect:/notice";
+	}
+	
+	@RequestMapping(value = "/noticeDeleteAction")
+	public String noticeDeleteAction(NoticeDTO dto) {
+		
+		service.noticeDelete(dto);
+		
+		return "redirect:/notice";
+	}
+
 }

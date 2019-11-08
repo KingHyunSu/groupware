@@ -19,24 +19,22 @@ public class CommonController {
 	@ResponseBody
 	@RequestMapping(value = "/sidebar") 
 	public Map<String, Object> sidebar(HttpSession session) throws Exception{
-		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("name",session.getAttribute("name"));
-		map.put("rank_name",session.getAttribute("rank_name"));
-		map.put("dept_name",session.getAttribute("dept_name"));
+		String id = (String)session.getAttribute("id");
 		
-		if(service.checkUser(map) == 0) {
+		if(service.checkUser(id) == 0) {
 			map.put("signStayCount", 0);
 		} else {
-			map.put("signStayCount", service.signStayCount(map));
+			map.put("signStayCount", service.signStayCount(id));
 		}
 		
-		if(service.checkUser2(map) == 0) {
+		if(service.checkUser2(id) == 0) {
 		map.put("signProcessCount", 0);
 		map.put("signFinishCount", 0);
 		} else {
-		map.put("signProcessCount", service.signProcessCount(map));
-		map.put("signFinishCount", service.signFinishCount(map));
+		map.put("signProcessCount", service.signProcessCount(id));
+		map.put("signFinishCount", service.signFinishCount(id));
 		}
 		
 		return map;

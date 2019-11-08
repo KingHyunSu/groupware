@@ -29,6 +29,26 @@
   <link href="resources/origin/css/style.css" rel="stylesheet">
   <link href="resources/origin/css/style-responsive.css" rel="stylesheet" />
   
+  <style type="text/css">
+	#member_info{
+		line-height: 31px;
+		text-align: center;
+	}
+	label {
+		font-weight: 900;
+		color: black;
+	}
+	
+	#button2 {
+		float:right; 
+		width :100px;
+	    border: none;
+	    background: #394a59;
+	    color: white;
+	    border-radius: 5px;
+	}
+	</style>
+	
 </head>
 
 <body>
@@ -60,7 +80,9 @@
           <div class="col-lg-12">
             <section class="panel">
               <header class="panel-heading">
-                
+              		<div style="text-align: center">
+                		<%= dto.getNum() %>
+                	</div>
               </header>
               <div class="panel-body">
                 <div class="form">
@@ -71,25 +93,46 @@
                         	<%= dto.getTitle() %>
                       </div>
                     </div>
+                    <div class="form-group">
+                      <label for="cname" class="control-label col-lg-1">이름</label>
+                      <div class="col-lg-2" id="member_info">
+                         	<%= dto.getMemberDto().getName() %>
+                      </div>
+                      <label for="cname" class="control-label col-lg-1">부서</label>
+                      <div class="col-lg-2" id="member_info">
+                         	<%= dto.getDeptDto().getDept_name() %>
+                      </div>
+                      <label for="cname" class="control-label col-lg-1">직급</label>
+                      <div class="col-lg-2" id="member_info">
+                         	<%= dto.getRankDto().getRank_name() %>
+                      </div>
+                    </div>
+                    <div class="form-group ">
+                      <label for="cname" class="control-label col-lg-1">작성일</label>
+                      <div class="col-lg-2" id="member_info">
+                         	<%= dto.getDate() %>
+                      </div>
+                    </div>
                     <div class="form-group ">
                       <label for="cname" class="control-label col-lg-1">첨부파일</label>
                       <div class="col-lg-10">
-                        <input class="form-control" id="cname" name="file" type="text" required />
+                        
                       </div>
                     </div>
-                    <div class="form-group ">
-                      <label for="ccomment" class="control-label col-lg-1">내용</label>
-                      <div class="col-lg-10">
-                        <textarea class="form-control" id = "Seditor" name="content" 
-                        style = "height:500px; resize:none;" required readonly="readonly"><%= dto.getContent() %></textarea>
+                    <div class="form-group" style="height: 500px;">
+                      <label for="cname" class="control-label col-lg-1" style="padding-top: 13%;">내용</label>
+                      <div class="col-lg-10" style="padding-left:5%;">
+                       	<%= dto.getContent() %>
                       </div>
                     </div>
                     <div class="form-group">
-                      <div class="col-lg-offset-2 col-lg-10">
-                      	<button class="btn btn-primary" type="button"
-                        	style = "margin-left:33%; width :100px;" onclick="location.href='notice'">목록</button>
-                        <button class="btn btn-primary" type="button"
-                        	style = "margin-left:40%; width :100px;" onclick="formSubmit();">수정</button>
+                      <div style="width:96%; margin:0 auto;">
+                      	<button class="btn btn-primary" type="button" id="button2" style="float:left;" 
+                      		onclick="location.href='notice'">목록</button>
+                        <button class="btn btn-primary" type="button" id="button2" style="background-color:firebrick;"
+                        	onclick="location.href='noticeDeleteAction?num=<%=dto.getNum()%>'">삭제</button>	
+                        <button class="btn btn-primary" type="button" id="button2" style="background-color:cornflowerblue; margin-right: 20px;"
+                        	onclick="location.href='noticeUpdateForm?num=<%=dto.getNum()%>'">수정</button>
                       </div>
                     </div>
                   </form>

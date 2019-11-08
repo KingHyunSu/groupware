@@ -18,32 +18,32 @@ public class CommonDAO {
 	
 	private static final String namespace = "com.management.common.CommonDAO";
 	
-	public MemberDTO userInfo(MemberDTO dto) {
+	public MemberDTO userInfo(String id) {
 		
-		return sqlSession.selectOne(namespace + ".userInfo",dto);
+		return sqlSession.selectOne(namespace + ".userInfo",id);
 	}
 	
-	public int signProcessCount(Map<String,Object> map) {
-		return sqlSession.selectOne(namespace + ".signProcessCount",map);
+	public int signProcessCount(String id) {
+		return sqlSession.selectOne(namespace + ".signProcessCount",id);
 	}
 	
-	public int signStayCount(Map<String,Object> map) {
+	public int signStayCount(String id) {
 		
-		return sqlSession.selectOne(namespace + ".signStayCount",map);
+		return sqlSession.selectOne(namespace + ".signStayCount",id);
 	}
 	
-	public int signFinishCount(Map<String,Object> map) {
+	public int signFinishCount(String id) {
 		
-		return sqlSession.selectOne(namespace + ".signFinishCount",map);
+		return sqlSession.selectOne(namespace + ".signFinishCount",id);
 	}
 	
-	public int checkUser(Map<String,Object> map) {
+	public int checkUser(String id) {
 		
-		return sqlSession.selectOne(namespace + ".checkUser", map);
+		return sqlSession.selectOne(namespace + ".checkUser", id);
 	}
 	
-	public int checkUser2(Map<String,Object> map) {
+	public int checkUser2(String id) {
 		
-		return sqlSession.selectOne(namespace + ".checkUser2", map);
+		return sqlSession.selectOne(namespace + ".checkUser2", id);
 	}
 }

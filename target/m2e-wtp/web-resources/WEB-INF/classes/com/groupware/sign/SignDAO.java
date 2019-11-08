@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.groupware.dto.DeptDTO;
 import com.groupware.dto.MemberDTO;
 import com.groupware.dto.SignDTO;
+import com.groupware.dto.SignPathDTO;
 
 @Repository
 public class SignDAO {
@@ -39,7 +40,7 @@ public class SignDAO {
 		return sqlSession.selectOne(namespace + ".selectNum", dto);
 	}
 	
-	public void insertSignPath(SignDTO dto) {
+	public void insertSignPath(SignPathDTO dto) {
 		sqlSession.insert(namespace + ".insertSignPath", dto);
 	}
 	

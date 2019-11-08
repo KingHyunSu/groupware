@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.groupware.dto.DeptDTO;
 import com.groupware.dto.MemberDTO;
 import com.groupware.dto.SignDTO;
+import com.groupware.dto.SignPathDTO;
 
 @Controller
 public class SignController {
@@ -62,15 +63,18 @@ public class SignController {
 	}
 	
 	@RequestMapping(value = "/insertSign", method=RequestMethod.POST)
-	public String insertSign(HttpSession session, SignDTO dto,
+	public String insertSign(HttpSession session,
+					@RequestParam("title") String title,
+					@RequestParam("content") String content,
 					@RequestParam("signname") String name,
 					@RequestParam("rank_no") String rank_no,
 					@RequestParam("dept_no") String dept_no
 					) throws Exception {
 		
-		dto.setId((String)session.getAttribute("id"));
+		System.out.println("Controller");
+		String id = (String)session.getAttribute("id");
 		
-		service.insertSign(dto,name,rank_no,dept_no);
+		service.insertSign(id,title,content,name,rank_no,dept_no);
 
 		return "redirect:/signProcess";
 	}

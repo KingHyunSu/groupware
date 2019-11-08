@@ -3,27 +3,75 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-    <mapper namespace = "com.management.notice.NoticeDAO">
-    	<select id="noticList" parameterType = "NoticeDTO" resultType = "NoticeDTO">
+    <mapper namespace = "com.groupware.notice.NoticeDAO">
+    	<resultMap type="NoticeDTO" id="noticeInfo">
+    		<result property="num" column="num"/>
+    		<result property="title" column="title"/>
+    		<result property="content" column="content"/>
+    		<result property="date" column="date"/>
+    		<association property="memberDto" javaType="MemberDTO">
+    			<result property="name" column="name"/>
+    		</association>
+    		<association property="deptDto" javaType="DeptDTO">
+    			<result property="dept_name" column="dept_name"/>
+    		</association>
+    		<association property="rankDto" javaType="RankDTO">
+    			<result property="rank_name" column="rank_name"/>
+    		</association>
+    	</resultMap>
+    	
+    	<select id="noticList" parameterType = "NoticeDTO" resultMap = "noticeInfo">
     		SELECT
-    			*
+    			notice.*, member.name
     		FROM
     			notice
+    		JOIN
+    			member
+    		ON
+    			notice.id = member.id
     	</select>
     	
     	<insert id="insertNotice" parameterType = "NoticeDTO">
     		INSERT INTO
-    			notice(title,content)
+    			notice(title,content,date,id)
     		VALUES
-    			(#{title},#{content})
+    			(#{title},#{content},SYSDATE(),#{id})
     	</insert>
     	
-    	<select id="noticeDoc" parameterType = "NoticeDTO" resultType = "NoticeDTO">
+    	<select id="noticeDoc" parameterType = "NoticeDTO" resultMap = "noticeInfo">
     		SELECT
-    			*
+    			notice.*, member.name, dept.dept_name, rank.rank_name
     		FROM
     			notice
+    		JOIN
+    			member
+    		ON
+    			notice.id = member.id
+    		JOIN
+    			dept
+    		ON
+    			member.dept_no = dept.dept_no
+    		JOIN
+    			rank
+    		ON
+    			member.rank_no = rank.rank_no
     		WHERE
     			num = #{num}
     	</select>
+    	
+    	<update id="noticeUpdate" parameterType="NoticeDTO">
+    		UPDATE
+    			notice
+    		SET
+    			title=#{title}, content=#{content}, date=SYSDATE()
+    		WHERE
+    			num=#{num}
+    	</update>
+    	
+    	<delete id="noticeDelete" parameterType="NoticeDTO">
+    		DELETE FROM
+    			notice
+    		WHERE
+    			num=#{num}
+    	</delete>
     </mapper>

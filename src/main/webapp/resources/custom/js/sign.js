@@ -56,11 +56,11 @@ function click_rank(name, value) {
 							"<option value = '2'>합의</option>"+
 							"<option value = '3'>협의</option>"+
 							"<td class='signFinal-dept'>"+
-							"<button class='path-button' name='buttondept' value="+result.deptname+">"+result.deptDto.dept_name+"</button>"+
+							"<button class='path-button' name='buttondept' value="+result.dept_no+">"+result.deptDto.dept_name+"</button>"+
 							"</td><td class='signFinal-name'>"+
 							"<button class='path-button' name='buttonname' value="+result.name+">"+result.name+"</button>"+
 							"</td><td class='signFinal-rank'>"+
-							"<button class='path-button' name='buttonrank' value="+result.rankname+">"+result.rankDto.rank_name+"</button>"+
+							"<button class='path-button' name='buttonrank' value="+result.rank_no+">"+result.rankDto.rank_name+"</button>"+
 							"</td><td><button type='button' class='cancle-button' onclick='cancle(name);'>취소</buttom>"+
 							"</td></tr>"		
 				);
@@ -68,7 +68,7 @@ function click_rank(name, value) {
 				$('div#sign-zone').append(
 						"<input type = 'hidden' id = 'deptname' name = 'dept_name' value = "+result.dept_name+">"+
 						"<input type = 'hidden' id = 'rankname' name = 'rank_name' value = "+result.rank_name+">"+
-						"<input type = 'hidden' id = 'name' name = 'signname' value = "+result.name+">"+
+						"<input type = 'hidden' id = 'name' name = 'name' value = "+result.name+">"+
 						"<input type = 'hidden' id = 'dept' name = 'dept_no' value = "+result.dept_no+">"+
 						"<input type = 'hidden' id = 'sign' name = 'rank_no' value = "+result.rank_no+">"
 						);
@@ -85,7 +85,8 @@ function click_Ok() {
 	var dept = $('input#dept').val()
 	var rank = $('input#rank').val()
 	
-	$("#sign-add",opener.document).append("<li>"+
+	$("#sign-add",opener.document).append(
+								"<li>"+
 									"<div class = 'sign-left'>"+
 	                    				"결<br>재" +
 	                    			"</div>"+
@@ -93,7 +94,8 @@ function click_Ok() {
 	
 	$("button[name=buttonname]").each(function(idx){
 			var eqValue = $("button[name=buttonname]:eq("+idx+")").val();
-		$('#sign-add',opener.document).append("<li>" +
+		$('#sign-add',opener.document).append(
+								"<li>" +
 									"<div class='sign'>" +
 										"<div class='sign-top'>"+eqValue+"</div>" +
 										"<div class='sign-middle'></div>" +
@@ -101,21 +103,21 @@ function click_Ok() {
 									"</div>"+
 								"</li>");
 		$('div#hidden-sign',opener.document).append(
-				"<input type = 'hidden' name = 'signName' value = "+eqValue+">");
+				"<input type = 'hidden' name = 'signname' value = "+eqValue+">");
 		});
 	
 	$("button[name=buttondept]").each(function(idx){
 		var eqValue = $("button[name=buttondept]:eq("+idx+")").val();
 
 		$('div#hidden-sign',opener.document).append(
-				"<input type = 'hidden' name = 'signDept' value = "+eqValue+">");
+				"<input type = 'hidden' name = 'dept_no' value = "+eqValue+">");
 		});
 	
 	$("button[name=buttonrank]").each(function(idx){
 		var eqValue = $("button[name=buttonrank]:eq("+idx+")").val();
 		console.log(eqValue);
 		$('div#hidden-sign',opener.document).append(
-				"<input type = 'hidden' name = 'signRank' value = "+eqValue+">");
+				"<input type = 'hidden' name = 'rank_no' value = "+eqValue+">");
 		});
 
 

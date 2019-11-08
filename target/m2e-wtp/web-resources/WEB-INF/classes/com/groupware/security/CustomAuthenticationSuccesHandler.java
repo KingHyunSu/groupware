@@ -21,11 +21,17 @@ public class CustomAuthenticationSuccesHandler implements AuthenticationSuccessH
 		
 		CustomUserDetails cud = (CustomUserDetails) authentication.getPrincipal();
 
+		String id = cud.getUsername();
+		String name = cud.getName();
+		String dept_name = cud.getDeptDto().getDept_name();
+		String rank_name = cud.getRankDto().getRank_name();
+		
 		HttpSession session = request.getSession();
-		session.setAttribute("id", cud.getName());
-		session.setAttribute("name", cud.getUsername());
-		session.setAttribute("dept_name",cud.getDeptDto().getDept_name());
-		session.setAttribute("rank_name", cud.getRankDto().getRank_name());
+		
+		session.setAttribute("id", id);
+		session.setAttribute("name", name);
+		session.setAttribute("dept_name",dept_name);
+		session.setAttribute("rank_name", rank_name);
 		
 		response.sendRedirect("main");
 	}

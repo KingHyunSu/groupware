@@ -16,16 +16,16 @@ public class CommonService {
 	private CommonDAO dao;
 	
 	
-	public int signProcessCount(Map<String,Object> map) {
+	public int signProcessCount(String id) {
 //		MemberDTO dto = new MemberDTO();
 //		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 //		String id = auth.getName();
 //		dto.setId(id);
 		
-		return dao.signProcessCount(map);
+		return dao.signProcessCount(id);
 	}
 	
-	public int signStayCount(Map<String,Object> map) {
+	public int signStayCount(String id) {
 		MemberDTO dto = new MemberDTO();
 //		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 //		String id = auth.getName();
@@ -37,10 +37,10 @@ public class CommonService {
 //		dto.setSignDept(user.getDeptname());
 //		dto.setSignRank(user.getRankname());
 		
-		return dao.signStayCount(map);
+		return dao.signStayCount(id);
 	}
 	
-	public int signFinishCount(Map<String,Object> map) {
+	public int signFinishCount(String id) {
 		
 //		MemberDTO dto = new MemberDTO();
 //		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -52,10 +52,10 @@ public class CommonService {
 //		
 //		String a = user.get
 		
-		return dao.signFinishCount(map);
+		return dao.signFinishCount(id);
 	}
 	
-	public int checkUser(Map<String,Object> map) {
+	public int checkUser(String id) {
 		
 //		CommonDTO dto = new CommonDTO();
 //		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -64,16 +64,17 @@ public class CommonService {
 //		
 //		MemberDTO user = dao.userInfo(dto);
 		
-		return dao.checkUser(map);
+		return dao.checkUser(id);
 	}
 	
-	public int checkUser2(Map<String,Object> map) {
+	public int checkUser2(String id) {
 		
 //		CommonDTO dto = new CommonDTO();
 //		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 //		String id = auth.getName();
 //		dto.setId(id);
 		
-		return dao.checkUser2(map);
+		return dao.checkUser2(id);
 	}
+
 }

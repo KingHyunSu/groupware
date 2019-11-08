@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.Calendar" %>
+<%@ page import="com.groupware.dto.NoticeDTO" %>
 <%
 	Calendar cal = Calendar.getInstance();
 	
 	int year = cal.get(Calendar.YEAR);
 	int mon = cal.get(Calendar.MONTH)+1;
 	int day = cal.get(Calendar.DAY_OF_MONTH);
+	
+	NoticeDTO dto = (NoticeDTO)request.getAttribute("noticeDoc");
 %>
 <!DOCTYPE html>
 <html>
@@ -80,33 +83,34 @@
           <div class="col-lg-12">
             <section class="panel">
               <header class="panel-heading">
-                
+                	<%=dto.getNum() %>
               </header>
               <div class="panel-body">
                 <div class="form">
-                  <form class="form-validate form-horizontal" id="feedback_form" method="post" action="noticeInsertAction">
+                  <form class="form-validate form-horizontal" id="feedback_form" method="post" action="noticeUpdateAction">
                     <div class="form-group ">
                       <label for="cname" class="control-label col-lg-1">제목</label>
                       <div class="col-lg-10">
-                        <input class="form-control" id="cname" name="title" type="text" required />
+                        <input class="form-control" id="cname" name="title" type="text" value="<%=dto.getTitle()%>"required />
+                      	<input type="hidden" name="num" value="<%=dto.getNum()%>">
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="cname" class="control-label col-lg-1">이름</label>
                       <div class="col-lg-2" id="member_info">
-                         <%=session.getAttribute("name") %>	
+                         <%=dto.getMemberDto().getName()%>
                       </div>
                       <label for="cname" class="control-label col-lg-1">부서</label>
                       <div class="col-lg-2" id="member_info">
-                         <%=session.getAttribute("dept_name") %>	
+                         <%=dto.getDeptDto().getDept_name() %>	
                       </div>
                       <label for="cname" class="control-label col-lg-1">직급</label>
                       <div class="col-lg-2" id="member_info">
-                         <%=session.getAttribute("rank_name") %>	
+                         <%=dto.getRankDto().getRank_name() %>	
                       </div>
                     </div>
                     <div class="form-group ">
-                      <label for="cname" class="control-label col-lg-1">작성일</label>
+                      <label for="cname" class="control-label col-lg-1">수정일</label>
                       <div class="col-lg-2" id="member_info">
                          <%=year%>-<%=mon%>-<%=day%>
                       </div>
@@ -121,7 +125,7 @@
                       <label for="ccomment" class="control-label col-lg-1">내용</label>
                       <div class="col-lg-10">
                         <textarea class="form-control" id = "Seditor" name="content" 
-                        style = "height:500px; resize:none; display:none;" required></textarea>
+                        style = "height:500px; resize:none; display:none;" required><%=dto.getContent()%></textarea>
 	                        <script>
 		                        var oEditors = [];
 		                        
@@ -148,7 +152,7 @@
                     <div class="form-group">
                       <div class="col-lg-offset-2 col-lg-10">
                         <button class="btn btn-primary" type="button"
-                        	style = "margin-left:33%; width :100px;" onclick="formSubmit();">작성</button>
+                        	style = "margin-left:33%; width :100px;" onclick="formSubmit();">수정</button>
                       </div>
                     </div>
                   </form>

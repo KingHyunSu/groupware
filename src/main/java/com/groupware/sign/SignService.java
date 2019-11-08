@@ -47,7 +47,7 @@ public class SignService {
 	}
 	
 	//기안하기
-	public void insertSign(SignDTO dto, String name, String rank_no, String dept_no) {
+	public void insertSign(String id, String title, String content, String name, String rank_no, String dept_no) {
 		
 		//state_no 
 		
@@ -56,11 +56,16 @@ public class SignService {
 //		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 //		String date = sdf.format(d);
 //		dto.setDate(date);
+		SignDTO signDTO = new SignDTO();
 		
-		int num = dao.insertSign(dto);
+		signDTO.setTitle(title);
+		signDTO.setContent(content);
+		signDTO.setId(id);
 		
+		int num = dao.insertSign(signDTO);
+		System.out.println("num  : " + num);
 		
-		dao.selectNum(dto);
+		//dao.selectNum(dto);
 		
 		//////////////////////////////////////
 
@@ -72,13 +77,14 @@ public class SignService {
 
 		SignPathDTO signPathDTO = new SignPathDTO();
 		
-		for(int i = 0; i < signName.length; i++) {
-			signPathDTO.setSign_no(num);
+		
+		for(int i = 0; i < num; i++) {
+			signPathDTO.setSign_no(signDTO.getSign_no());
 			signPathDTO.setName(signName[i]);
 			signPathDTO.setDept_no(Integer.parseInt(deptName[i]));
 			signPathDTO.setRank_no(Integer.parseInt(rankName[i]));
 			
-			dao.insertSignPath(dto);
+			dao.insertSignPath(signPathDTO);
 		}
 	}
 	

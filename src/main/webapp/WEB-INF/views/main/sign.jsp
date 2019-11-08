@@ -147,7 +147,8 @@
                     </div>
                     
                     		<!-- hidden -->
-              
+              		<div id="hidden-sign">
+              		</div>
                   
                   </form>
                 </div>

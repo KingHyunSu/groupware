@@ -29,25 +29,23 @@ public class MainController {
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		map.put("name",session.getAttribute("name"));
-		map.put("rank_name",session.getAttribute("rank_name"));
-		map.put("dept_name",session.getAttribute("dept_name"));
+		String id = (String)session.getAttribute("id");
 		
 		model.addAttribute("noticeList", notice.noticeList());
 		
 		
-		if(common.checkUser(map) == 0) {
+		if(common.checkUser(id) == 0) {
 			model.addAttribute("signStayCount", 0);
 		} else {
-			model.addAttribute("signStayCount", common.signStayCount(map));
+			model.addAttribute("signStayCount", common.signStayCount(id));
 		}
 		
-		if(common.checkUser2(map) == 0) {
+		if(common.checkUser2(id) == 0) {
 			model.addAttribute("signProcessCount", 0);
 			model.addAttribute("signFinishCount", 0);
 		} else {
-			model.addAttribute("signProcessCount", common.signProcessCount(map));
-			model.addAttribute("signFinishCount", common.signFinishCount(map));
+			model.addAttribute("signProcessCount", common.signProcessCount(id));
+			model.addAttribute("signFinishCount", common.signFinishCount(id));
 		}
 		
 		model.addAttribute("showSchedule" , shedule.showSchedule());

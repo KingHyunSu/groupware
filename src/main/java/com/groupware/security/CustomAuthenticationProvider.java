@@ -33,7 +33,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		
 		System.out.println(user.getName());
 		System.out.println(user.getDeptDto().getDept_name());
-		
+		System.out.println(user.getAuthorities());
 		if(passDecoder.matches(pw, user.getPassword())) {
 			System.out.println("매칭 완료");
 		}
