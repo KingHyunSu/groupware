@@ -1,17 +1,20 @@
 package com.groupware.dto;
 
+import java.util.List;
+
 public class MemberDTO {
 
 	private int num;
 	private String id;
 	private String pw;
 	private String name;
+	private String photo;
 	private String authority;
 	private boolean enabled;
 	private int dept_no;
 	private int rank_no;
-	private DeptDTO deptDto;
-	private RankDTO rankDto;
+	private List<DeptDTO> deptDto;
+	private List<RankDTO> rankDto;
 	
 	
 	public int getNum() {
@@ -38,6 +41,13 @@ public class MemberDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
 	public String getAuthority() {
 		return authority;
 	}
@@ -62,18 +72,19 @@ public class MemberDTO {
 	public void setRank_no(int rank_no) {
 		this.rank_no = rank_no;
 	}
-	public DeptDTO getDeptDto() {
+	public List<DeptDTO> getDeptDto() {
 		return deptDto;
 	}
-	public void setDeptDto(DeptDTO deptDto) {
+	public void setDeptDto(List<DeptDTO> deptDto) {
 		this.deptDto = deptDto;
 	}
-	public RankDTO getRankDto() {
+	public List<RankDTO> getRankDto() {
 		return rankDto;
 	}
-	public void setRankDto(RankDTO rankDto) {
+	public void setRankDto(List<RankDTO> rankDto) {
 		this.rankDto = rankDto;
 	}
+	
 	
 	
 }

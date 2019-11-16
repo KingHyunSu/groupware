@@ -28,12 +28,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 		//db에서 회원 정보 가져옴
 		CustomUserDetails user = (CustomUserDetails)service.loadUserByUsername(id);
-		//db에서 join 가져오는건 잘 가져옴
-		//SuccessHandler에서 CustomUserDetails 객체 안에 정보 가져올수 있는지 확인해보기
+
 		
-		System.out.println(user.getName());
-		System.out.println(user.getDeptDto().getDept_name());
-		System.out.println(user.getAuthorities());
 		if(passDecoder.matches(pw, user.getPassword())) {
 			System.out.println("매칭 완료");
 		}

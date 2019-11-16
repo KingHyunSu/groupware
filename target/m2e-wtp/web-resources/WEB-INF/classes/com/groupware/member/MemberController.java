@@ -1,9 +1,13 @@
 package com.groupware.member;
 
+import java.io.File;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.groupware.dto.MemberDTO;
 
@@ -29,7 +34,20 @@ public class MemberController {
 	
 	//회원가입 버튼 클릭
 	@RequestMapping(value = "/joinAction", method = RequestMethod.POST)
-	public String joinAction(MemberDTO dto, @RequestParam String formDept, @RequestParam String formRank) throws Exception {
+	public String joinAction(MemberDTO dto, HttpServletRequest request,
+			@RequestParam String formDept, 
+			@RequestParam String formRank, 
+			@RequestParam MultipartFile file) throws Exception {
+		
+		ServletContext application = request.getServletContext();
+		String savePath = application.getRealPath("/resources/upload/");
+		System.out.println(savePath);
+		if(!file.isEmpty()) {
+			String saveFileName = new Date().getTime() + "-" + file.getOriginalFilename();
+			dto.setPhoto(saveFileName);
+			file.transferTo(new File(savePath + saveFileName));
+		}
+		
 		service.joinAction(dto,formDept,formRank);
 		
 		return "redirect:/login";

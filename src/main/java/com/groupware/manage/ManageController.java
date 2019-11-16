@@ -5,8 +5,8 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.groupware.dto.DeptDTO;
 import com.groupware.dto.MemberDTO;
 import com.groupware.member.MemberService;
 
@@ -49,17 +49,17 @@ public class ManageController {
 	}
 	
 	@RequestMapping(value = "/selectDept")
-	public String selectDept(String dept, Model model) throws Exception {
-		
-		model.addAttribute("deptMemberList", member.selectDept(dept));
+	public String selectDept(MemberDTO dto, Model model) throws Exception {
+		System.out.println(dto.getDept_no());
+		model.addAttribute("deptMemberList", member.selectDept(dto));
 		
 		return "/main/admin/memberManageSuv";
 	}
 	
 	@RequestMapping(value = "/selectName")
-	public String selectName(String name, Model model) throws Exception {
+	public String selectName(MemberDTO dto, Model model) throws Exception {
 		
-		model.addAttribute("memberInfo", member.selectName(name));
+		model.addAttribute("memberInfo", member.selectName(dto));
 		
 		return "/main/admin/memberManageSuv2";
 	}

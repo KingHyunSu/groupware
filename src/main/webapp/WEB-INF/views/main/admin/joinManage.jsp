@@ -103,13 +103,13 @@
 					<div class="listBody">
 						<div class="listHiddenField pull-left field60"><%= no %></div>
 						<div class="listHiddenField pull-right field100">
-							<a style = "color:red;" href="joinNO?num=<%= dto.getId() %>">거절</a>
+							<a style = "color:red;" href="joinNO?id=<%= dto.getId() %>">거절</a>
 						</div>
 						<div class="listHiddenField pull-right field100">
-							<a style = "color:springgreen;" href="joinOK?num=<%= dto.getId() %>">승인</a>
+							<a style = "color:springgreen;" href="joinOK?id=<%= dto.getId() %>">승인</a>
 						</div>
-						<div class="listHiddenField pull-right field130"><%= dto.getRankDto().getRank_name() %></div>
-						<div class="listHiddenField pull-right field130"><%= dto.getDeptDto().getDept_name() %></div>
+						<div class="listHiddenField pull-right field130"><%= dto.getRankDto().get(0).getRank_name() %></div>
+						<div class="listHiddenField pull-right field130"><%= dto.getDeptDto().get(0).getDept_name() %></div>
 						<div class="listHiddenField pull-right field130"><%= dto.getName() %></div>
 						<div class="listTitle" style="text-align:center;">
 							<%=dto.getId() %>

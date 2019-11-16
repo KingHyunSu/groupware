@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.groupware.dto.DeptDTO;
 import com.groupware.dto.MemberDTO;
 import com.groupware.security.CustomUserDetails;
 

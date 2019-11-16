@@ -23,8 +23,8 @@ public class CustomAuthenticationSuccesHandler implements AuthenticationSuccessH
 
 		String id = cud.getUsername();
 		String name = cud.getName();
-		String dept_name = cud.getDeptDto().getDept_name();
-		String rank_name = cud.getRankDto().getRank_name();
+		String dept_name = cud.getDeptDto().get(0).getDept_name();
+		String rank_name = cud.getRankDto().get(0).getRank_name();
 		
 		HttpSession session = request.getSession();
 		

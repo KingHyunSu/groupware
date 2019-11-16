@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.groupware.dto.DeptDTO;
 import com.groupware.dto.MemberDTO;
 
 @Service
@@ -50,18 +51,13 @@ public class MemberService{
 		return dao.showUser();
 	}
 	
-	public List<MemberDTO> selectDept(String dept) throws Exception {
-		MemberDTO dto = new MemberDTO();
-		
-		dto.setDept_no(Integer.parseInt(dept));
+	public List<MemberDTO> selectDept(MemberDTO dto) throws Exception {
+
 		
 		return dao.selectDept(dto);
 	}
 	
-	public MemberDTO selectName(String name) throws Exception {
-		MemberDTO dto = new MemberDTO();
-		
-		dto.setName(name);
+	public MemberDTO selectName(MemberDTO dto) throws Exception {
 		
 		return dao.selectName(dto);
 	}
