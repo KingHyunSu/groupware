@@ -1,6 +1,7 @@
 package com.groupware.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 public class NoticeDTO {
 
@@ -9,9 +10,11 @@ public class NoticeDTO {
 	private String content;
 	private Date date;
 	private String id;
-	private String name;
-	private String dept_name;
-	private String rank_name;
+	
+	private List<MemberDTO> memberDto;
+	private List<DeptDTO> deptDto;
+	private List<RankDTO> rankDto;
+	
 	public int getNum() {
 		return num;
 	}
@@ -42,24 +45,25 @@ public class NoticeDTO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public List<MemberDTO> getMemberDto() {
+		return memberDto;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setMemberDto(List<MemberDTO> memberDto) {
+		this.memberDto = memberDto;
 	}
-	public String getDept_name() {
-		return dept_name;
+	public List<DeptDTO> getDeptDto() {
+		return deptDto;
 	}
-	public void setDept_name(String dept_name) {
-		this.dept_name = dept_name;
+	public void setDeptDto(List<DeptDTO> deptDto) {
+		this.deptDto = deptDto;
 	}
-	public String getRank_name() {
-		return rank_name;
+	public List<RankDTO> getRankDto() {
+		return rankDto;
 	}
-	public void setRank_name(String rank_name) {
-		this.rank_name = rank_name;
+	public void setRankDto(List<RankDTO> rankDto) {
+		this.rankDto = rankDto;
 	}
+	
 	
 	
 	

@@ -3,20 +3,73 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-    <mapper namespace = "com.management.manage.ManageDAO">
+    <mapper namespace = "com.groupware.manage.ManageDAO">
+    	<resultMap type="MemberDTO" id="memberInfo">
+    		<result column="id" property="id"/>
+    		<result column="name" property="name"/>
+    		<collection property="deptDto" javaType="java.util.List" ofType="DeptDTO">
+    			<id column="dept_no" property="dept_no"/>
+    			<result column="dept_name" property="dept_name"/>
+    		</collection>
+    		<collection property="rankDto" javaType="java.util.List" ofType="RankDTO">
+    			<id column="rank_no" property="rank_no"/>
+    			<result column="rank_name" property="rank_name"/>
+    		</collection>
+    	</resultMap>
+    	
+    	<select id="memberInfo" resultMap="memberInfo">
+    		SELECT
+    			member.id, member.name, dept.dept_name, rank.rank_name
+    		FROM
+    			member
+    		JOIN
+    			dept
+    		ON
+    			member.dept_no = dept.dept_no
+    		JOIN
+    			rank
+    		ON
+    			member.rank_no = rank.rank_no
+    		WHERE
+    			authority = 'anonymous'
+    	</select>
+    	
     	<update id="joinOK" parameterType = "MemberDTO">
     		UPDATE
     			member
     		SET
     			authority = "ROLE_USER"
     		WHERE
-    			num = #{num}
+    			id = #{id}
     	</update>
     	
     	<update id="joinNO" parameterType = "MemberDTO">
     		DELETE FROM
     			member
     		WHERE
-    			num = #{num}
+    			id = #{id}
+    	</update>
+    	
+    	<select id="deptList" resultType="DeptDTO">
+    		SELECT
+    			*
+    		FROM
+    			dept
+    	</select>
+    	
+    	<select id="rankList" resultType="RankDTO">
+    		SELECT
+    			*
+    		FROM
+    			rank
+    	</select>
+    	
+    	<update id="memberUpdate" parameterType="MemberDTO">
+    		UPDATE
+    			member
+    		SET
+    			name=#{name}, dept_no=#{dept_no}, rank_no=#{rank_no}, email=#{email}, phone=#{phone}
+    		WHERE
+    			id = #{id}
     	</update>
     </mapper>

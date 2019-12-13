@@ -101,11 +101,8 @@
 
 				</table>
 		</div>
-		<div id = "sign-zone">
+		<div id="sign-zone">
 		</div>
-		
-		<input type = "hidden" id = "popup-deptname" name="deptname" value = "">		
-		<input type = "hidden" id = "popup-dept" name="dept" value = "">
 
 
 	<div class = "group-foot">

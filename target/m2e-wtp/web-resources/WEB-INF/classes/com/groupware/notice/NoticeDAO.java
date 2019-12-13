@@ -15,7 +15,7 @@ public class NoticeDAO {
 	@Inject
 	private SqlSession sqlSession;
 	
-	private static final String namespace = "com.management.notice.NoticeDAO";
+	private static final String namespace = "com.groupware.notice.NoticeDAO";
 	
 	public List<NoticeDTO> noticeList(){
 		return sqlSession.selectList(namespace + ".noticList");
@@ -27,5 +27,13 @@ public class NoticeDAO {
 	
 	public NoticeDTO noticeDoc(NoticeDTO dto) {
 		return sqlSession.selectOne(namespace + ".noticeDoc", dto);
+	}
+	
+	public void noticeUpdate(NoticeDTO dto) {
+		sqlSession.update(namespace + ".noticeUpdate", dto);
+	}
+	
+	public void noticeDelete(NoticeDTO dto) {
+		sqlSession.delete(namespace + ".noticeDelete", dto);
 	}
 }

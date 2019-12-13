@@ -2,14 +2,17 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8">
+  <meta charset="utf-8">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
   <meta name="author" content="GeeksLabs">
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="resources/origin/img/favicon.png">
+
+  <title>Login Page 2 | Creative - Bootstrap 3 Responsive Admin Template</title>
 
   <!-- Bootstrap CSS -->
   <link href="resources/origin/css/bootstrap.min.css" rel="stylesheet">
@@ -41,111 +44,71 @@
   }
   </script>
   <style type="text/css">
-  	table{
-  		width: 100%;
-  	}
-
-  	.file{
-	    margin-top: 5px;
-	    margin-bottom: 5px;
+  	.fileName{
+  		color: #c7c7cc;
+  		font-size: 14px;
+  		position: relative;
+	    top: -33px;
+	    left: 98px;
+	    width: 200px;
+	    height: 19px;
+	    background: white;
   	}
   </style>
 </head>
-<body class="login-img3-body">
-<div class="container">
 
-    <form class="login-form" name = "joinForm" action="joinAction" method = "post" 
-    	style="max-width: 550px; margin-top: 100px;"onsubmit="return formCheck();" enctype="multipart/form-data">
+<body class="login-img3-body">
+
+  <div class="container">
+
+    <form class="login-form" name = "joinForm" action="joinAction" method = "post" onsubmit="return formCheck();" enctype="multipart/form-data">
       <div class="login-wrap">
         <p class="login-img"><i class="icon_lock_alt"></i></p>
-			<table>
-				
-				<tr>
-					<td rowspan = "3" style="width:160px; height:200px;">
-						<img src="resources/custom/img/noImage.jpg" id="blah" width="160" height="200" alt="">
-					</td>		
-					<td>
-						<div class="input-group" style="width:100%;">
-				          <span class="input-group-addon"><i class="icon_profile"></i></span>
-				          <input type="text" class="form-control" name = "name" placeholder="이름을 입력해주세요.." autofocus>
-				        </div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="input-group" style="width:100%;">
-				          <span class="input-group-addon"><i class="icon_profile"></i></span>
-				          <input type="text" class="form-control" name = "email" placeholder="이메일을 입력해주세요.." autofocus>
-				        </div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="input-group" style="width:100%;">
-				          <span class="input-group-addon"><i class="icon_profile"></i></span>
-				          <input type="text" class="form-control" name = "phone" placeholder="휴대폰 번호를 입력해주세요.." autofocus>
-				        </div>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<input type="file" class="file" name = "file" id = "file" onchange="readURL(this);">
-					</td>
-				</tr>
-				<tr>	
-					<td colspan="2">
-						<div class="input-group" style="width:100%;">
-				          <span class="input-group-addon"><i class="icon_profile"></i></span>
-				          <input type="text" class="form-control" name = "id" placeholder="아이디를 입력해주세요.." autofocus
-				          		id = "idzon" oninput="check_id();">
-				        </div>
-				        <div class = "id-text">
-				        </div>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<div class="input-group" style="width:100%;">
-				          <button type="button" class="form-control" name = "group" autofocus onclick="click_group();"
-				          		style="width: 160px; border:0; margin-left:34%; background:#D6E3F4; border-radius:10px; color:white;">
-				          		부서/직급 선택하기
-				          		</button>
-				        </div>
-				        <div class = "group-text">
-        				</div>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<div class="input-group" style="width:100%;">
-				          <span class="input-group-addon"><i class="icon_key_alt"></i></span>
-				          <input type="password" class="form-control" name = "pw" placeholder="비밀번호를 입력해주세요.."
-				          		id = "pw" oninput="check_pw();">
-				        </div>
-				        <div class = "pw-text">
-				        </div>
-			        </td>
-		        </tr>
-		        <tr>
-			        <td colspan="2">
-				        <div class="input-group" style="width:100%;">
-				          <span class="input-group-addon"><i class="icon_key_alt"></i></span>
-				          <input type="password" class="form-control" placeholder="비밀번호를 한번 더 입력해주세요.."
-				          		id = "checkPw" oninput="check_pw();">
-				        </div>
-				        <div class = "ok-text">
-				        </div>
-			        </td>
-		        </tr>
-			</table>
-				<input type = "hidden" id = "dept" name="dept_no" value = "">
-	      		<input type = "hidden" id = "rank" name="rank_no" value = "">
-	<button class="btn btn-primary btn-lg btn-block" type="submit" id = "joinSubmit" disabled>가입</button>
+        <div class="input-group">
+          <input type="file" class="form-control" name = "file" id = "file" oninput="check_file();">      
+          <div class="fileName">본인 사진을 등록해주세요</div>
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="icon_profile"></i></span>
+          <input type="text" class="form-control" name = "id" placeholder="아이디를 입력해주세요.." autofocus
+          		id = "idzon" oninput="check_id();">
+        </div>
+        <div class = "id-text">
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="icon_profile"></i></span>
+          <input type="text" class="form-control" name = "name" placeholder="이름을 입력해주세요.." autofocus>
+        </div>
+        <div class="input-group">
+          <input type="button" class="form-control" name = "group" autofocus onclick="click_group();"
+          		style="border:0; margin-left:50px; background:#D6E3F4; border-radius:10px; color:white;" 
+          		value = "부서/직급 선택하기">
+        </div>
+        <div class = "group-text">
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+          <input type="password" class="form-control" name = "pw" placeholder="비밀번호를 입력해주세요.."
+          		id = "pw" oninput="check_pw();">
+        </div>
+        <div class = "pw-text">
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+          <input type="password" class="form-control" placeholder="비밀번호를 한번 더 입력해주세요.."
+          		id = "checkPw" oninput="check_pw();">
+        </div>
+        <div class = "ok-text">
+        </div>
+        <button class="btn btn-primary btn-lg btn-block" type="submit" id = "joinSubmit" disabled>가입</button>
       </div>
+      <input type = "hidden" id = "dept" name = "formDept" value = "">
+      <input type = "hidden" id = "rank" name = "formRank" value = "">
     </form>
   </div>
-  
-  	<!-- popupGroup -->
+
+
+	<!-- popupGroup -->
 <div class = "group" id = "popupGroup">	
 	<div class = "group-head">
 		<h1 class = "zTree-h1"> 부서/직급 선택 </h1>
@@ -238,21 +201,11 @@
 		</div>
 		<button class = "ok-button" type= "button" onclick="click_Ok();">확인</button>
 		
+		<input type = "hidden" name = "dept_no" id = "dept" value = "">
+		<input type = "hidden" name = "rank_no" id = "rank" value = "">
+		
 	</div>	
 </div>
-  
+
 </body>
-<script type="text/javascript">
-function readURL(input) {     
-	if (input.files && input.files[0]) {         
-		var reader = new FileReader();         
-		reader.onload = function(e) {            
-			$('#blah').attr('src', e.target.result)            
-			.width(width)            
-			.height(height);        
-			};       
-			reader.readAsDataURL(input.files[0]);     
-			} 
-	}
-</script>
 </html>

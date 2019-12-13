@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.groupware.dto.DeptDTO;
 import com.groupware.dto.MemberDTO;
 
 @Service
@@ -18,15 +19,12 @@ public class MemberService{
 	private BCryptPasswordEncoder passEncoder;
 	
 	
-	public void joinAction(MemberDTO dto, String formDept, String formRank) throws Exception {
-		
-		System.out.println(dto.getPw());
+	public void joinAction(MemberDTO dto) throws Exception {
+
 		String pass = passEncoder.encode(dto.getPw());
 		
 		dto.setPw(pass);
-		dto.setDept_no(Integer.parseInt(formDept));
-		dto.setRank_no(Integer.parseInt(formRank));
-				
+
 		dao.joinAction(dto);
 	}
 
@@ -50,20 +48,33 @@ public class MemberService{
 		return dao.showUser();
 	}
 	
-	public List<MemberDTO> selectDept(String dept) throws Exception {
-		MemberDTO dto = new MemberDTO();
-		
-		dto.setDept_no(Integer.parseInt(dept));
+	public List<MemberDTO> selectDept(MemberDTO dto) throws Exception {
+
 		
 		return dao.selectDept(dto);
 	}
 	
-	public MemberDTO selectName(String name) throws Exception {
-		MemberDTO dto = new MemberDTO();
-		
-		dto.setName(name);
+	public MemberDTO selectName(MemberDTO dto) throws Exception {
 		
 		return dao.selectName(dto);
+	}
+	
+	public MemberDTO memberUpdateInfo(String id) {
+		
+		MemberDTO dto = new MemberDTO();
+		dto.setId(id);
+		
+		return dao.memberUpdateInfo(dto);
+	}
+	
+	public void memberUpdate(MemberDTO dto, String id) {
+
+		String pass = passEncoder.encode(dto.getPw());
+		
+		dto.setPw(pass);
+		dto.setId(id);
+		
+		dao.memberUpdate(dto);
 	}
 	
 }

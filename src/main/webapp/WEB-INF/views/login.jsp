@@ -44,8 +44,8 @@
         	<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
         </div>
         <label class="checkbox">
-                <input type="checkbox" value="remember-me"> Remember me
-                <span class="pull-right"> <a href="#"> Forgot Password?</a></span>
+                <input type="checkbox" value="remember-me"> 아이디 기억하기
+                <span class="pull-right"> <a href="#"> 비밀번호 찾기</a></span>
             </label>
         <button class="btn btn-primary btn-lg btn-block" type="submit">로그인</button>
         <button type = "button" class="btn btn-info btn-lg btn-block" onclick="location.href='join'">회원가입</button>

@@ -10,7 +10,7 @@
 	int stay = (int)request.getAttribute("signStayCount");
 	int finish = (int)request.getAttribute("signFinishCount");
 	List<ScheduleDTO> scheduleList = (ArrayList<ScheduleDTO>)request.getAttribute("showSchedule");
-%>
+%> 
 <!DOCTYPE html>
 <html>
 
@@ -191,8 +191,8 @@
 %>
 					<div class="listBody">
 						<div class="listHiddenField pull-left field60 textCenter"><%=dto.getNum() %></div>
-						<div class="listHiddenField pull-right field130 textCenter"></div>
-						<div class="listHiddenField pull-right field130 textCenter"></div>
+						<div class="listHiddenField pull-right field130 textCenter"><%=dto.getDate() %></div>
+						<div class="listHiddenField pull-right field130 textCenter"><%=dto.getMemberDto().get(0).getName()%></div>
 						<div class="listTitle" style="text-align:center;">
 							<a href="noticeDoc?num=<%= dto.getNum() %>">
 							<%=dto.getTitle() %></a>

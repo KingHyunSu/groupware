@@ -1,16 +1,24 @@
 package com.groupware.member;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.groupware.dto.MemberDTO;
 
@@ -29,8 +37,19 @@ public class MemberController {
 	
 	//회원가입 버튼 클릭
 	@RequestMapping(value = "/joinAction", method = RequestMethod.POST)
-	public String joinAction(MemberDTO dto, @RequestParam String formDept, @RequestParam String formRank) throws Exception {
-		service.joinAction(dto,formDept,formRank);
+	public String joinAction(MemberDTO dto, HttpServletRequest request,
+			@RequestParam MultipartFile file) throws Exception {
+		
+		ServletContext application = request.getServletContext();
+		String savePath = application.getRealPath("/resources/upload/");
+		System.out.println(savePath);
+		if(!file.isEmpty()) {
+			String saveFileName = new Date().getTime() + "-" + file.getOriginalFilename();
+			dto.setPhoto(saveFileName);
+			file.transferTo(new File(savePath + saveFileName));
+		}
+		
+		service.joinAction(dto);
 		
 		return "redirect:/login";
 	}
@@ -84,5 +103,40 @@ public class MemberController {
 	@RequestMapping(value = "/logout")
 	public String logout() throws Exception {
 		return "redirect:/login";
+	}
+	
+	//개인정보수정 팝업
+	@RequestMapping(value="/memberUpdatePopup")
+	public String memberUpdatePopup(HttpSession session, Model model) {
+		
+		String id = (String)session.getAttribute("id");
+		MemberDTO aa = service.memberUpdateInfo(id);
+		System.out.println(aa.getPhoto());
+		model.addAttribute("memberInfo", aa);
+		
+		return "/main/common/memberUpdatePopup";
+	}
+	
+	//개인정보수정
+	@RequestMapping(value="/memberInfoUpdate")
+	public String memberInfoUpdate(MemberDTO dto, HttpSession session, HttpServletRequest request,
+									@RequestParam MultipartFile file,
+									@RequestParam String photoName) throws IllegalStateException, IOException {
+		
+		String id = (String)session.getAttribute("id");
+		
+		ServletContext application = request.getServletContext();
+		String savePath = application.getRealPath("/resources/upload/");
+		System.out.println(savePath);
+		if(!file.isEmpty()) {
+			String saveFileName = new Date().getTime() + "-" + file.getOriginalFilename();
+			dto.setPhoto(saveFileName);
+			file.transferTo(new File(savePath + saveFileName));
+		}else {
+			dto.setPhoto(photoName);
+		}
+		
+		service.memberUpdate(dto,id);
+		return "redirect:/memberUpdatePopup";
 	}
 }

@@ -90,7 +90,7 @@
               
               <div class="panel-body">
               	*글쓰기는 관리자만 가능합니다.
-                	<div class="listHead">
+                	<div class="listHead" style="font-weight: 900;">
 						<div class="listHiddenField pull-left field60">No.</div>
 						<div class="listHiddenField pull-right field130">날짜</div>
 						<div class="listHiddenField pull-right field130">글쓴이</div>
@@ -102,8 +102,8 @@
 %>
 					<div class="listBody">
 						<div class="listHiddenField pull-left field60 textCenter"><%=dto.getNum() %></div>
-						<div class="listHiddenField pull-right field130 textCenter"></div>
-						<div class="listHiddenField pull-right field130 textCenter"></div>
+						<div class="listHiddenField pull-right field130 textCenter"><%=dto.getDate() %></div>
+						<div class="listHiddenField pull-right field130 textCenter"><%=dto.getMemberDto().get(0).getName() %></div>
 						<div class="listTitle" style="text-align:center;">
 							<a href="noticeDoc?num=<%= dto.getNum() %>">
 							<%=dto.getTitle() %></a>
@@ -113,7 +113,7 @@
 	}
 %>					
 					<sec:authorize access="hasAnyRole('ADMIN')">
-						<button type = "button" class = "write-button" onclick="location.href='noticeWrite'">글쓰기</button>
+						<button type = "button" class = "write-button" onclick="location.href='noticeInsertForm'">글쓰기</button>
 					</sec:authorize>
 				</div>
             </section>

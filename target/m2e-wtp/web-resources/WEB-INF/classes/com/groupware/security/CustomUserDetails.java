@@ -2,6 +2,7 @@ package com.groupware.security;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,8 +19,8 @@ public class CustomUserDetails implements UserDetails{
 	private String name;
 	private String authority;
 	private boolean enabled;
-	private DeptDTO deptDto;
-	private RankDTO rankDto;
+	private List<DeptDTO> deptDto;
+	private List<RankDTO> rankDto;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -66,21 +67,23 @@ public class CustomUserDetails implements UserDetails{
 		this.name = name;
 	}
 
-	public DeptDTO getDeptDto() {
+	public List<DeptDTO> getDeptDto() {
 		return deptDto;
 	}
 
-	public void setDeptDto(DeptDTO deptDto) {
+	public void setDeptDto(List<DeptDTO> deptDto) {
 		this.deptDto = deptDto;
 	}
 
-	public RankDTO getRankDto() {
+	public List<RankDTO> getRankDto() {
 		return rankDto;
 	}
 
-	public void setRankDto(RankDTO rankDto) {
+	public void setRankDto(List<RankDTO> rankDto) {
 		this.rankDto = rankDto;
 	}
+
+	
 	
 	
 	

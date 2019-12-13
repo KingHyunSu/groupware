@@ -17,7 +17,7 @@
     		</association>
     	</resultMap>
     	
-    	<select id="userInfo" parameterType = "MemberDTO" resultMap = "userInfo">
+    	<select id="userInfo" parameterType = "string" resultMap = "userInfo">
     		SELECT
     			member.id, member.name, rank.rank_name, dept.dept_name
     		FROM
@@ -34,7 +34,7 @@
     			member.id = #{id}
     	</select>
     	
-    	<select id="signProcessCount" parameterType="MemberDTO" resultType="int">
+    	<select id="signProcessCount" parameterType="string" resultType="int">
     		SELECT
     			COUNT(*)
     		FROM
@@ -43,26 +43,18 @@
     			id = #{id}
     	</select>
     	
-    	<select id="signStayCount" parameterType="MemberDTO" resultType="int">
+    	<select id="signStayCount" parameterType="string" resultType="int">
     		SELECT
     			COUNT(*)
     		FROM
-    			sign
-    		JOIN
     			sign_path
-    		ON
-    			sign.sign_no = sign_path.sign_no
     		WHERE
-    			sign_path.name = #{name}
+    			sign_path.id = #{id}
     		AND
-    			sign_path.dept_name = #{dept_name}
-    		AND
-    			sign_path.rank_name = #{rank_name}
-    		AND
-    			sign_path.state_no = "0"
+    			sign_path.state_no = 1
     	</select>
     	
-    	<select id="signFinishCount" parameterType="MemberDTO" resultType="int">
+    	<select id="signFinishCount" parameterType="string" resultType="int">
     		SELECT
     			COUNT(*)
     		FROM
@@ -70,23 +62,19 @@
     		WHERE
     			id = #{id}
     		AND
-    			state_no = "1"
+    			state_no = 2
     	</select>
     	
-    	<select id="checkUser" parameterType="MemberDTO" resultType="int">
+    	<select id="checkUser" parameterType="string" resultType="int">
     		SELECT
     			COUNT(*)
     		FROM
     			sign_path
     		WHERE
-    			name = #{name}
-    		AND
-    			dept_name = #{dept_name}
-    		AND
-    			rank_name = #{rank_name}
+    			id = #{id}
     	</select>
     	
-    	<select id="checkUser2" parameterType="MemberDTO" resultType="int">
+    	<select id="checkUser2" parameterType="string" resultType="int">
     		SELECT
     			COUNT(*)
     		FROM

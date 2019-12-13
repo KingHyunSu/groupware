@@ -15,5 +15,6 @@
 			<typeAlias type = "com.groupware.dto.SignPathDTO" alias = "SignPathDTO"/>
 			<typeAlias type = "com.groupware.dto.StateDTO" alias = "StateDTO"/>
 			<typeAlias type = "com.groupware.security.CustomUserDetails" alias = "CustomUserDetails"/>
+			<typeAlias type = "java.util.List" alias = "List"/>
 		</typeAliases>
     </configuration>

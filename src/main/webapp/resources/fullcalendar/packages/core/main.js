@@ -4588,12 +4588,12 @@ Docs & License: https://fullcalendar.io/
             next: 'next',
             prevYear: 'prev year',
             nextYear: 'next year',
-            year: 'year',
-            today: 'today',
-            month: 'month',
-            week: 'week',
-            day: 'day',
-            list: 'list'
+            year: '년간',
+            today: '오늘',
+            month: '월간',
+            week: '주간',
+            day: '일간',
+            list: '목록'
         },
         weekLabel: 'W',
         allDayText: 'all-day',

@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.groupware.dto.DeptDTO;
 import com.groupware.dto.MemberDTO;
 import com.groupware.security.CustomUserDetails;
 
@@ -47,7 +48,15 @@ public class MemberDAO {
 		return sqlSession.selectList(namespace + ".selectDept", dto);
 	}
 	
-	public MemberDTO selectName(MemberDTO dto) throws Exception {
+	public MemberDTO selectName(MemberDTO dto) {
 		return sqlSession.selectOne(namespace + ".selectName", dto);
+	}
+	
+	public MemberDTO memberUpdateInfo(MemberDTO dto) {
+		return sqlSession.selectOne(namespace + ".memberUpdateInfo", dto);
+	}
+	
+	public void memberUpdate(MemberDTO dto) {
+		sqlSession.update(namespace + ".memberUpdate", dto);
 	}
 }

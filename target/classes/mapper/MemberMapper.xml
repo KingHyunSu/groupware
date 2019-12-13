@@ -9,19 +9,35 @@
     		<result column="pw" property="pw"/>
     		<result column="name" property="name"/>
     		<result column="authority" property="authority"/>
-    		<association property="deptDto" javaType="DeptDTO">
+    		<collection property="deptDto" javaType="List" ofType="DeptDTO">
     			<result column="dept_name" property="dept_name"/>
-    		</association>
-    		<association property="rankDto" javaType="RankDTO">
+    		</collection>
+    		<collection property="rankDto" javaType="List" ofType="RankDTO">
 				<result column="rank_name" property="rank_name"/>    		
-    		</association>
+    		</collection>
+    	</resultMap>
+    	
+    	<resultMap type="MemberDTO" id="userInfo2">
+    		<id property="id" column="id"/>
+    		<result column="name" property="name"/>
+    		<result column="photo" property="photo"/>
+    		<result column="email" property="email"/>
+    		<result column="phone" property="phone"/>
+    		<result column="dept_no" property="dept_no"/>
+    		<result column="rank_no" property="rank_no"/>
+    		<collection property="deptDto" javaType="List" ofType="DeptDTO">
+    			<result column="dept_name" property="dept_name"/>
+    		</collection>
+    		<collection property="rankDto" javaType="List" ofType="RankDTO">
+				<result column="rank_name" property="rank_name"/>    		
+    		</collection>
     	</resultMap>
     	
     	<insert id="join">
     		INSERT INTO
-    			member(id,pw,name,dept_no,rank_no)
+    			member(id,pw,name,dept_no,rank_no,photo,email,phone)
     		VALUES
-    			(#{id},#{pw},#{name},#{dept_no},#{rank_no})
+    			(#{id},#{pw},#{name},#{dept_no},#{rank_no},#{photo},#{email},#{phone})
     	</insert>
     	
     	<select id="idCheck" resultType = "int" parameterType = "String">
@@ -34,7 +50,7 @@
     	
     	<select id="login" resultMap="userInfo">
     		SELECT
-    			id, pw, name, authority, dept_name, rank_name
+    			member.id, member.pw, member.name, member.authority, dept.dept_name, rank.rank_name
     		FROM
     			member
     		JOIN
@@ -67,7 +83,7 @@
     			rank_no = #{rank_no}
     	</select>
     	
-    	<select id = "showUser" resultType = "MemberDTO">
+    	<select id="showUser" resultType = "MemberDTO">
     		SELECT
     			member.num, member.id, member.name, dept.dept_name, rank.rank_name
     		FROM
@@ -84,9 +100,9 @@
     			member.authority = 'anonymous'
     	</select>
     	
-    	<select id="selectDept" parameterType = "MemberDTO" resultType = "MemberDTO">
+    	<select id="selectDept" parameterType = "MemberDTO" resultMap = "userInfo2">
     		SELECT
-    			member.num, member.name, dept.dept_name, rank.rank_name
+    			member.id, member.name, dept.dept_name, rank.rank_name
     		FROM
     			member
     		JOIN
@@ -101,20 +117,48 @@
     			member.dept_no = #{dept_no}
     	</select>
     	
-    	<select id="selectName" parameterType = "MemberDTO" resultType = "MemberDTO">
+    	<select id="selectName" parameterType = "MemberDTO" resultMap = "userInfo2">
     		SELECT
-    			member.name, dept.deptname, rank.rankname
+    			member.id, member.name, member.photo, member.rank_no, member.dept_no, member.email, member.phone, dept.dept_name, rank.rank_name
     		FROM
     			member
     		JOIN
     			dept
     		ON
-    			member.dept = dept.deptno
+    			member.dept_no = dept.dept_no
     		JOIN
     			rank
     		ON
-    			member.rank = rank.rankno
+    			member.rank_no = rank.rank_no
     		WHERE
-    			member.name = #{name}
+    			member.id = #{id}
+    		ORDER BY
+    			rank_no
     	</select>
+    	
+    	<select id="memberUpdateInfo" parameterType="MemberDTO" resultMap="userInfo2">
+    		SELECT
+    			member.*, dept.dept_name, rank.rank_name
+    		FROM
+    			member
+    		JOIN
+    			dept
+    		ON
+    			member.dept_no = dept.dept_no
+    		JOIN
+    			rank
+    		ON
+    			member.rank_no = rank.rank_no
+    		WHERE
+    			id = #{id}
+    	</select>
+    	
+    	<update id="memberUpdate" parameterType="MemberDTO">
+    		UPDATE
+    			member
+    		SET
+    			id=#{id}, pw=#{pw}, name=#{name}, photo=#{photo}, email=#{email}, phone=#{phone}
+    		WHERE
+    			id = #{id}
+    	</update>
     </mapper>

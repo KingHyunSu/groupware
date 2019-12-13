@@ -22,11 +22,18 @@ public class NoticeService {
 		dao.insertNotice(dto);
 	}
 	
-	public NoticeDTO noticeDoc(String num) throws Exception{
-		NoticeDTO dto = new NoticeDTO();
-		
-		dto.setNum(Integer.parseInt(num));
+	public NoticeDTO noticeDoc(NoticeDTO dto) throws Exception{
 		
 		return dao.noticeDoc(dto);
+	}
+	
+	public void noticeUpdate(NoticeDTO dto) {
+		
+		dao.noticeUpdate(dto);
+	}
+	
+	public void noticeDelete(NoticeDTO dto) {
+		
+		dao.noticeDelete(dto);
 	}
 }

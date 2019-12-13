@@ -31,6 +31,7 @@
   	<!-- 템플릿 custom -->
   	<!-- ajax -->
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--  <script src="resources/origin/js/jquery.js"></script> -->
   <!-- Tree -->
   	<link rel="stylesheet" href="resources/Tree/css/jquery.treeview.css" />
 	<link rel="stylesheet" href="resources/Tree/css/screen.css" />

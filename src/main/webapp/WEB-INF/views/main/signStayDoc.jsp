@@ -2,12 +2,13 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="com.groupware.dto.SignDTO"%>
+<%@page import="com.groupware.dto.SignPathDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	SignDTO dto = (SignDTO)request.getAttribute("signDoc");
-	List<SignDTO> list = (ArrayList<SignDTO>)request.getAttribute("signPath");
-	SignDTO userInfo = (SignDTO)request.getAttribute("userInfo");
+	List<SignPathDTO> list = (ArrayList<SignPathDTO>)request.getAttribute("signPath");
+	String sign_id = (String)request.getAttribute("id");
 %>
 <!DOCTYPE html>
 <html>
@@ -91,48 +92,46 @@
                     		<table class = "gian">
                     			<tr>
                     				<td class = "gian-left">부서</td>
-                    				<td class = "gian-right"><%= dto.getDeptname() %></td>
+                    				<td class = "gian-right"><%= dto.getDeptDto().get(0).getDept_name() %></td>
                     			</tr>
                     			<tr>
                     				<td class = "gian-left">기안자</td>
-                    				<td class = "gian-right"><%= dto.getWriter() %></td>
+                    				<td class = "gian-right"><%= dto.getMemberDto().get(0).getName() %></td>
                     			</tr>
                     			<tr>
                     				<td class = "gian-left">기안 날짜</td>
                     				<td class = "gian-right"><%= dto.getDate() %></td>
                     			</tr>
                     		</table>
+                    		
                     		<div class = "sign-zone">        
-                    			
+                    			<input type = "hidden" id="sign_no" value=<%=dto.getSign_no() %>>
                     			<ul id = "sign-add">
 									<li>
 										<div class = 'sign-left'>
 											결<br>재
 		                    			</div>
 		                    		</li>
+		                    		
 <%
 	for(int i = 0; i < list.size(); i++) {
-		SignDTO path = list.get(i);
+		SignPathDTO path = list.get(i);
 %>
 									<li>
 										<div class='sign'>
-											<div class='sign-top'><%= path.getSignName() %></div>
+											<div class='sign-top'><%= path.getName() %></div>
 											<div class='sign-middle'>
 <%
-	if(path.getSign().equals("1")) {
+	if(path.getState_no() == 2) {
 %>
 											<button class = "sign-fin-button" type = "button">
 												결재 완료
 											</button>
 <%	
-	}
+	}else if(path.getState_no() == 1){
+			if(path.getId().equals(sign_id)) {
 %>
-
-<% 
-	if(path.getSignName().equals(userInfo.getName())) {
-		if(path.getSign().equals("0")){
-%>
-											<button class = "sign-button" type = "button" id = "nowUser"onclick = "click_signOK();">
+											<button class = "sign-button" type = "button" id = "nowUser" name = "<%= sign_id%>" onclick = "click_signOK(name);">
 												전자 결재
 											</button>
 <% 
@@ -140,7 +139,12 @@
 	}
 %>
 											</div>
-											<div class='sign-bottom'></div>
+											<div class='sign-bottom'>
+												<% if(path.getDate() == null) { %>
+												<%} else {%>
+												<%=path.getDate() %>
+												<%} %>
+											</div>
 										</div>
 									</li>
 <% 
@@ -171,12 +175,6 @@
                       </div>
                     </div>
                     
-                    		<!-- hidden -->
-                 <div id = "hidden-sign">
-						<input type = "hidden" name = "name" value = <%=dto.getWriter() %>>
-						<input type = "hidden" id = "docNum" name = "num" value = <%=dto.getNum() %>>
-                  </div>
-                  
                   </form>
                 </div>
 

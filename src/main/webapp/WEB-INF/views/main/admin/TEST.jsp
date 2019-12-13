@@ -11,6 +11,8 @@
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="resources/origin/img/favicon.png">
 
+  <title>Login Page 2 | Creative - Bootstrap 3 Responsive Admin Template</title>
+
   <!-- Bootstrap CSS -->
   <link href="resources/origin/css/bootstrap.min.css" rel="stylesheet">
   <!-- bootstrap theme -->
@@ -41,60 +43,30 @@
   }
   </script>
   <style type="text/css">
-  	table{
-  		width: 100%;
-  	}
-
-  	.file{
-	    margin-top: 5px;
-	    margin-bottom: 5px;
+  	.fileName{
+  		color: #c7c7cc;
+  		font-size: 14px;
+  		position: relative;
+	    top: -33px;
+	    left: 98px;
+	    width: 200px;
+	    height: 19px;
+	    background: white;
   	}
   </style>
 </head>
-<body class="login-img3-body">
+<body>
 <div class="container">
 
-    <form class="login-form" name = "joinForm" action="joinAction" method = "post" 
-    	style="max-width: 550px; margin-top: 100px;"onsubmit="return formCheck();" enctype="multipart/form-data">
+    <form class="login-form" name = "joinForm" action="joinAction" method = "post" onsubmit="return formCheck();" enctype="multipart/form-data">
       <div class="login-wrap">
         <p class="login-img"><i class="icon_lock_alt"></i></p>
 			<table>
-				
 				<tr>
-					<td rowspan = "3" style="width:160px; height:200px;">
-						<img src="resources/custom/img/noImage.jpg" id="blah" width="160" height="200" alt="">
-					</td>		
-					<td>
-						<div class="input-group" style="width:100%;">
-				          <span class="input-group-addon"><i class="icon_profile"></i></span>
-				          <input type="text" class="form-control" name = "name" placeholder="이름을 입력해주세요.." autofocus>
-				        </div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="input-group" style="width:100%;">
-				          <span class="input-group-addon"><i class="icon_profile"></i></span>
-				          <input type="text" class="form-control" name = "email" placeholder="이메일을 입력해주세요.." autofocus>
-				        </div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="input-group" style="width:100%;">
-				          <span class="input-group-addon"><i class="icon_profile"></i></span>
-				          <input type="text" class="form-control" name = "phone" placeholder="휴대폰 번호를 입력해주세요.." autofocus>
-				        </div>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<input type="file" class="file" name = "file" id = "file" onchange="readURL(this);">
-					</td>
-				</tr>
-				<tr>	
-					<td colspan="2">
-						<div class="input-group" style="width:100%;">
+					
+					<td rowspan = "4"><img src="${pageContext.request.contextPath}/resources/upload/" width="160" height="200"></td>
+					<td class = "right-td">
+						<div class="input-group">
 				          <span class="input-group-addon"><i class="icon_profile"></i></span>
 				          <input type="text" class="form-control" name = "id" placeholder="아이디를 입력해주세요.." autofocus
 				          		id = "idzon" oninput="check_id();">
@@ -104,20 +76,16 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2">
-						<div class="input-group" style="width:100%;">
-				          <button type="button" class="form-control" name = "group" autofocus onclick="click_group();"
-				          		style="width: 160px; border:0; margin-left:34%; background:#D6E3F4; border-radius:10px; color:white;">
-				          		부서/직급 선택하기
-				          		</button>
+					<td class = "right-td">
+						<div class="input-group">
+				          <span class="input-group-addon"><i class="icon_profile"></i></span>
+				          <input type="text" class="form-control" name = "name" placeholder="이름을 입력해주세요.." autofocus>
 				        </div>
-				        <div class = "group-text">
-        				</div>
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2">
-						<div class="input-group" style="width:100%;">
+					<td class = "right-td">
+						<div class="input-group">
 				          <span class="input-group-addon"><i class="icon_key_alt"></i></span>
 				          <input type="password" class="form-control" name = "pw" placeholder="비밀번호를 입력해주세요.."
 				          		id = "pw" oninput="check_pw();">
@@ -127,8 +95,8 @@
 			        </td>
 		        </tr>
 		        <tr>
-			        <td colspan="2">
-				        <div class="input-group" style="width:100%;">
+			        <td class = "right-td">
+				        <div class="input-group">
 				          <span class="input-group-addon"><i class="icon_key_alt"></i></span>
 				          <input type="password" class="form-control" placeholder="비밀번호를 한번 더 입력해주세요.."
 				          		id = "checkPw" oninput="check_pw();">
@@ -137,11 +105,33 @@
 				        </div>
 			        </td>
 		        </tr>
+		
+				<tr>
+					<td class = "left-td">
+						<div class="input-group">
+				          <input type="button" class="form-control" name = "group" autofocus onclick="click_group();"
+				          		style="border:0; margin-left:50px; background:#D6E3F4; border-radius:10px; color:white;" 
+				          		value = "부서/직급 선택하기">
+				        </div>
+					</td>
+				</tr>
+				<tr>
+					<td class = "left-td">이메일</td>
+					<td class = "right-td" colspan="3"></td>
+				</tr>
+				<tr>
+					<td class = "left-td">주소</td>
+					<td class = "right-td" colspan="3"></td>
+				</tr>
+				<tr>
+					<td class = "left-td-2">특이사항</td>
+					<td class = "right-td-2" colspan = "4"></td>
+				</tr>
 			</table>
-				<input type = "hidden" id = "dept" name="dept_no" value = "">
-	      		<input type = "hidden" id = "rank" name="rank_no" value = "">
 	<button class="btn btn-primary btn-lg btn-block" type="submit" id = "joinSubmit" disabled>가입</button>
       </div>
+      <input type = "hidden" id = "dept" name = "formDept" value = "">
+      <input type = "hidden" id = "rank" name = "formRank" value = "">
     </form>
   </div>
   
@@ -238,21 +228,11 @@
 		</div>
 		<button class = "ok-button" type= "button" onclick="click_Ok();">확인</button>
 		
+		<input type = "hidden" name = "dept_no" id = "dept" value = "">
+		<input type = "hidden" name = "rank_no" id = "rank" value = "">
+		
 	</div>	
 </div>
   
 </body>
-<script type="text/javascript">
-function readURL(input) {     
-	if (input.files && input.files[0]) {         
-		var reader = new FileReader();         
-		reader.onload = function(e) {            
-			$('#blah').attr('src', e.target.result)            
-			.width(width)            
-			.height(height);        
-			};       
-			reader.readAsDataURL(input.files[0]);     
-			} 
-	}
-</script>
 </html>

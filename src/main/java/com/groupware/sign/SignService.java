@@ -1,7 +1,5 @@
 package com.groupware.sign;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,7 +8,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.groupware.dto.DeptDTO;
+import com.groupware.dto.MemberDTO;
 import com.groupware.dto.SignDTO;
+import com.groupware.dto.SignPathDTO;
 
 @Service
 public class SignService {
@@ -19,107 +20,88 @@ public class SignService {
 	private SignDAO dao;
 
 	//결재 경로 부서 선택
-	public List<SignDTO> selectDeptShowMember(String dept){
-		SignDTO dto = new SignDTO();
-		//dto.setDept(dept);
+	public List<MemberDTO> selectDeptShowMember(DeptDTO dto){
+//		SignDTO dto = new SignDTO();
+//		//dto.setDept(dept);
 		
 		return dao.selectDeptShowMember(dto);
 	}
 	
 	//결재 경로 직원 선택
-	public SignDTO selectSignUser(SignDTO dto){
+	public MemberDTO selectSignUser(MemberDTO dto){
 
 		return dao.selectSignUser(dto);
 	}
 	
 	//직원 정보
-	public SignDTO userInfo() {
-		
-		SignDTO dto = new SignDTO();
-		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String id = auth.getName();
-		
-		dto.setId(id);
-		
-		return dao.userInfo(dto);
-	}
-	
-	//기안하기
-//	public void insertSign(SignDTO dto) {
+//	public SignDTO userInfo(String id) {
 //		
-//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//		String id = auth.getName();
+//		SignDTO dto = new SignDTO();
+//		
+////		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+////		String id = auth.getName();
+//		
 //		dto.setId(id);
 //		
-//		String defaultSign = "0";
-//		dto.setSignCheck(defaultSign);
-//		dto.setSign(defaultSign);
-//		
-//		//날짜
+//		return dao.userInfo(dto);
+//	}
+	
+	//기안하기
+	public void insertSign(String id, String title, String content, String name, String sign_id, String rank_no, String dept_no) {
+		
+		//state_no 
+		
+		//날짜
 //		Date d = new Date();
 //		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 //		String date = sdf.format(d);
 //		dto.setDate(date);
-//		
-//		dao.insertSign(dto);
-//		
-//		
-//		dao.selectNum(dto);
-//		
-//		String signNameList = dto.getSignName();
-//		String[] signName = signNameList.split(",");
-//		String signDeptList = dto.getSignDept();
-//		String[] deptName = signDeptList.split(",");
-//		String signRankList = dto.getSignRank();
-//		String[] rankName = signRankList.split(",");
-//
-//		
-//		for(int i = 0; i < signName.length; i++) {
-//			dto.setSignName(signName[i]);
-//			dto.setSignDept(deptName[i]);
-//			dto.setSignRank(rankName[i]);
-//			
-//			dao.insertSignPath(dto);
-//		}
-//	}
-//	
-//	//결재 진행 중인 문서 리스트
-//	public List<SignDTO> signProcessList() {
-//		
-//		SignDTO dto = new SignDTO();
-//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//		String id = auth.getName();
-//		dto.setId(id);
-//		
-//		return dao.signProcessList(dto);
-//	}
+		SignDTO signDTO = new SignDTO();
+		
+		signDTO.setTitle(title);
+		signDTO.setContent(content);
+		signDTO.setId(id);
+		
+		int num = dao.insertSign(signDTO);
+		
+		//dao.selectNum(dto);
+		
+		//////////////////////////////////////
+
+		String[] signName = name.split(",");
+		String[] signId = sign_id.split(","); 
+		String[] deptName = dept_no.split(",");
+		String[] rankName = rank_no.split(",");
+
+		SignPathDTO signPathDTO = new SignPathDTO();
+		
+		
+		for(int i = 0; i < signName.length; i++) {
+			signPathDTO.setSign_no(signDTO.getSign_no());
+			signPathDTO.setName(signName[i]);
+			signPathDTO.setId(signId[i]);
+			signPathDTO.setDept_no(Integer.parseInt(deptName[i]));
+			signPathDTO.setRank_no(Integer.parseInt(rankName[i]));
+			
+			dao.insertSignPath(signPathDTO);
+		}
+	}
+	
+	//결재 진행 중인 문서 리스트
+	public List<SignDTO> signProcessList(String id) {
+				
+		return dao.signProcessList(id);
+	}
 	
 	//결재 대기 중인 문서 리스트 
-//	public List<SignDTO> signStayList() {
-//		
-//		SignDTO dto = new SignDTO();
-//		
-//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//		String id = auth.getName();
-//		
-//		dto.setId(id);
-//		
-//		SignDTO user = dao.userInfo(dto);
-//		
-//		dto.setSignName(user.getName());
-//		dto.setSignDept(user.getDeptname());
-//		dto.setSignRank(user.getRankname());
-//		
-//		return dao.signStayList(dto);
-//	}
+	public List<SignDTO> signStayList(String id) {
+
+		return dao.signStayList(id);
+	}
 	
 	//결재 완료된 문서 리스트
-	public List<SignDTO> signFinishList(){
+	public List<SignDTO> signFinishList(String id){
 		SignDTO dto = new SignDTO();
-		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String id = auth.getName();
 		
 		dto.setId(id);
 		
@@ -132,54 +114,33 @@ public class SignService {
 		return dao.signDocView(dto);
 	}
 	
-	public List<SignDTO> signDocPath(SignDTO dto) {
+	public List<SignPathDTO> signDocPath(SignDTO dto) {
 
 		return dao.signDocPath(dto);
 	}
 	
 	//결재 하기
-//	public void signOK(String num) {
-//		SignDTO dto = new SignDTO();	
-//		
-//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//		String id = auth.getName();
-//		
-//		dto.setId(id);
-//	
-//		//결제할 유저 정보 가져오기
-//		SignDTO userInfo = dao.userInfo(dto);
-//		
-//		dto.setSignName(userInfo.getName());
-//		dto.setSignDept(userInfo.getDeptname());
-//		dto.setSignRank(userInfo.getRankname());
-//
-//		dto.setNum(Integer.parseInt(num));
-//
-//		//결재 날짜 
-//		Date d = new Date();
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//		String date = sdf.format(d);
-//		dto.setSignDate(date);
-//		
-//		//결제
-//		dao.signOK(dto);
-//		
-//		//결제 어디까지 완료되었는지 확인
-//		int signSum = 0;
-//		
-//		List<SignDTO> list = dao.signDocPath(dto);
-//		
-//		for(int i = 0; i < list.size(); i++) {
-//			SignDTO signCheck = list.get(i);
-//			
-//			signSum += Integer.parseInt(signCheck.getSign());
-//		}
-//		
-//		//(결제 카운트수 == 결제 완료 합) 이면 sign테이블 결제 '1'
-//		if(signSum == dao.signCount(dto)) {
-//			dto.setDate(date.toString());
-//			
-//			dao.signFinish(dto);
-//		}
-//	}
+	public void signOK(SignPathDTO dto) {
+
+		dao.signOK(dto);
+		
+		
+		//결재 경로에 전부 결재 완료되었으면 결재문서 상태 결재 완료로 변경
+		int sign_no = dto.getSign_no();
+		
+		List<SignPathDTO> signPathSignNo =  dao.signPathNowSign(sign_no);
+		
+		int tot = signPathSignNo.size() * 2;
+		
+		int val = 0;
+		
+		for(int i = 0; i < signPathSignNo.size(); i++) {
+			val += signPathSignNo.get(0).getState_no();
+		}
+		
+		if(tot == val) {
+			dao.updateSignFinish(sign_no);
+		}
+
+	}
 }

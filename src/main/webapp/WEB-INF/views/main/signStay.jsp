@@ -88,24 +88,29 @@
 	for (int i = 0; i < list.size(); i++) {
 		SignDTO dto = list.get(i);
 		
-		if(dto.getSign().equals("0")) {
-			dto.setSign("대기");
+		if(list.size() == 0) {
+%>
+		System.out.println(list.size());
+					<div class="listBody">
+						<div>완료된 결재 문서가 없습니다.</div>
+					</div>
+
+<% 
 		} else {
-			dto.setSign("결재");
-		}
 %>
 	              <div class="listBody">
-						<div class="listHiddenField pull-left field60 textCenter"><%=dto.getNum() %></div>
-						<div class="listHiddenField pull-right field100 textCenter"><%=dto.getSign() %></div>
+						<div class="listHiddenField pull-left field60 textCenter"><%=dto.getSign_no() %></div>
+						<div class="listHiddenField pull-right field100 textCenter"><%=dto.getStateDto().get(0).getState_name() %></div>
 						<div class="listHiddenField pull-right field130 textCenter"></div>
 						<div class="listHiddenField pull-right field130 textCenter"><%=dto.getDate() %></div>
-						<div class="listHiddenField pull-right field130 textCenter"><%=dto.getWriter() %></div>
+						<div class="listHiddenField pull-right field130 textCenter"><%=dto.getMemberDto().get(0).getName() %></div>
 						<div class="listTitle" style="text-align:center;">
-							<a href="signStayDoc?num=<%= dto.getNum() %>">
+							<a href="signStayDoc?num=<%= dto.getSign_no() %>">
 							<%=dto.getTitle() %></a>
 						</div>
 					</div>
 <%
+		}
 	}
 %>					
 				</div>

@@ -28,13 +28,13 @@
 %>
 	<div class="listHiddenField pull-left field60"><%= no %></div>
 	<div class="listHiddenField pull-right field100" style="width:20%;">
-		<%= dto.getDept_no() %>
+		<%= dto.getDeptDto().get(0).getDept_name()%>
 	</div>
 	<div class="listHiddenField pull-right field100" style="width:20%;">
-		<%= dto.getRank_no() %>
+		<%= dto.getRankDto().get(0).getRank_name() %>
 	</div>
 	<div class="listTitle" style="text-align:center;">
-		<button type = "button" class = "name" name = <%= dto.getName() %> onclick = "click_name(name);"><%= dto.getName() %></button>
+		<button type = "button" class = "name" name = <%= dto.getId() %> onclick = "click_name(name);"><%= dto.getName() %></button>
 	</div>
 <%
 	}

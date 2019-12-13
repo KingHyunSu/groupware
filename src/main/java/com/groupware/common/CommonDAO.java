@@ -15,32 +15,32 @@ public class CommonDAO {
 	
 	private static final String namespace = "com.management.common.CommonDAO";
 	
-	public MemberDTO userInfo(MemberDTO dto) {
+	public MemberDTO userInfo(String id) {
 		
-		return sqlSession.selectOne(namespace + ".userInfo",dto);
+		return sqlSession.selectOne(namespace + ".userInfo",id);
 	}
 	
-	public int signProcessCount(MemberDTO dto) {
-		return sqlSession.selectOne(namespace + ".signProcessCount",dto);
+	public int signProcessCount(String id) {
+		return sqlSession.selectOne(namespace + ".signProcessCount",id);
 	}
 	
-	public int signStayCount(MemberDTO dto) {
+	public int signStayCount(String id) {
 		
-		return sqlSession.selectOne(namespace + ".signStayCount",dto);
+		return sqlSession.selectOne(namespace + ".signStayCount",id);
 	}
 	
-	public int signFinishCount(MemberDTO dto) {
+	public int signFinishCount(String id) {
 		
-		return sqlSession.selectOne(namespace + ".signFinishCount",dto);
+		return sqlSession.selectOne(namespace + ".signFinishCount",id);
 	}
 	
-	public int checkUser(MemberDTO dto) {
+	public int checkUser(String id) {
 		
-		return sqlSession.selectOne(namespace + ".checkUser", dto);
+		return sqlSession.selectOne(namespace + ".checkUser", id);
 	}
 	
-	public int checkUser2(MemberDTO dto) {
+	public int checkUser2(String id) {
 		
-		return sqlSession.selectOne(namespace + ".checkUser2", dto);
+		return sqlSession.selectOne(namespace + ".checkUser2", id);
 	}
 }
